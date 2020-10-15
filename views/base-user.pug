@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+html(lang="sr-BA")
+  head
+    block head
+      meta(charset="UTF-8")
+      meta(name="viewport", content="width=device-width, initial-scale=1.0")
+  body
+    .lds-ring
+      div
+      div
+      div
+      div
+    #modal-container.modal
+      form#modal-form.modalform(action='#')
+        .modalform__group
+          label.modalform__label(for='name') Ime
+          input#name.modalform__input(type='text' placeholder='Petar Petrović' required='')
+        .modalform__group
+          label.modalform__label(for='tel') Broj telefona
+          input#email.modalform__input(type='tel' placeholder='065701308' required='')
+        .modalform__group
+          label.modalform__label(for='email') e-mail adresa
+          input#email.modalform__input(type='email' placeholder='petar@petrovic.com')
+        .modalform__group
+          label.modalform__label(for='info') Marka i model automobila
+          input#info.modalform__input(type='text' placeholder='Alfa Romeo 156 2.0 twin spark')
+        .modalform__group
+          label.modalform__label(for='message') Poruka
+          textarea#message.modalform__input.modalform__textarea(name='message' placeholder='Želim da zakažem besplatan pregled automobila...' required='' maxlength='320')
+        .modalform__group
+          button.modalform__button(type='submit') Pošalji
+    #modal-background.modal__bg
+    #modal-background.overlay__bg
+     // Navigation
+    nav#nav.nav
+      .nav__wrap
+        .nav__menu
+          // Logo button, leads to landing page
+          a.nav__logo__link(href='/')
+            img.nav__logo(src='/img/logowhite.svg' alt='Auto Gas Gaga logo')
+          // Usluge, dropdown on click
+          button#ulsugeBtn.nav__link Usluge
+        ul.nav__menu
+          // 3-piece call button
+          li.nav__list.elaborate
+            span.nav__list--text1
+              | Imate pitanje?
+              br
+              span.nav__list--text2 Pozovite nas
+            a.nav__btn--1(href='tel:+38765701308')
+              svg.nav__list--img
+                use(xlink:href='img/sprite.svg#icon-phone')
+              |                                 (+387) 65 701 308
+          // Pop up button
+          li.nav__list
+            button.nav__btn--2.showModalBtn Zatraži ponudu
+      // Dropdown links
+      #nav__usluge.nav__usluge.container
+        a.nav__usluge__link(href='/automehanicarskeusluge')
+          | Automehaničarske usluge
+          br
+          span.minitext Pružamo sve vrste automehaničarkih usluga
+        a.nav__usluge__link(href='/ugradnjaplina')
+          | Auto gas
+          br
+          span.minitext Preko 20 godina aktivnog iskustva sa ugradnjom gasa
+        a.nav__usluge__link(href='/slepsluzba')
+          | Šlep Služba
+          br
+          span.minitext Uvijek Vam stojimo na raspolaganju
+        a.nav__usluge__link(href='/eservisnaknjizica')
+          | E Servisna knjižica
+          br
+          span.minitext Pristup za Vašu  e-servisnu knjižicu.
+    //CONTENT
+    block content
+    // Footer
+    footer.footer
+      .footer__wrap.container
+        ul.footer__nav
+          li.footer__nav__list
+            a.footer__nav__link(href='/') HOME
+          li.footer__nav__list
+            a.footer__nav__link(href='/slepsluzba') Šlep služba
+          li.footer__nav__list
+            a.footer__nav__link(href='/automehanicarskeusluge') Automehaničarske usluge
+          li.footer__nav__list
+            a.footer__nav__link(href='/ugradnjaplina') Auto gas
+          li.footer__nav__list
+            a.footer__nav__link(href='/eservisnaknjizica') E Servisna Knjižica
+        ul.footer__menu
+          li
+            a.footer__link(href='tel:+38765701308')
+              svg.footer__icon
+                use(xlink:href='img/sprite.svg#icon-phone')
+          li
+            a.footer__link(href='https://www.facebook.com/gaga.autogas/' target='_blank')
+              svg.footer__icon
+                use(xlink:href='img/sprite.svg#icon-facebook')
+      p.copyright Copyright &copy; Auto Gas Gaga 2020 All Rights Reserved
+    block scripts

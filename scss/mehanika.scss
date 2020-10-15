@@ -1,0 +1,49 @@
+@import "variables";
+@import "base";
+@import "typography";
+@import "utilities";
+@import "nav";
+@import "modal";
+@import "mehanikaheader";
+@import "about";
+@import "contact";
+@import "form";
+@import "cta";
+@import "footer";
+.leftalign {
+    text-align: left;
+}
+.centalign {
+    text-align: center;
+}
+.about {
+    padding: 3rem 0;
+    &__btn,
+    &__btn:focus {
+        display: block;
+        cursor: pointer;
+        padding: 1.4rem 0;
+        background-color: transparent;
+        text-decoration: none;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 1.5rem;
+        font-weight: 600;
+        font-style: normal;
+        color: $color-gray-dark;
+        border: 1px solid $color-gray-lighty;
+        letter-spacing: 1px;
+        border-radius: 40px;
+        min-width: 45rem;
+        transition: all .2s;
+        outline: none;
+        margin: 2rem auto;
+    }
+    &__btn:hover,
+    &__btn:active {
+        color: $color-primary;
+    }
+}
+.gmb {
+    background-color: $color-gray-lightmaster;
+}

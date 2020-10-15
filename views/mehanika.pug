@@ -1,0 +1,69 @@
+extends base.pug
+
+block head
+  meta(http-equiv='X-UA-Compatible' content='ie=edge')
+  meta(name='description' content='Najpouzdanije Automehaničarske Usluge Za Sve Automobile. Preko 20 godina aktivnog iskustva!')
+  meta(name='keywords' content='Auto Mehanicar, Automehaničar,Auto,Automobil,Mehaničar,Autoservis,Popravka,Mali servis,Veliki servis,zamena ulja,Banjaluka,Banja Luka,Fiat,Alfa Romeo,Lancia,Citroen,Ford,Peugeot,Toyota,Mazda,Honda,Mitsubishi,Kia,Hyundai,Škoda,Seat,Volvo,Renault,Daewoo,Chevrolet,Volkswagen,Audi,Mercedes')
+  // Open Graph Tags
+  meta(property='og:locale' content='sr_rs')
+  meta(property='og:locale:alternate' content='bs-ba')
+  meta(property='og:type' content='website')
+  meta(property='og:title' content='Auto Gas Gaga | Dobrodošli')
+  meta(property='og:description' content='Najpouzdanije Automehaničarske Usluge Za Sve Automobile. Preko 20 godina aktivnog iskustva!')
+  meta(property='og:url' content='https://autogasgaga.ba/')
+  meta(property='og:image' content='https://autogasgaga.ba/OGhero.jpg')
+  // Twitter Tags
+  meta(property='twitter:card' content='summary_large_image')
+  meta(property='twitter:title' content='Auto Gas Gaga | Dobrodošli')
+  meta(property='twitter:description' content='Najpouzdanije Automehaničarske Usluge Za Sve Automobile. Preko 20 godina aktivnog iskustva!')
+  meta(property='twitter:image' content='https://autogasgaga.ba/twitterhero.jpg')
+  meta(property='twitter:image:alt' content='Najpouzdanije Automehaničarske Usluge Za Sve Automobile. Preko 20 godina aktivnog iskustva!')
+  meta(property='twitter:url' content='https://autogasgaga.ba/')
+  // Links
+  link(rel='stylesheet' href='stylesheet/mehanika.css')
+  
+  link(rel='shortcut icon' type='image/x-icon' href='/img/logoblack.svg')
+  title Auto Gas Gaga | Automehaničarske Usluge
+
+block content
+  main
+    header.header
+      .header__wrap
+        h1.heading__terzo Automehaničarske usluge
+        h2.heading__terzo
+          | Sve vrste mehaničarskih radova uz dugogodišnje iskustvo
+    // About section 1
+    section.about
+      .about__wrapper.container
+        h3.heading__3.leftalign Zaslužujemo Vaše povjerenje
+        p.bodytext
+          | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia nemo
+          | rerum voluptatum fugiat corrupti et deserunt eligendi molestias
+          | iusto eveniet saepe rem nostrum eius necessitatibus obcaecati, in
+          | nobis eaque vel ratione ducimus quidem delectus! Culpa, rem. Atque,
+          | quibusdam, illo deserunt inventore eligendi facilis dolorum suscipit
+          | ex, officiis sed sequi nulla?
+    section.about.gmb
+      .about__wrapper.container
+        h3.heading__3.leftalign Redovni servisi i popravke
+        p.bodytext
+          | Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+          | Accusantium doloremque numquam deserunt quasi pariatur repellendus
+          | voluptate tenetur molestiae iste aperiam explicabo, repellat porro
+          | aliquid odio eveniet totam voluptas fugiat voluptatum fugit iusto
+          | quam nobis suscipit.
+    section.about
+      .about__wrapper.container
+        h3.heading__3.leftalign Konkretne i realne procjene
+        p.bodytext
+          | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia nemo
+          | rerum voluptatum fugiat corrupti et deserunt eligendi molestias
+          | iusto eveniet saepe rem nostrum eius necessitatibus obcaecati, in
+          | nobis eaque vel ratione ducimus quidem delectus! Culpa, rem. Atque,
+          | quibusdam, illo deserunt inventore eligendi facilis dolorum suscipit
+          | ex, officiis sed sequi nulla?
+        button.about__btn.centalign.showModalBtn
+          | Zatražite ponudu odmah
+
+block scripts
+  script(src='./javascript/build/mehanika.bundle.js')

@@ -1,0 +1,102 @@
+extends base.pug
+
+block head
+  // SEO meta tags
+  meta(http-equiv='X-UA-Compatible' content='ie=edge')
+  meta(name='description' content='Profesionalna ugradnja auto plina u Vaš automobil. Preko 20 godina aktivnog iskustva!')
+  meta(name='keywords' content='Auto,Automobil,Auto gas,TNG,LPG,Atest,plin,Ugradnja plina Banja Luka,Banja Luka, ugradnja auto plina')
+  // Open Graph Tags
+  meta(property='og:locale' content='sr_rs')
+  meta(property='og:locale:alternate' content='bs-ba')
+  meta(property='og:type' content='website')
+  meta(property='og:title' content='Auto Gas Gaga | Ugradnja Auto Plina')
+  meta(property='og:description' content='Profesionalna ugradnja auto plina u Vaš automobil. Preko 20 godina aktivnog iskustva!')
+  meta(property='og:url' content='https://autogasgaga.ba/')
+  meta(property='og:image' content='https://autogasgaga.ba/OGhero.jpg')
+  // Twitter Tags
+  meta(property='twitter:card' content='summary_large_image')
+  meta(property='twitter:title' content='Auto Gas Gaga | Ugradnja Auto Plina')
+  meta(property='twitter:description' content='Profesionalna ugradnja auto plina u Vaš automobil. Preko 20 godina aktivnog iskustva!')
+  meta(property='twitter:image' content='https://autogasgaga.ba/twitterhero.jpg')
+  meta(property='twitter:image:alt' content='Nargila BG, Dostava nargila na području Beograda na Vašu adresu.')
+  meta(property='twitter:url' content='https://nargilabg.rs/')
+  // Links
+  link(rel='stylesheet' href='stylesheet/gas.css')
+  
+  link(rel='shortcut icon' type='image/x-icon' href='/img/logoblack.svg')
+  title Auto Gas Gaga | Ugradnja gasa
+
+
+block content
+  main
+    header.header
+      .header__wrap.container
+        .header__half
+          h1.heading__secondary Ugradnja gasa
+          p.textest
+            | Sa preko 24 godine aktivnog iskustva u oblasti konverzije automobila na TNG pogonsko gorivo, Auto Gas Gaga d.o.o. može Vam garantovati najpouzdaniju i najkvalitetniju ugradnju plinksih sistema.
+        .header__scuderia
+          h2.heading__special Kalkulator uštede
+          form#form.form(action='#')
+            .form__group
+              label.form__label(for='potrosnja') Unesite potrošnju automobila [litar/100km]
+              input#potrosnja.form__input(type='number' placeholder='9.5' value='9.5' step='0.25' required)
+            .form__group
+              label.form__label(for='voznja')
+                | Unesite godišnju kilometražu 
+                br
+                span.form__label--mod prosječan vozač u BiH pređe oko 13.000 km godišnje
+              input#voznja.form__input(type='number' placeholder='13000' value='13000' step='250' required)
+            .flex
+              .form__group
+                label.form__label.form__label--min(for='potrosnja') Cijena Benzina (km)
+                input#cbenzin.form__input(type='number' placeholder='1.80' value='1.80' step='0.01' required)
+              .form__group
+                label.form__label.form__label--min(for='potrosnja') Cijena Plina (km)
+                input#cplin.form__input(type='number' placeholder='0.80' value='0.80' step='0.01' required)
+            .form__group
+              button.form__button(type='submit') Izračunaj
+            p#out.span
+            // Calculator JavaScript string
+            // Godišnja ušteda bi iznosila <span class="span--green">{%USTEDA%}</span>, a mjesečna <span class="span--green">{%USTEDA%}</span>.<br><a href="#" class="span--blue">Kontaktirajte nas</a> da saznate koliko bi Vas koštala mjesečna rata
+    // About
+    section.about
+      .about__wrap.container
+        .about__textwrap
+          .abot__superwrap
+            h3.heading__3 Uz Vas od 1996.
+            p.bodytext
+              | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia nemo rerum voluptatum fugiat corrupti et deserunt eligendi molestias iusto eveniet saepe rem nostrum eius necessitatibus obcaecati, in nobis eaque vel ratione ducimus quidem delectus! Culpa, rem. Atque, quibusdam, illo deserunt inventore eligendi facilis dolorum suscipit ex, officiis sed sequi nulla?
+            p.bodytext
+              | Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur velit officiis ipsum qui esse reiciendis tempore perferendis possimus ad. Aperiam quo, deleniti nemo beatae ad illo ullam maxime similique numquam praesentium impedit ab esse odio est porro nobis itaque. Esse?
+          img.about__img(src='img/passat.jpg' alt='Car in a mechanic shop')
+    section.recenzije
+      .recenzije__wrapper.container
+        h3.heading__3 Veliki broj zadovoljnih mušterija
+        .recenzije__wrap
+          figure.recenzija
+            img.recenzija__img(src='img/profile_1.jpg' alt='')
+            h5.recenzija__title Ugradnja gasa u Fiat 500
+            .recenzija__wrap
+              p.recenzija__desc
+                | Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia, debitis magnam, optio voluptates ipsa minus labore cumque enim saepe sunt totam, at eius officia aut!
+              h6.recenzija__signature &mdash; Đorđe
+          figure.recenzija
+            img.recenzija__img(src='img/profile_4.jpg' alt='')
+            h5.recenzija__title Ugradnja gasa u Fiat 500
+            .recenzija__wrap
+              p.recenzija__desc
+                | Lorem ipsum dolor sit amet consectetur!
+              h6.recenzija__signature &mdash; Nadežda
+          figure.recenzija
+            img.recenzija__img(src='img/profile_2.jpg' alt='')
+            h5.recenzija__title Ugradnja gasa u Fiat 500
+            .recenzija__wrap
+              p.recenzija__desc
+                | Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quia, debitis magnam, optio voluptates ipsa minus labore cumque enim saepe sunt totam, at eius officia aut!
+              h6.recenzija__signature &mdash; Zoran
+    // Plavi section
+ 
+
+block scripts
+  script(src='./javascript/build/gas.bundle.js')

@@ -1,0 +1,59 @@
+extends base.pug
+
+block head
+  meta(http-equiv='X-UA-Compatible' content='ie=edge')
+  meta(name='description' content='Brza i Pouzdana Šlep Služba u Banja Luci. Usluge šlepanja za cijelu evropu.')
+  meta(name='keywords' content='Šlep Služba, slep sluzba, slep, slepa, slepanje, slepanje u banja luci, slepanje banja luka, slepanje automobila, slepanje kombija, šlepanje automobila, šlep služba bosna, šlep bih')
+  
+  // Open Graph Tags
+  meta(property='og:locale' content='sr_rs')
+  meta(property='og:locale:alternate' content='bs-ba')
+  meta(property='og:type' content='website')
+  meta(property='og:title' content='Auto Gas Gaga | Dobrodošli')
+  meta(property='og:description' content='Brza i Pouzdana Šlep Služba u Banja Luci. Usluge šlepanja za cijelu evropu.')
+  meta(property='og:url' content='https://autogasgaga.ba/')
+  meta(property='og:image' content='https://autogasgaga.ba/OGhero.jpg')
+  // Twitter Tags
+  meta(property='twitter:card' content='summary_large_image')
+  meta(property='twitter:title' content='Auto Gas Gaga | Dobrodošli')
+  meta(property='twitter:description' content='Brza i Pouzdana Šlep Služba u Banja Luci. Usluge šlepanja za cijelu evropu.')
+  meta(property='twitter:image' content='https://autogasgaga.ba/twitterhero.jpg')
+  meta(property='twitter:image:alt' content='Brza i Pouzdana Šlep Služba u Banja Luci. Usluge šlepanja za cijelu evropu.')
+  meta(property='twitter:url' content='https://autogasgaga.ba/')
+  // Links
+  // <link rel="canonical" href="https://autogasgaga.ba/">
+  link(rel='stylesheet' href='./stylesheet/slep.css')
+  
+  link(rel='shortcut icon' type='image/x-icon' href='/img/logoblack.svg')
+  title Auto Gas Gaga | Šlep Služba
+
+
+block content
+  header.header
+    .header__wrap.container.slep-header-flex      
+      h1.heading__1 Šlep služba
+      h2.heading__4 Uvijek smo tu za Vas. Pozovite nas odmah. Lorem ipsum dolor sit amet.
+      h2.heading__4.heading__4--mod ili pogledajte neku od drugih usluga
+      .header__cards
+        a.header__cards__link(href='/slepsluzba')
+          figure.header__card
+            img.header__card__img(src='img/tow2kb_white.svg' alt='')
+            h4.header__card__title Šlep
+        a.header__cards__link(href='/automehanicar')
+          figure.header__card
+            img.header__card__img(src='img/servis2kb_white.svg' alt='')
+            h4.header__card__title Mehanika
+        a.header__cards__link(href='/ugradnjagasa')
+          figure.header__card
+            img.header__card__img(src='img/toro.svg' alt='')
+            h4.header__card__title Gas
+  // About
+  section.about
+    .about__wrapper.container
+      h3.heading__3 O našoj šlep službi
+      p.bodytext
+        | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia nemo rerum voluptatum fugiat corrupti et deserunt eligendi molestias iusto eveniet saepe rem nostrum eius necessitatibus obcaecati, in nobis eaque vel ratione ducimus quidem delectus! Culpa, rem. Atque, quibusdam, illo deserunt inventore eligendi facilis dolorum suscipit ex, officiis sed sequi nulla?
+      a.about__btn(href='tel:+38765701308') Pozovite nas odmah
+
+block scripts
+  script(src='./javascript/build/slep.bundle.js')

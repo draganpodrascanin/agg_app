@@ -1,0 +1,31 @@
+extends base-user
+
+block head
+  title Auto Gas Gaga | E-servisna knjizica login
+  meta(property='og:locale' content='sr_rs')
+  meta(property='og:locale:alternate' content='bs-ba')
+  meta(property='og:type' content='website')
+  meta(property='og:title' content='Auto Gas Gaga | E-Servisna Knjižica Login')
+  meta(property='og:description' content='Ulogujte se da vidite vašu servisnu knjižicu.')
+  meta(property='og:url' content='https://autogasgaga.ba/userlogin')
+  meta(property='og:image' content='https://autogasgaga.ba/OGhero.jpg')
+  link(rel='stylesheet' href='stylesheet/userlogin.css')
+
+
+block content
+  main.login-wrapper
+    .container
+      .form-wrapper
+        h1 Log In
+        // Form
+        form.form(action='#')
+          .form__group
+            label.form__label(for='name') Email
+            input#email.form__input(type='text' placeholder='email@primer.com' required)
+          .form__group
+            label.form__label(for='tel') Šifra
+            input#password.form__input(type='tel' placeholder='******' required)
+          button.form__button(type='submit') Potvrdi
+
+block scripts
+  script(src="javascript/build/userlogin.bundle.js")

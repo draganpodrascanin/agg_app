@@ -1,0 +1,71 @@
+.contact {
+  padding: 7rem 0;
+  background-color: #fff;
+  &__content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 3rem;
+    @media only screen and (max-width: $bp-s-tablet-portrait) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.alert-fail {
+  padding: 2rem;
+  font-size: 1.5rem;
+  background-color: rgba($color-red, 0.8);
+  font-weight: 300;
+  line-height: 150%;
+
+  & p {
+    text-align: center;
+  }
+
+  & a,
+  & a:link,
+  & a:visited {
+    color: $color-white;
+    font-weight: 400;
+
+    &:hover {
+      color: rgba($color-white, 0.8);
+    }
+  }
+}
+
+.alert-success {
+  padding: 3rem;
+  font-size: 1.8rem;
+  background-color: $color-green;
+  font-weight: 400;
+
+  & p {
+    text-align: center;
+  }
+}
+
+.alert-warn {
+  padding: 3rem;
+  font-size: 1.8rem;
+  background-color: rgb(225, 179, 41);
+  font-weight: 400;
+
+  & p {
+    text-align: center;
+  }
+}
+
+#contact .form__group:last-child {
+  text-align: start;
+}
+
+.char-left__wrap {
+  margin-top: 3px;
+  font-size: 1.5rem;
+  color: $color-black;
+}
+
+.red {
+  color: $color-red;
+}

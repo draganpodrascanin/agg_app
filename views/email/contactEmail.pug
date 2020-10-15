@@ -1,0 +1,13 @@
+//- you should remake this template
+
+extends baseEmail
+
+block content
+    h1 AGG PORUKA 
+    ul
+      li #{name}
+      li #{phone}
+      li #{email}
+      -if(car)
+        li #{car}
+    p #{message}

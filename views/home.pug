@@ -1,0 +1,134 @@
+extends base.pug
+
+block head
+  meta(http-equiv='X-UA-Compatible' content='ie=edge')
+  meta(name='description' content='Dve i po decenije iskustva. Preko 10 hiljada uspešno ugrađenih plinskih sistema u automobile. Najpouzdanija ugradnja sistema nove generacije uz pismenu garanciju na 5 godina. Atest 7 godina.')
+  meta(name='keywords' content='auto,automobil,autogas,auto plin,TNG,atest,plin,ugradnja plina Banjaluka,Banjaluka,banja luka,automehanicar banjaluka,šlep služba banjaluka,gaga,Neđo Podraščanin,majstor')
+  meta(name='author' content='Stefan Mentović, Dragan Podraščanin')
+  // Open Graph Tags
+  meta(property='og:locale' content='sr_rs')
+  meta(property='og:locale:alternate' content='bs-ba')
+  meta(property='og:type' content='website')
+  meta(property='og:title' content='Auto Gas Gaga | Mehaničarske Usluge, Ugradnja Auto Plina, Šlep Služba')
+  meta(property='og:description' content='Najpouzdanije Mehaničarske Usluge, Ugradnja Auto Plina, Šlep Služba. Više od 20 godina aktivnog iskustva!')
+  meta(property='og:url' content='https://autogasgaga.ba/')
+  meta(property='og:image' content='https://autogasgaga.ba/OGhero.jpg')
+  // Twitter Tags
+  meta(property='twitter:card' content='summary_large_image')
+  meta(property='twitter:title' content='Auto Gas Gaga | Mehaničarske Usluge, Ugradnja Auto Plina, Šlep Služba')
+  meta(property='twitter:description' content='Najpouzdanije Mehaničarske Usluge, Ugradnja Auto Plina, Šlep Služba. Više od 20 godina aktivnog iskustva!')
+  meta(property='twitter:image' content='https://autogasgaga.ba/twitterhero.jpg')
+  meta(property='twitter:image:alt' content='Auto Gas Gaga slika')
+  meta(property='twitter:url' content='https://autogasgaga.ba')
+  script(defer src="javascript/build/map.bundle.js")
+  // Links
+  
+  
+  link(rel='shortcut icon' type='image/x-icon' href='/img/logoblack.svg')
+  link(rel='stylesheet' href='stylesheet/home.css')
+  title Auto Gas Gaga | Početna Stranica
+
+block content
+  header.header
+    .header__wrap
+      h2.heading__2 Najbolji prijatelj vašeg automobila
+      h1.heading__1 Auto Gas Gaga
+      // Header navigacija
+      ul.header__nav
+        li.header__links
+          a.header__link(href='/slepsluzba') Šlep služba
+        li.header__links
+          a.header__link(href='/automehanicarskeusluge') Automehaničarske usluge
+        li.header__links
+          a.header__link(href='/ugradnjaplina') Ugradnja gasa
+      .header__btn
+        a.header__btn--1(href='tel:+38765701308') Pozovite nas
+        button.header__btn--2.showModalBtn Zatraži ponudu
+  // Cards
+  section.cards
+    .card__wrap.container
+      .card
+        img.card__img(src='img/servis2kb.svg' alt='')
+        h4.card__title Automehaničarske usluge
+        p.card__desc
+          | Naši mehaničari u AutoGas Gaga stoje Vam na raspolaganju za usluge
+          | auto dijagnostiku, mehaniku, veliki i mali servis, remont
+          | određenih delova, elektriku i elektroniku kao i popravke.
+          | Zadovoljstvo naših klijenata nam je prioritet. Pozitivna iskustva
+          | naših mušterija su najbolja reklama.
+        a.card__link(href='/automehanicar') Saznaj više &rsaquo;
+      .card
+        img.card__img(src='img/bocacyl2kb.svg' alt='')
+        h4.card__title Ugradnja gasa
+        p.card__desc
+          | Oslonite se na naše bogato iskustvo. Iza nas stoji od preko 10.000
+          | izvršenih ugradnji plinskih sistema. Pored ugradnje gasa vršimo i
+          | usluge servisa i popravke postojećih sistema na vašim kolima. Od
+          | nas možete da očekujete najpouzdaniju ugradnju sistema nove
+          | generacije uz pismenu garanciju na 5 godina.
+        a.card__link(href='/ugradnjagasa') Saznaj više &rsaquo;
+      .card
+        img.card__img(src='img/tow2kb.svg' alt='')
+        h4.card__title Šlep služba
+        p.card__desc
+          | Šlepanje svih tipova automobila: limuzina, karavana, džipova,
+          | kupea. Brza i pouzdana usluga bez obzira da li je Vaše vozilo u
+          | kvaru ili je havarisano. Ukoliko se nalazite negde na putu stižemo
+          | u najkraćem roku, pozovite nas i proverite našu efikasnost. Veliki
+          | broj zadovoljnih korisnika.
+        a.card__link(href='/slepsluzba') Saznaj više &rsaquo;
+  // About
+  section.about
+    .about__wrap.container
+      h3.heading__3 O Nama
+      .about__textwrap
+        p.bodytext
+          | Vremenom smo uvećali spektar usluga koje nudimo, tako da danas
+          | pored ugradnje i održavanja sistema autogasa, nudimo i širok
+          | spektar automehaničarskih usluga. Ukoliko Vaše vozilo ima problem
+          | sa paljenjem ili iz nekog drugog razloga nije u voznom stanju naša
+          | šlep služba je tu za Vas.
+        p.bodytext
+          | Već dve i po decenije ugrađujemo autogasnu opremu i održavamo
+          | motorna vozila. Naše glavne odlike su izuzetno visok kvalitet
+          | pruženih usluga, atraktivne cene, stručno osoblje i brzi rokovi
+          | rada bez opadanja kvaliteta usluge.
+  // Contact
+  section.contact
+    .contact__wrap.container
+      h3.heading__3 Kontaktirajte nas
+      .contact__content
+        // Form
+        form#contact.form(action='#')
+          .form__group
+            label.form__label(for='name') Ime
+            input#name.form__input(type='text' placeholder='Petar Petrović' required)
+          .form__group
+            label.form__label(for='tel') Broj telefona
+            input#phone.form__input(type='tel' placeholder='065701308' required)
+          .form__group
+            label.form__label(for='email') e-mail adresa
+            input#email.form__input(type='email' placeholder='petar@petrovic.com')
+          .form__group
+            label.form__label(for='message') Poruka
+            textarea#message.form__input.form__textarea(name='message' placeholder='Želim da zakažem besplatan pregled automobila...' required maxlength='500')
+            p.char-left__wrap
+              span#char-left 500
+              | /500
+          .form__group
+            button.form__button(type='submit') Pošalji
+        p.bodytext
+          | Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+          | labore alias, adipisci exercitationem quo, dicta sint odio
+          | inventore pariatur quibusdam, optio animi rerum quos consectetur?
+  // Map section
+  section.map
+    h3.heading__3 Kako do nas?
+    #map.map__img.container 
+    a.map__btn(href='https://goo.gl/maps/A2N2LkUp8Qax7Ghi6' target='_blank')
+      svg.map__icon
+        use(xlink:href='img/sprite.svg#icon-assistant_navigation')
+      | &#x9;&#x9;&#x9;&#x9;&#x9;Navigacija
+  
+block scripts
+  script(src="javascript/build/home.bundle.js")

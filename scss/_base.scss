@@ -1,0 +1,58 @@
+//fonts
+@font-face {
+  font-display: swap;
+  font-family: Montserrat;
+  src: url(/fonts/Montserrat/Montserrat-Medium.ttf);
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Montserrat;
+  src: url(/fonts/Montserrat/Montserrat-Light.ttf);
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-display: swap;
+  font-family: Montserrat;
+  src: url(/fonts/Montserrat/Montserrat-Bold.ttf);
+  font-weight: 600;
+  font-style: normal;
+}
+
+
+// GENERAL RESET
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+::selection {
+    color: $color-white;
+    background: $color-primary;
+}
+html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    font-size: 62.5%;
+    font-family: "Montserrat", sans-serif;
+    @media only screen and (max-width: $bp-l-phone) {
+        font-size: 57%;
+    }
+    @media only screen and (max-width: $bp-m-phone) {
+        font-size: 50%;
+    }
+}
+body {
+    overflow-x: hidden;
+    font-family: $font-body;
+    color: $color-white;
+    font-weight: 300;
+    line-height: 150%;
+    background-color: $color-gray-lightmaster;
+}

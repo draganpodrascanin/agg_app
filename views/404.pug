@@ -1,0 +1,18 @@
+extends base.pug
+
+block head
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/stylesheet/build/error.css">
+  <link rel="shortcut icon" type="image/x-icon" href="/img/logoblack.svg">
+  <title>Auto Gas Gaga | Error 404</title>  
+
+block content
+  header.header
+    .header__wrap
+      h1.heading__3 Ups Greška 404
+      p.bodytext
+        | Stranica koju ste tražili nije trenutno dostupna. Molimo Vas da pokušate kasnije.
+      a.header__btn(href='index.html') Nazad na početnu stanicu
+
+block scripts
+  script(src='./javascript/build/error404.bundle.js')
