@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { pleaseWaitToSubmitAgain } from './prevent-form-submit';
 import { hideSpinner, showSpinner } from './spinner';
 import { ResponseAlert } from './alert';
@@ -38,9 +39,27 @@ window.onkeydown = function (event) {
   }
 };
 
+//alert if phone is not valid
+inputPhone.addEventListener('input', () => {
+  const prevAlert = document.querySelector('.phone-warn');
+  if (prevAlert) prevAlert.remove();
+  console.log(inputPhone.value);
+  // not a phone number, allowed numbers only or start with +
+  const regex = /(^[0-9]{0,15}$(?![a-zA-Z])|^\+[0-9]{0,15}$(?![a-zA-Z])|$^|^\+$)/;
+  if (!regex.test(inputPhone.value)) {
+    console.log('true');
+
+    const res = new ResponseAlert(modalForm, 'custom', {
+      class: 'phone-warn',
+      innerHTML: '<p>Broj telefona nije validan.</p>',
+    });
+
+    res.render();
+  }
+});
+
 //SHOW HOW MANY MORE CHARS ARE ALOWED (MAX500)
 textarea.addEventListener('input', (e) => {
-  console.log(e);
   const out = 500 - e.target.value.length;
   charLeft.innerHTML = out;
 
@@ -51,6 +70,7 @@ textarea.addEventListener('input', (e) => {
 modalForm.addEventListener('submit', async function modalFormSubmit(e) {
   e.preventDefault();
   showSpinner();
+  ResponseAlert.deletePreviousAlerts();
 
   const data = {
     name: inputName.value,
@@ -60,12 +80,14 @@ modalForm.addEventListener('submit', async function modalFormSubmit(e) {
     car: inputCar.value,
   };
 
-  modalForm.removeEventListener(modalFormSubmit);
-  modalForm.addEventListener(pleaseWaitToSubmitAgain.bind(null, e, modalForm));
-
+  //block another form submition
+  const blockSubmit = (e) => pleaseWaitToSubmitAgain(e, modalForm);
+  modalForm.removeEventListener('submit', modalFormSubmit);
+  modalForm.addEventListener('submit', blockSubmit);
+  //allow submition after 10sec
   setTimeout(() => {
-    form.addEventListener('submit', submitForm);
-    form.removeEventListener('submit', pleaseWaitToSubmitAgain);
+    modalForm.removeEventListener('submit', blockSubmit);
+    modalForm.addEventListener('submit', modalFormSubmit);
   }, 10000);
 
   try {
@@ -76,6 +98,7 @@ modalForm.addEventListener('submit', async function modalFormSubmit(e) {
     inputEmail.value = '';
     inputCar.value = '';
     textarea.value = '';
+    charLeft.innerHTML = 500;
 
     const res = new ResponseAlert(modalForm, 'custom', {
       class: 'alert-success',

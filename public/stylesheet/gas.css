@@ -144,6 +144,9 @@ body {
   margin-top: 2rem;
   color: #fff; }
 
+.red {
+  color: #e74c3c !important; }
+
 .container {
   max-width: 117rem;
   width: 80%;
@@ -381,7 +384,7 @@ body {
 .modalform__group:not(:last-child) {
   margin-bottom: 1.5rem; }
 
-.modalform__group:last-child {
+.modalform .modalform__button {
   text-align: center; }
 
 .modalform__group:nth-last-child(3) {
@@ -396,6 +399,8 @@ body {
   display: block;
   transition: all 0.3s;
   line-height: 2.2rem; }
+  .modalform__label span {
+    font-weight: 300; }
 
 .modalform__input {
   display: block;
@@ -478,7 +483,7 @@ body {
 #modal-message {
   margin-bottom: 0; }
 
-#modal-mcl-wrapper {
+#modal-mscl-wrapper {
   margin-bottom: 1.5rem; }
 
 .header {
@@ -533,40 +538,6 @@ body {
       .contact__content {
         grid-template-columns: 1fr; } }
 
-.alert-fail {
-  padding: 2rem;
-  font-size: 1.5rem;
-  background-color: rgba(231, 76, 60, 0.8);
-  font-weight: 300;
-  line-height: 150%; }
-  .alert-fail p {
-    text-align: center; }
-  .alert-fail a,
-  .alert-fail a:link,
-  .alert-fail a:visited {
-    color: #fff;
-    font-weight: 400; }
-    .alert-fail a:hover,
-    .alert-fail a:link:hover,
-    .alert-fail a:visited:hover {
-      color: rgba(255, 255, 255, 0.8); }
-
-.alert-success {
-  padding: 3rem;
-  font-size: 1.8rem;
-  background-color: #2ecc71;
-  font-weight: 400; }
-  .alert-success p {
-    text-align: center; }
-
-.alert-warn {
-  padding: 3rem;
-  font-size: 1.8rem;
-  background-color: #e1b329;
-  font-weight: 400; }
-  .alert-warn p {
-    text-align: center; }
-
 #contact .form__group:last-child {
   text-align: start; }
 
@@ -606,6 +577,8 @@ body {
     text-transform: initial; }
   .form__label--min {
     font-size: 1.4rem; }
+  .form__label span {
+    font-weight: 300; }
 
 .form__input {
   display: block;
@@ -678,6 +651,50 @@ body {
 
 .form__button:active {
   transform: translateY(1px); }
+
+.phone-warn {
+  background: #f33936;
+  font-size: 1.6rem;
+  padding: 1rem 1.5rem; }
+
+.alert-fail {
+  padding: 2rem;
+  font-size: 1.5rem;
+  background-color: rgba(231, 76, 60, 0.8);
+  font-weight: 300;
+  line-height: 150%; }
+  .alert-fail p {
+    text-align: center; }
+  .alert-fail a,
+  .alert-fail a:link,
+  .alert-fail a:visited {
+    color: #fff;
+    font-weight: 400; }
+    .alert-fail a:hover,
+    .alert-fail a:link:hover,
+    .alert-fail a:visited:hover {
+      color: rgba(255, 255, 255, 0.8); }
+
+.alert-success {
+  padding: 3rem;
+  font-size: 1.8rem;
+  background-color: #2ecc71;
+  font-weight: 400; }
+  .alert-success p {
+    text-align: center; }
+
+.alert-warn {
+  padding: 3rem;
+  font-size: 1.8rem;
+  background-color: #e1b329;
+  font-weight: 400; }
+  .alert-warn p {
+    text-align: center; }
+
+.char-left__wrap {
+  margin-top: 3px;
+  font-size: 1.5rem;
+  color: #363946; }
 
 .cta {
   background-color: #1e7be2;

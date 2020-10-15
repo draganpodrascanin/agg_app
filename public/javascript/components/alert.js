@@ -44,11 +44,12 @@ export class ResponseAlert {
         break;
       case 'msg-warn':
         this.alert.className = 'alert alert-warn';
-        this.alert.innerHTML = `<p>Molimo Vas sačekajte malo, pre nego što ponovo pošaljete poruku.</p>`;
+        this.alert.innerHTML = `<p>Molimo Vas sačekajte malo pre nego što ponovo pošaljete poruku.</p>`;
         break;
       case 'custom':
         this.alert.className = `alert ${this.options.class}`;
         this.alert.innerHTML = this.options.innerHTML;
+        break;
       default:
         return console.error(
           'status of alert can be only "msg-success", "msg-fail", "msg-warn" or "custom"'
@@ -58,5 +59,11 @@ export class ResponseAlert {
 
   delete() {
     this.alert.remove();
+  }
+
+  static deletePreviousAlerts() {
+    const alerts = document.querySelectorAll('.alert');
+
+    alerts.forEach((alert) => alert.remove());
   }
 }

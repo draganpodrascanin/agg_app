@@ -14,20 +14,24 @@ html(lang="sr-BA")
       form#modal-form.modalform(action='#')
         .modalform__group
           label.modalform__label(for='name') Ime
-          input#modal-name.modalform__input(type='text' placeholder='Petar Petrović' required='')
+            span *
+          input#modal-name.modalform__input(type='text' placeholder='Petar Petrović' required)
         .modalform__group
           label.modalform__label(for='tel') Broj telefona
-          input#modal-phone.modalform__input(type='tel' placeholder='065701308' required='')
+            span *
+          input#modal-phone.modalform__input(type='tel' placeholder='065701308' pattern="(^[0-9]{0,15}$(?![a-zA-Z])|^\\+[0-9]{0,15}$(?![a-zA-Z])|$^|^\\+$)" title="unesite validan broj telefona" required='')
         .modalform__group
           label.modalform__label(for='email') e-mail adresa
           input#modal-email.modalform__input(type='email' placeholder='petar@petrovic.com')
         .modalform__group
-          label.modalform__label(for='info') Marka i model automobila
+          label.modalform__label(for='info') Proizvođač i model automobila
+            span *
           input#modal-car.modalform__input(type='text' placeholder='Alfa Romeo 156 2.0 twin spark')
         .modalform__group
           label.modalform__label(for='message') Poruka
+            span *
           textarea#modal-message.modalform__input.modalform__textarea(name='message' placeholder='Želim da zakažem besplatan pregled automobila...' required='' maxlength='500')
-        p#modal-mcl-wrapper.char-left__wrap
+        p#modal-mscl-wrapper.char-left__wrap
           span#modal-message-char-left 500
           | /500
         .modalform__group

@@ -7,6 +7,7 @@
 @import 'form';
 @import 'cta';
 @import 'footer';
+@import 'spinner';
 
 .login-wrapper {
 	height: 90vh;
@@ -38,4 +39,12 @@
 	&__group:nth-child(2) {
 		margin-bottom: 3rem;
 	}
+}
+
+.login-warn {
+	margin-top: 1rem;
+	font-size:1.5rem;
+	color:white;
+	background: $color-warn;
+	padding: 1rem 1.5rem
 }

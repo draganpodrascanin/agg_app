@@ -18,13 +18,13 @@ block content
       .form-wrapper
         h1 Log In
         // Form
-        form.form(action='#')
+        form#login-form.form(action='#')
           .form__group
             label.form__label(for='name') Email
             input#email.form__input(type='text' placeholder='email@primer.com' required)
           .form__group
             label.form__label(for='tel') Šifra
-            input#password.form__input(type='tel' placeholder='******' required)
+            input#password.form__input(type='password' placeholder='******' required)
           button.form__button(type='submit') Potvrdi
 
 block scripts

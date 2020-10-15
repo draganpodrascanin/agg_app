@@ -55,7 +55,11 @@
     margin-bottom: 1.5rem;
   }
 
-  &__group:last-child {
+  //   &__group:last-child {
+  //     text-align: center;
+  //   }
+
+  & .modalform__button {
     text-align: center;
   }
 
@@ -72,6 +76,10 @@
     display: block;
     transition: all 0.3s;
     line-height: 2.2rem;
+
+    & span {
+      font-weight: 300;
+    }
   }
   &__input {
     display: block;
@@ -169,6 +177,6 @@
   margin-bottom: 0;
 }
 
-#modal-mcl-wrapper {
+#modal-mscl-wrapper {
   margin-bottom: 1.5rem;
 }

@@ -102,21 +102,24 @@ block content
         form#contact.form(action='#')
           .form__group
             label.form__label(for='name') Ime
+              span *
             input#name.form__input(type='text' placeholder='Petar Petrović' required)
           .form__group
             label.form__label(for='tel') Broj telefona
-            input#phone.form__input(type='tel' placeholder='065701308' required)
+              span *
+            input#phone.form__input(type='tel' placeholder='065701308' pattern="(^[0-9]{0,15}$(?![a-zA-Z])|^\\+[0-9]{0,15}$(?![a-zA-Z])|$^|^\\+$)" title="unesite validan broj telefona" required)
           .form__group
             label.form__label(for='email') e-mail adresa
             input#email.form__input(type='email' placeholder='petar@petrovic.com')
           .form__group
             label.form__label(for='message') Poruka
+              span *
             textarea#message.form__input.form__textarea(name='message' placeholder='Želim da zakažem besplatan pregled automobila...' required maxlength='500')
             p.char-left__wrap
               span#char-left 500
               | /500
           .form__group
-            button.form__button(type='submit') Pošalji
+            input.form__button(type='submit' value='Pošalji') 
         p.bodytext
           | Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
           | labore alias, adipisci exercitationem quo, dicta sint odio

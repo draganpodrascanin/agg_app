@@ -12,20 +12,30 @@ const phone = document.querySelector('#phone');
 const email = document.querySelector('#email');
 const message = document.querySelector('#message');
 
-const deletePreviousAlerts = () => {
-  const alerts = document.querySelectorAll('.alert');
-
-  alerts.forEach((alert) => alert.remove());
-};
-
 //SHOW HOW MANY MORE CHARS ARE ALOWED (MAX500)
 textarea.addEventListener('input', (e) => {
-  console.log(e);
   const out = 500 - e.target.value.length;
   charLeft.innerHTML = out;
 
   if (out === 0) charLeftWrapp.className = 'char-left__wrap red';
   else charLeftWrapp.className = 'char-left__wrap';
+});
+
+phone.addEventListener('input', () => {
+  const prevAlert = document.querySelector('.phone-warn');
+  if (prevAlert) prevAlert.remove();
+
+  // not a phone number, allowed numbers only or start with +
+  const regex = /(^[0-9]{0,15}$(?![a-zA-Z])|^\+[0-9]{0,15}$(?![a-zA-Z])|$^|^\+$)/;
+  if (!regex.test(phone.value)) {
+    console.log('true');
+    const res = new ResponseAlert(form, 'custom', {
+      class: 'phone-warn',
+      innerHTML: '<p>Broj telefona nije validan.</p>',
+    });
+
+    res.render();
+  }
 });
 
 //alternative listener
@@ -45,7 +55,7 @@ const pleaseWaitToSubmitAgain = (e) => {
 //SUBMIT
 form.addEventListener('submit', async function submitForm(e) {
   e.preventDefault();
-  deletePreviousAlerts();
+  ResponseAlert.deletePreviousAlerts();
   showSpinner();
 
   const data = {

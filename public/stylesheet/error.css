@@ -278,7 +278,7 @@ body {
 .modalform__group:not(:last-child) {
   margin-bottom: 1.5rem; }
 
-.modalform__group:last-child {
+.modalform .modalform__button {
   text-align: center; }
 
 .modalform__group:nth-last-child(3) {
@@ -293,6 +293,8 @@ body {
   display: block;
   transition: all 0.3s;
   line-height: 2.2rem; }
+  .modalform__label span {
+    font-weight: 300; }
 
 .modalform__input {
   display: block;
@@ -375,7 +377,7 @@ body {
 #modal-message {
   margin-bottom: 0; }
 
-#modal-mcl-wrapper {
+#modal-mscl-wrapper {
   margin-bottom: 1.5rem; }
 
 .cta {

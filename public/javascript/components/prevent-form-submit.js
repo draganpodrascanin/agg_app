@@ -1,13 +1,14 @@
+import { ResponseAlert } from './alert';
 //alternative listener
 //need to wait before submiting form again
-export const pleaseWaitToSubmitAgain = (e) => {
+export const pleaseWaitToSubmitAgain = (e, form) => {
   e.preventDefault();
-  const res = document.createElement('div');
-  form.appendChild(res);
+  ResponseAlert.deletePreviousAlerts();
 
-  res.className = 'alert-warn';
-  res.innerHTML = `<p>Molimo Vas sačekajte malo, pre nego što ponovo pošaljete poruku.</p>`;
+  const res = new ResponseAlert(form, 'msg-warn');
+  res.render();
+
   setTimeout(() => {
-    res.remove();
+    res.delete();
   }, 5000);
 };
