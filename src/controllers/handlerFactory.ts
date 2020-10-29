@@ -15,113 +15,119 @@ import { Entities } from '../entity/Entities';
 */
 
 class HandlerFactory {
-	public getOne = (Entity: Entities) => async (
-		req: Request,
-		res: Response,
-		next: NextFunction
-	) => {
-		const entityRepo = getEnvConnection().getRepository(Entity);
-		const entity = (await entityRepo.findOne({
-			where: { id: req.params.id },
-		})) as ObjectLiteral;
+  public getOne = (
+    Entity: Entities,
+    options?: { paramId?: string; relations?: string[] }
+  ) => async (req: Request, res: Response, next: NextFunction) => {
+    const entityRepo = getEnvConnection().getRepository(Entity);
 
-		if (!entity) {
-			throw new CustomError('Data Not Found', 404);
-		}
+    const id = options?.paramId || 'id';
 
-		const resEntity = { ...entity, password: undefined };
+    const query = entityRepo.findOne({
+      where: { id: req.params[id] },
+      relations: options?.relations || [],
+    });
 
-		res.status(200).json({
-			status: 'success',
-			data: resEntity,
-		});
-	};
+    const entity = (await query) as ObjectLiteral;
 
-	//delete one from db
-	public deletOne = (Entity: Entities) => async (
-		req: Request,
-		res: Response,
-		next: NextFunction
-	) => {
-		const entityRepo = getEnvConnection().getRepository(Entity);
-		const response = await entityRepo.delete(req.params.id);
+    if (!entity) {
+      throw new CustomError('Data Not Found', 404);
+    }
 
-		res.status(200).json({
-			status: 'success',
-			response,
-		});
-	};
+    const resEntity = { ...entity, password: undefined };
 
-	//update one, provide Entity, and Array of strings that represents fields that are allowed to update
-	//if allowed fields are not specified, everything is allowed to update
-	public updateOne = (Entity: Entities, allowedFields?: string[]) => async (
-		req: Request,
-		res: Response,
-		next: NextFunction
-	) => {
-		const entityRepo = getEnvConnection().getRepository(Entity);
-		const entity: any = await entityRepo.findOne({
-			where: { id: req.params.id },
-		});
+    res.status(200).json({
+      status: 'success',
+      data: resEntity,
+    });
+  };
 
-		if (!entity) {
-			throw new CustomError('Data Not Found', 404);
-		}
+  //delete one from db
+  public deletOne = (Entity: Entities) => async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const entityRepo = getEnvConnection().getRepository(Entity);
+    const response = await entityRepo.delete(req.params.id);
 
-		//filter request
-		let updateBody;
-		if (allowedFields && allowedFields.length > 0) {
-			updateBody = filterObj(req.body, ...allowedFields);
-		} else updateBody = req.body;
+    res.status(200).json({
+      status: 'success',
+      response,
+    });
+  };
 
-		//set entities value to updated values
-		for (const property in updateBody) {
-			if (Object.prototype.hasOwnProperty.call(updateBody, property)) {
-				const newValue = updateBody[property];
-				entity[property] = newValue;
-			}
-		}
+  //update one, provide Entity, and Array of strings that represents fields that are allowed to update
+  //if allowed fields are not specified, everything is allowed to update
+  public updateOne = (Entity: Entities, allowedFields?: string[]) => async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const entityRepo = getEnvConnection().getRepository(Entity);
 
-		await validateEntity(entity);
+    const entity: any = await entityRepo.findOne({
+      where: { id: req.params.id },
+    });
 
-		await entityRepo.save(entity);
+    if (!entity) {
+      throw new CustomError('Data Not Found', 404);
+    }
 
-		res.status(200).json({
-			success: 'success',
-			data: entity,
-		});
-	};
+    //filter request
+    let updateBody;
+    if (allowedFields && allowedFields.length > 0) {
+      updateBody = filterObj(req.body, ...allowedFields);
+    } else updateBody = req.body;
 
-	public createOne = (Entity: Entities) => async (
-		req: Request,
-		res: Response,
-		next: NextFunction
-	) => {
-		const entityRepo = getEnvConnection().getRepository(Entity);
-		const entity = entityRepo.create(req.body);
-		await validateEntity(entity);
-		await entityRepo.save(entity);
+    //set entities value to updated values
+    for (const property in updateBody) {
+      if (Object.prototype.hasOwnProperty.call(updateBody, property)) {
+        const newValue = updateBody[property];
+        entity[property] = newValue;
+      }
+    }
 
-		res.status(201).json({
-			status: 'success',
-			data: entity,
-		});
-	};
+    await validateEntity(entity);
 
-	public getAll = (Entity: Entities, filter?: FindManyOptions) => async (
-		req: Request,
-		res: Response,
-		next: NextFunction
-	) => {
-		const entityRepo = getEnvConnection().getRepository(Entity);
-		const entities = await entityRepo.find(filter);
+    await entityRepo.save(entity);
 
-		res.status(200).json({
-			status: 'success',
-			results: entities.length,
-			data: entities,
-		});
-	};
+    res.status(200).json({
+      success: 'success',
+      data: entity,
+    });
+  };
+
+  public createOne = (Entity: Entities) => async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const entityRepo = getEnvConnection().getRepository(Entity);
+    const entity = entityRepo.create(req.body);
+    await validateEntity(entity);
+    const responseEnt = await entityRepo.save(entity);
+
+    res.status(201).json({
+      status: 'success',
+      data: responseEnt,
+    });
+  };
+
+  public getAll = (Entity: Entities, filter?: FindManyOptions) => async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const entityRepo = getEnvConnection().getRepository(Entity);
+    const entities = await entityRepo.find(filter);
+
+    res.status(200).json({
+      status: 'success',
+      results: entities.length,
+      data: entities,
+    });
+  };
 }
 
 export default new HandlerFactory();

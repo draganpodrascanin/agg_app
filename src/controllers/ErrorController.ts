@@ -17,6 +17,11 @@ const handleDuplicateEntry = (err: any) => {
   );
 };
 
+const handleMissingField = (err: any) => {
+  const what = err.sqlMessage.split("'")[1];
+  return new CustomError(`Missing field ${what}`, 400);
+};
+
 const handleDataTruncated = (err: any) => {
   const what = err.sqlMessage.split("'")[1];
   return new CustomError(`invalid data for field: ${what}`, 400);
@@ -25,6 +30,7 @@ const handleDataTruncated = (err: any) => {
 const checkForKownErrors = (err: any): Error => {
   if (err.code === 'ER_DUP_ENTRY') return handleDuplicateEntry(err);
   if (err.code === 'WARN_DATA_TRUNCATED') return handleDataTruncated(err);
+  if (err.errno === 1364) return handleMissingField(err);
   //add DB and other known errors that arent made by us
   return err;
 };
@@ -37,7 +43,7 @@ export default (
 ) => {
   // console.log(err);
   let error;
-  console.log(err);
+
   //check for DB and other known errors that aren't made by us
   if (!err.isOperational) error = checkForKownErrors(err) as CustomError;
   else error = { ...err, message: err.message } as Error;

@@ -1,0 +1,86 @@
+.cta {
+  background-color: $color-primary;
+  padding: 5rem 3rem;
+  text-align: center;
+  .cta__btnwrap {
+    display: flex;
+    justify-content: center;
+    @media only screen and (max-width: $bp-xs-phone) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cta a,
+    .cta button {
+      align-self: center;
+      font-size: 1.4rem;
+    }
+  }
+}
+.cta--1,
+.cta--1:link,
+.cta--1:visited {
+  margin-right: 0.5rem;
+  display: inline-block;
+  text-decoration: none;
+  color: $color-primary;
+  background-color: $color-white;
+  padding: 1.4rem 2rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-style: normal;
+  text-transform: uppercase;
+  border-radius: 4px;
+  border: 1px solid $color-white;
+  line-height: 1;
+  transition: all 0.2s;
+  margin: 2rem 1rem;
+  width: 25rem;
+  @media only screen and (max-width: $bp-s-tablet-portrait) {
+    width: 22rem;
+  }
+  @media only screen and (max-width: $bp-s-phone) {
+    width: 20rem;
+  }
+}
+.cta--1:hover,
+.cta--1:active {
+  opacity: 0.9;
+}
+.cta--1:active {
+  transform: translateY(1px);
+}
+.cta--2,
+.cta--2:focus {
+  cursor: pointer;
+  text-decoration: none;
+  color: $color-white;
+  background-color: $color-secondary;
+  padding: 1.4rem 2rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  font-style: normal;
+  text-transform: uppercase;
+  border-radius: 4px;
+  border: 1px solid $color-secondary;
+  font-family: $font-heading;
+  line-height: 1;
+  transition: all 0.2s;
+  margin: 2rem 1rem;
+  width: 25rem;
+  outline: none;
+  @media only screen and (max-width: $bp-s-tablet-portrait) {
+    width: 22rem;
+  }
+  @media only screen and (max-width: $bp-s-phone) {
+    width: 20rem;
+  }
+}
+.cta--2:hover,
+.cta--2:active {
+  opacity: 0.9;
+}
+.cta--2:active {
+  transform: translateY(1px);
+}

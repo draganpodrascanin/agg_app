@@ -4,7 +4,7 @@ import { ObjectLiteral } from 'typeorm';
 import { User } from '../entity/User';
 
 export default async (
-  entity: User /*change type to your entities that need validation*/
+  entity: any /*change type to your entities that need validation*/
 ): Promise<void> => {
   const errors = await validate(entity);
 

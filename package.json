@@ -47,6 +47,7 @@
 		"bcryptjs": "^2.4.3",
 		"class-validator": "^0.12.2",
 		"cookie-parser": "^1.4.5",
+		"dayjs": "^1.9.4",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
 		"express-async-errors": "^3.1.1",
@@ -65,13 +66,13 @@
 		"start:dev": "ts-node-dev src/server.ts",
 		"start:prod": "NODE_ENV=production node dist/server.js",
 		"build": "tsc -p .",
-		"watch:sass": "concurrently -k \"node-sass ./scss/main.scss ./public/stylesheet/home.css -w\"  \"node-sass ./scss/gas.scss ./public/stylesheet/gas.css -w\" \"node-sass ./scss/slep.scss ./public/stylesheet/slep.css -w\" \"node-sass ./scss/mehanika.scss ./public/stylesheet/mehanika.css -w\" \"node-sass ./scss/error.scss ./public/stylesheet/error.css -w\" \"node-sass ./scss/userlogin.scss ./public/stylesheet/userlogin.css -w\" ",
-		"compile:sass": "node-sass ./scss/main.scss ./public/stylesheet/home.css && node-sass ./scss/gas.scss ./public/stylesheet/gas.css && node-sass ./scss/slep.scss ./public/stylesheet/slep.css && node-sass ./scss/mehanika.scss ./public/stylesheet/mehanika.css  && node-sass ./scss/error.scss ./public/stylesheet/error.css && node-sass ./scss/userlogin.scss ./public/stylesheet/userlogin.css",
+		"watch:sass": "concurrently -k \"node-sass ./resources/scss/main.scss ./public/stylesheet/home.css -w\"  \"node-sass ./resources/scss/gas.scss ./public/stylesheet/gas.css -w\" \"node-sass ./resources/scss/slep.scss ./public/stylesheet/slep.css -w\" \"node-sass ./resources/scss/mehanika.scss ./public/stylesheet/mehanika.css -w\" \"node-sass ./resources/scss/error.scss ./public/stylesheet/error.css -w\" \"node-sass ./resources/scss/userlogin.scss ./public/stylesheet/userlogin.css -w\" ",
+		"compile:sass": "node-sass ./resources/scss/main.scss ./public/stylesheet/home.css && node-sass ./resources/scss/gas.scss ./public/stylesheet/gas.css && node-sass ./resources/scss/slep.scss ./public/stylesheet/slep.css && node-sass ./resources/scss/mehanika.scss ./public/stylesheet/mehanika.css  && node-sass ./resources/scss/error.scss ./public/stylesheet/error.css && node-sass ./resources/scss/userlogin.scss ./public/stylesheet/userlogin.css",
 		"prefix:css": "postcss ./public/stylesheet/*.css --use autoprefixer   -d ./public/stylesheet/prefixed/",
 		"compress:css": "node-sass ./public/stylesheet/prefixed/home.css ./public/stylesheet/build/home.css --output-style compressed && node-sass ./public/stylesheet/prefixed/gas.css ./public/stylesheet/build/gas.css --output-style compressed && node-sass ./public/stylesheet/prefixed/mehanika.css ./public/stylesheet/build/mehanika.css --output-style compressed && node-sass ./public/stylesheet/prefixed/slep.css ./public/stylesheet/build/slep.css --output-style compressed && node-sass ./public/stylesheet/prefixed/error.css ./public/stylesheet/build/error.css --output-style compressed &&  node-sass ./public/stylesheet/prefixed/userlogin.css ./public/stylesheet/build/userlogin.css --output-style compressed",
 		"build:css": "npm-run-all compile:sass prefix:css compress:css",
 		"build:js": "webpack --config webpack.prod.js",
-		"watch:js": "webpack-dev-server --output-public-path=/public/javascript/build/",
+		"watch:js": "webpack-dev-server --output-public-path=/public/javascript/",
 		"test": "jest --watchAll --no-cache"
 	}
 }

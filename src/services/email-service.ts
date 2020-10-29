@@ -74,15 +74,10 @@ class EmailService implements Email {
     await this.send(
       EmailTemaplates['welcome'],
       to,
-      'Uspesno otvorena e knjizica.'
+      'Uspesno otvorena E Servisna Knjižica.'
     );
   }
 
-  /**
-   * url on which can user retrive its password
-   *
-   * @param url
-   */
   async sendPasswordReset(to: string, url: string) {
     await this.send(EmailTemaplates['passwordReset'], to, 'Resetovanje šifre', {
       url,

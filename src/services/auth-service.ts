@@ -1,11 +1,14 @@
 import bcrypt from 'bcryptjs';
 import { User } from '../entity/User';
+import { Admin } from '../entity/Admin';
 import crypto from 'crypto';
 import { Authentication } from '../interfaces/services/Authentication';
 import { injectable } from 'inversify';
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import { Authenticatable } from '../interfaces/Authenticatable';
 
+//this service is used for users and admins
 @injectable()
 class AuthenticationService implements Authentication {
   passwordMatchWithPasswordConfirm(password: string, passwordConfirm: string) {
@@ -20,7 +23,7 @@ class AuthenticationService implements Authentication {
 
   //----------------------------------------------------------------------------------
 
-  isCorrectPassword(password: string, User: User): Promise<boolean> {
+  isCorrectPassword(password: string, User: Authenticatable): Promise<boolean> {
     return bcrypt.compare(password, User.password);
   }
   createPasswordResetToken() {
@@ -38,7 +41,7 @@ class AuthenticationService implements Authentication {
 
   //----------------------------------------------------------------------------------
 
-  checkIfPasswordResetTokenExpired(user: User): boolean {
+  checkIfPasswordResetTokenExpired(user: Authenticatable): boolean {
     if (!user.passwordResetExpires) return true;
     return user.passwordResetExpires < new Date();
   }
@@ -61,14 +64,19 @@ class AuthenticationService implements Authentication {
   //----------------------------------------------------------------------------------
 
   createSendJWTToken(
-    user: User,
+    user: Authenticatable,
     statusCode: number,
     request: Request,
     res: Response
   ): void {
+    let jwt = '';
+
+    if (user instanceof User) jwt = 'jwt';
+    if (user instanceof Admin) jwt = 'adminjwt';
+
     const token = this.signJWTToken(user.id);
 
-    res.cookie('jwt', token, {
+    res.cookie(jwt, token, {
       expires: new Date(
         //@ts-ignore
         Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000

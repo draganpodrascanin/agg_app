@@ -1,0 +1,41 @@
+.header {
+  width: 100%;
+  min-height: 100vh;
+  background-image: linear-gradient(to bottom, rgba(#000, 0.7), rgba(#000, 0.8)),
+    url(/img/hero_gas.jpg);
+  @media only screen and (max-width: $bp-laptop) {
+    background-image: linear-gradient(
+        to bottom,
+        rgba(#000, 0.7),
+        rgba(#000, 0.8)
+      ),
+      url(/img/hero_gas_mobile.jpg);
+  }
+
+  @media only screen and (max-width: $bp-s-phone) {
+    height: 130vh;
+  }
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .header__half {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: center;
+  }
+  .header__wrap {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 2rem 3rem;
+    @media only screen and (max-width: $bp-tablet-portrait) {
+      grid-template-columns: 1fr;
+    }
+  }
+  .header__calculator {
+    background-color: $color-gray-lightmaster;
+    padding: 2rem;
+  }
+}

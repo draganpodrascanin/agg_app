@@ -3,18 +3,14 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
-  BeforeInsert,
 } from 'typeorm';
 
 import { IsEmail } from 'class-validator';
 
 @Entity('message')
 export class Message {
-  @PrimaryGeneratedColumn()
-  id: number;
-
-  @CreateDateColumn()
-  createdAt: Date;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({
     type: 'varchar',
@@ -48,8 +44,6 @@ export class Message {
   })
   message: string;
 
-  @BeforeInsert()
-  beforeInsert() {
-    this.createdAt = new Date();
-  }
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
 }
