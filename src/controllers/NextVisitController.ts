@@ -13,7 +13,7 @@ class NextVisitController {
     'milage',
     'note',
   ]);
-  public deleteOne = handlerFactory.deletOne(Entities.NextVisit);
+  public deleteOne = handlerFactory.deleteOne(Entities.NextVisit);
 
   public createOne = async (req: Request, res: Response) => {
     const connection = getEnvConnection();

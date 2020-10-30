@@ -9,7 +9,7 @@ import handlerFactory from './handlerFactory';
 class CarReceptionController {
   public getOne = handlerFactory.getOne(Entities.CarReception);
   public updateOne = handlerFactory.updateOne(Entities.CarReception);
-  public deleteOne = handlerFactory.deletOne(Entities.CarReception);
+  public deleteOne = handlerFactory.deleteOne(Entities.CarReception);
 
   public getPage = async (req: Request, res: Response) => {
     const page = Number(req.query.page) || 1;

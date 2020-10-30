@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -19,15 +20,18 @@ export class JobConclusion {
   @Column({ type: 'varchar', length: 1000, nullable: true })
   note: string;
 
+  @Column({ type: 'int' })
+  charged: number;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
-  @Column({ type: 'varchar', length: 30, nullable: true })
+  @Column({ type: 'varchar', length: 50, nullable: true })
   workOrderId: string;
 
-  @ManyToOne((type) => WorkOrder, (workOrder) => workOrder.jobConclusion)
+  @OneToOne((type) => WorkOrder, (workOrder) => workOrder.jobConclusion)
   workOrder: WorkOrder;
 }

@@ -6,7 +6,6 @@ import {
   UpdateDateColumn,
   OneToMany,
   JoinColumn,
-  Index,
 } from 'typeorm';
 import { Warranty } from './Warranty';
 

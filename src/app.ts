@@ -16,7 +16,13 @@ import warrantyRoutes from './routes/warranty-routes';
 import warrantyConditionsRoutes from './routes/warranty-condition-routes';
 import workOrderRoutes from './routes/work-order-routes';
 import carReceptionRoutes from './routes/car-reception-routes';
+import carExamRoutes from './routes/car-exam-routes';
+import jobTicketRoutes from './routes/job-ticket-routes';
+import jobConclusionRoutes from './routes/job-conclusion-routes';
 import nextVisitRoutes from './routes/next-visit-routes';
+import invoiceRoutes from './routes/invoice-routes';
+import imageRoutes from './routes/image-routes';
+import blogRoutes from './routes/blog-routes';
 
 import ViewsController from './controllers/ViewsController';
 import ErrorController from './controllers/ErrorController';
@@ -43,6 +49,12 @@ app.use('/api/v1/nextVisit', nextVisitRoutes);
 app.use('/api/v1/warrantyConditions', warrantyConditionsRoutes);
 app.use('/api/v1/workOrders', workOrderRoutes);
 app.use('/api/v1/carReceptions', carReceptionRoutes);
+app.use('/api/v1/jobTickets', jobTicketRoutes);
+app.use('/api/v1/jobConclusion', jobConclusionRoutes);
+app.use('/api/v1/carExams', carExamRoutes);
+app.use('/api/v1/invoices', invoiceRoutes);
+app.use('/api/v1/images', imageRoutes);
+app.use('/api/v1/blogs', blogRoutes);
 //not found api route
 app.use('/api/v1/*', (req, res, next) => {
   throw new CustomError(

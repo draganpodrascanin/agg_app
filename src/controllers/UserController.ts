@@ -28,7 +28,7 @@ class UserController {
     'lastName',
     'phoneNumber',
   ]);
-  public deleteOne = handlerFactory.deletOne(Entities.User);
+  public deleteOne = handlerFactory.deleteOne(Entities.User);
 
   public getOne = async (req: Request, res: Response) => {
     const { id } = req.params;

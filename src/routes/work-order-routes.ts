@@ -48,6 +48,19 @@ router.get(
 
 //---------------------------------------------------------------------------
 
+router.get(
+  '/:id',
+  adminAuthMiddleware.protect,
+  adminAuthMiddleware.restrictTo(
+    AdminRoles.admin,
+    AdminRoles.superAdmin,
+    AdminRoles.mechanic
+  ),
+  WorkOrderController.getOne
+);
+
+//---------------------------------------------------------------------------
+
 router.patch(
   '/:id/complete',
   adminAuthMiddleware.protect,

@@ -1,4 +1,3 @@
-import { type } from 'os';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -9,7 +8,6 @@ import {
   OneToOne,
   JoinColumn,
 } from 'typeorm';
-import { CarReception } from './CarReception';
 import { WorkOrder } from './WorkOrder';
 
 @Entity('car_exam')
@@ -18,7 +16,7 @@ export class CarExam {
   id: string;
 
   @Column({ type: 'varchar', length: 1000, name: 'exam_conclusion' })
-  exam_conclusion: string;
+  examConclusion: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
@@ -26,12 +24,6 @@ export class CarExam {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
-  @Column()
-  workOrderId: string;
-
   @OneToOne((type) => WorkOrder, (workOrder) => workOrder.carExam)
   workOrder: WorkOrder;
-
-  // @OneToMany(() => Warranty, (warranty) => warranty.warrantyConditions)
-  // warranties: Warranty[];
 }

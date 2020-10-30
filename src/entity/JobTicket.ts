@@ -27,15 +27,18 @@ export class JobTicket {
   })
   status: JobTicketStatus;
 
+  @Column({ type: 'varchar', length: 255 })
+  ticket: string;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
-  @Column({ type: 'varchar', length: 30, nullable: true })
+  @Column({ type: 'varchar', length: 50, nullable: true })
   workOrderId: string;
 
-  @ManyToOne((type) => WorkOrder, (workOrder) => workOrder.jobTicket)
+  @ManyToOne((type) => WorkOrder, (workOrder) => workOrder.jobTickets)
   workOrder: WorkOrder;
 }

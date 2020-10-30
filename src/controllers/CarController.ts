@@ -136,7 +136,7 @@ class CarController {
     'productionYear',
   ]);
   //------------------------------------------------------------
-  public deleteOne = handlerFactory.deletOne(Entities.Car);
+  public deleteOne = handlerFactory.deleteOne(Entities.Car);
 }
 
 export default new CarController();

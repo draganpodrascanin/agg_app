@@ -5,8 +5,14 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   ManyToOne,
+  Index,
+  BeforeInsert,
+  BeforeUpdate,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
 import { Admin } from './Admin';
+import { Image } from './Image';
 
 @Entity('blog')
 export class Blog {
@@ -16,14 +22,9 @@ export class Blog {
   @Column({ type: 'varchar', length: 255 })
   title: string;
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'varchar', length: 255, unique: true })
+  @Index('blog-slug')
   slug: string;
-
-  @Column({ type: 'varchar', length: 100 })
-  img: string;
-
-  @Column({ type: 'varchar', length: 100, name: 'img_min' })
-  imgMin: string;
 
   @Column({ type: 'text' })
   markdown: string;
@@ -39,4 +40,46 @@ export class Blog {
 
   @ManyToOne(() => Admin, (admin) => admin.blogs)
   admin: Admin;
+
+  @Column({ type: 'varchar', length: 150 })
+  synopsis: string;
+
+  @OneToOne(() => Image)
+  @JoinColumn()
+  image: Image;
+
+  @Column({ nullable: true, type: 'varchar', length: 50 })
+  imageId: string;
+
+  @Column({
+    default: 'generic heading image with title',
+    type: 'varchar',
+    length: 255,
+  })
+  imageAlt: string;
+
+  @OneToOne(() => Image)
+  @JoinColumn()
+  thumbnail: Image;
+
+  @Column({
+    default: 'generic thumbnail with title',
+    type: 'varchar',
+    length: 255,
+  })
+  thumbnailAlt: string;
+
+  @Column({ nullable: true, type: 'varchar', length: 50 })
+  thumbnailId: string;
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  createSlug() {
+    this.slug = this.title.split(' ').join('-');
+  }
+
+  @BeforeInsert()
+  createSynopsis() {
+    if (!this.synopsis) this.synopsis = this.markdown.slice(0, 147) + '...';
+  }
 }

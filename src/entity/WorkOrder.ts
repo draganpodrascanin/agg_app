@@ -52,10 +52,10 @@ export class WorkOrder {
   @JoinColumn()
   carExam: CarExam;
 
-  @OneToMany(() => JobTicket, (jobTicket) => jobTicket.workOrder)
-  jobTicket: JobTicket[];
-
   @OneToOne((type) => JobConclusion, (jobConclusion) => jobConclusion.workOrder)
   @JoinColumn()
   jobConclusion: JobConclusion;
+
+  @OneToMany(() => JobTicket, (jobTicket) => jobTicket.workOrder)
+  jobTickets: JobTicket[];
 }

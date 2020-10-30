@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
+import { Entities } from '../entity/Entities';
 import { WorkOrder } from '../entity/WorkOrder';
 import { CarRepository } from '../repositories/CarRepository';
 import { WorkOrderRepository } from '../repositories/WorkOrderRepository';
 import CustomError from '../utils/CustomError';
 import getEnvConnection from '../utils/get-env-connection';
+import handlerFactory from './handlerFactory';
 
 class WorkOrderController {
   public getPage = async (req: Request, res: Response) => {
@@ -82,18 +84,10 @@ class WorkOrderController {
     });
   };
 
-  public getCount = async (req: Request, res: Response) => {
-    const workOrderRepo = getEnvConnection().getCustomRepository(
-      WorkOrderRepository
-    );
-
-    const count = workOrderRepo.count();
-
-    res.status(200).json({
-      status: 'success',
-      data: count,
-    });
-  };
+  public getCount = handlerFactory.count(Entities.WorkOrder);
+  public getOne = handlerFactory.getOne(Entities.WorkOrder, {
+    relations: ['carExam', 'jobConclusion', 'carReception', 'jobTickets'],
+  });
 }
 
 export default new WorkOrderController();

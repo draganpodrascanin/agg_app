@@ -29,5 +29,5 @@ export class Invoice {
   updatedAt: Date;
 
   @OneToMany((type) => InvoiceDesc, (invocieDesc) => invocieDesc.invoice)
-  invoiceDesc: InvoiceDesc[];
+  invoiceDescs: InvoiceDesc[];
 }

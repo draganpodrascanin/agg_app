@@ -116,7 +116,7 @@ class WarantyController {
   };
 
   public getAll = handlerFactory.getAll(Entities.Warranty);
-  public deleteOne = handlerFactory.deletOne(Entities.Warranty);
+  public deleteOne = handlerFactory.deleteOne(Entities.Warranty);
   public updateOne = handlerFactory.updateOne(Entities.Warranty, [
     'partsUnderWarranty',
     'validUntil',

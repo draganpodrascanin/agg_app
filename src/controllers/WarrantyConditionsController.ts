@@ -8,7 +8,7 @@ import handlerFactory from './handlerFactory';
 class WarrantyConditionsController {
   public create = handlerFactory.createOne(Entities.WarrantyConditions);
   public updateOne = handlerFactory.updateOne(Entities.WarrantyConditions);
-  public deleteOne = handlerFactory.deletOne(Entities.WarrantyConditions);
+  public deleteOne = handlerFactory.deleteOne(Entities.WarrantyConditions);
   public getAll = handlerFactory.getAll(Entities.WarrantyConditions);
 
   public getByConditionTitle = async (req: Request, res: Response) => {

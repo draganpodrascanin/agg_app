@@ -42,14 +42,40 @@ class HandlerFactory {
     });
   };
 
-  //delete one from db
-  public deletOne = (Entity: Entities) => async (
+  //get page of entities
+  public getPage = (Entity: Entities, setLimit?: number) => async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
     const entityRepo = getEnvConnection().getRepository(Entity);
-    const response = await entityRepo.delete(req.params.id);
+
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || setLimit || 20;
+    const offset = (page - 1) * limit;
+
+    const entities = await entityRepo
+      .createQueryBuilder(Entity)
+      .offset(offset)
+      .limit(limit)
+      .getMany();
+
+    res.status(200).json({
+      status: 'success',
+      results: entities.length,
+      data: entities,
+    });
+  };
+
+  //delete one from db
+  public deleteOne = (Entity: Entities, paramId?: string) => async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const entityRepo = getEnvConnection().getRepository(Entity);
+    const id = paramId || 'id';
+    const response = await entityRepo.delete(req.params[id]);
 
     res.status(200).json({
       status: 'success',
@@ -59,15 +85,16 @@ class HandlerFactory {
 
   //update one, provide Entity, and Array of strings that represents fields that are allowed to update
   //if allowed fields are not specified, everything is allowed to update
-  public updateOne = (Entity: Entities, allowedFields?: string[]) => async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
+  public updateOne = (
+    Entity: Entities,
+    allowedFields?: string[],
+    paramId?: string
+  ) => async (req: Request, res: Response, next: NextFunction) => {
     const entityRepo = getEnvConnection().getRepository(Entity);
+    const id = paramId || 'id';
 
     const entity: any = await entityRepo.findOne({
-      where: { id: req.params.id },
+      where: { id: req.params[id] },
     });
 
     if (!entity) {
@@ -95,6 +122,21 @@ class HandlerFactory {
     res.status(200).json({
       success: 'success',
       data: entity,
+    });
+  };
+
+  public count = (Entity: Entities) => async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const entityRepo = getEnvConnection().getRepository(Entity);
+
+    const count = await entityRepo.count();
+
+    res.status(200).json({
+      status: 'success',
+      data: count,
     });
   };
 

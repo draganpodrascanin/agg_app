@@ -1,6 +1,7 @@
 export enum Entities {
   Appointment = 'appointment',
   Admin = 'admin',
+  Blog = 'blog',
   User = 'user',
   CalcLog = 'calc_log',
   Message = 'message',
@@ -15,4 +16,5 @@ export enum Entities {
   WorkOrder = 'work_order',
   Warranty = 'warranty',
   WarrantyConditions = 'warranty_conditions',
+  Image = 'image',
 }
