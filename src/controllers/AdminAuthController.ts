@@ -260,6 +260,24 @@ class AdminAuthController {
 
     this._AdminAuthenticationService.createSendJWTToken(admin, 200, req, res);
   };
+
+  getCurrentAdmin = (req: Request, res: Response) => {
+    const admin = req.admin;
+
+    if (!admin) {
+      res.status(400).json({
+        status: 'failed',
+        message: 'you are not logged in',
+      });
+    }
+
+    const response: any = { ...admin, password: undefined };
+
+    res.status(200).json({
+      status: 'success',
+      data: response,
+    });
+  };
 }
 
 export default new AdminAuthController(

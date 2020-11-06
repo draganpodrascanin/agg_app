@@ -28,7 +28,7 @@ export class Car {
   milage: number;
 
   @Column({ type: 'varchar', length: 30, unique: true })
-  @Index()
+  @Index('car-reg-idx')
   registration: string;
 
   @Column({ type: 'year', name: 'production_year' })

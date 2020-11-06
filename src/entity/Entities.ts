@@ -17,4 +17,5 @@ export enum Entities {
   Warranty = 'warranty',
   WarrantyConditions = 'warranty_conditions',
   Image = 'image',
+  Expense = 'expense',
 }

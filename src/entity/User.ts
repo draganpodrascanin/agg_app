@@ -21,7 +21,7 @@ export class User implements Authenticatable {
   lastName: string;
 
   @Column({ nullable: false, type: 'varchar', length: 100, unique: true })
-  @Index()
+  @Index('user-email-idx')
   @IsEmail()
   email: string;
 

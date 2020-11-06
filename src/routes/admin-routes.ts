@@ -20,6 +20,12 @@ router.patch(
   AdminAuthController.updatePassword
 );
 
+router.get(
+  '/getCurrentAdmin',
+  adminAuthMiddleware.protect,
+  AdminAuthController.getCurrentAdmin
+);
+
 // router.get('/getMe', adminAuthMiddleware.getMe, UserController.getOne);
 // router.patch('/updateMe', adminAuthMiddleware.getMe, UserController.updateOne);
 // router.delete('/deleteMe', adminAuthMiddleware.getMe, UserController.deleteOne);

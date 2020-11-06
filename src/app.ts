@@ -22,7 +22,9 @@ import jobConclusionRoutes from './routes/job-conclusion-routes';
 import nextVisitRoutes from './routes/next-visit-routes';
 import invoiceRoutes from './routes/invoice-routes';
 import imageRoutes from './routes/image-routes';
+import expensesRoutes from './routes/expenses-routes';
 import blogRoutes from './routes/blog-routes';
+import aggregationRoutes from './routes/aggregation-routes';
 
 import ViewsController from './controllers/ViewsController';
 import ErrorController from './controllers/ErrorController';
@@ -53,8 +55,10 @@ app.use('/api/v1/jobTickets', jobTicketRoutes);
 app.use('/api/v1/jobConclusion', jobConclusionRoutes);
 app.use('/api/v1/carExams', carExamRoutes);
 app.use('/api/v1/invoices', invoiceRoutes);
+app.use('/api/v1/expenses', expensesRoutes);
 app.use('/api/v1/images', imageRoutes);
 app.use('/api/v1/blogs', blogRoutes);
+app.use('/api/v1/aggregations', aggregationRoutes);
 //not found api route
 app.use('/api/v1/*', (req, res, next) => {
   throw new CustomError(
