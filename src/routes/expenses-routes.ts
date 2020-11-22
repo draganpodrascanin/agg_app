@@ -6,10 +6,17 @@ import adminAuthMiddleware from '../middlewares/adminAuthMiddleware';
 const router = Router({ mergeParams: true });
 
 router.get(
-  '/:id',
+  '/',
   adminAuthMiddleware.protect,
   adminAuthMiddleware.restrictTo(AdminRoles.admin, AdminRoles.superAdmin),
   ExpenceController.getPage
+);
+
+router.get(
+  '/betweenDates',
+  adminAuthMiddleware.protect,
+  adminAuthMiddleware.restrictTo(AdminRoles.admin, AdminRoles.superAdmin),
+  ExpenceController.getBetweenDates
 );
 
 router.get(

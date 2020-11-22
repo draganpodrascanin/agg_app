@@ -7,6 +7,7 @@ class ExprensesController {
   public deleteOne = handlerFactory.deleteOne(Entities.Expense);
   public updateOne = handlerFactory.updateOne(Entities.Expense);
   public getPage = handlerFactory.getPage(Entities.Expense);
+  public getBetweenDates = handlerFactory.getBetweenDates(Entities.Expense);
 }
 
 export default new ExprensesController();

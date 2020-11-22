@@ -11,11 +11,7 @@ const userService = new UserAuthService();
 
 const getUserSeed = async () => {
   const userSeed: User[] = [];
-  const carSeed: Car[] = [];
-  await createDBConnection();
-
   const userRepo = getEnvConnection().getRepository(User);
-  const carRepo = getEnvConnection().getRepository(Car);
 
   for (let i = 0; i <= 300; i++) {
     const userData = {
@@ -38,6 +34,7 @@ const getUserSeed = async () => {
 };
 
 const seedDB = async () => {
+  await createDBConnection();
   const useSeed = await getUserSeed();
   const carSeed: Car[] = [];
 
@@ -52,13 +49,14 @@ const seedDB = async () => {
       console.log(u);
 
       //for every user create 1 or 2 cars
-      const carNum = Math.round(Math.random() * 1.8);
+      const carNum = Math.round(Math.random() + 1);
       for (let e = 1; e <= carNum; e++) {
+        //battle with linter, name is a because linter always break the line and ends up wit \n in db
+        const a = (n: number) => faker.random.alphaNumeric(n);
+
         const carData = {
           user: u,
-          registration: `${faker.random.alphaNumeric(3)}
-        -${faker.random.alphaNumeric(1)}-${faker.random.alphaNumeric(3)}
-        }`,
+          registration: `${a(3)}-${a(1)}-${a(3)}`,
           carBrand: faker.vehicle.manufacturer(),
           carModel: faker.vehicle.model(),
           productionYear: dayjs(faker.date.past(30)).format('YYYY'),

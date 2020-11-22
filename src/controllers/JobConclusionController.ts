@@ -16,6 +16,9 @@ class JobConclusionController {
     'charged',
   ]);
   public deleteOne = handlerFactory.deleteOne(Entities.JobConclusion);
+  public getBetweenDates = handlerFactory.getBetweenDates(
+    Entities.JobConclusion
+  );
 
   public create = async (req: Request, res: Response) => {
     const { workOrderId, note, workDone, charged } = req.body;

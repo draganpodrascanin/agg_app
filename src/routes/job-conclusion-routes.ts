@@ -26,6 +26,17 @@ router.get(
 );
 
 router.get(
+  '/betweenDates',
+  adminAuthMiddleware.protect,
+  adminAuthMiddleware.restrictTo(
+    AdminRoles.admin,
+    AdminRoles.superAdmin,
+    AdminRoles.mechanic
+  ),
+  JobConclusionController.getBetweenDates
+);
+
+router.get(
   '/:id',
   adminAuthMiddleware.protect,
   adminAuthMiddleware.restrictTo(

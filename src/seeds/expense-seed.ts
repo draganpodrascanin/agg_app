@@ -3,13 +3,14 @@ import { Expense } from '../entity/Expanse';
 import getEnvConnection from '../utils/get-env-connection';
 import createDBConnection from '../utils/create-typeorm-connection';
 import { Entities } from '../entity/Entities';
+import faker from 'faker';
 
 const getSeed = () => {
   const seed: any[] = [];
 
   for (let i = 0; i <= 300; i++) {
     seed.push({
-      description: 'seed',
+      description: faker.company.catchPhrase(),
       amount: Math.round(Math.random() * 200),
       createdAt: dayjs(new Date())
         .subtract(Math.round(Math.random() * 50), 'day')

@@ -1,10 +1,11 @@
-import { FindManyOptions, ObjectLiteral } from 'typeorm';
+import { Between, FindManyOptions, ObjectLiteral } from 'typeorm';
 import { NextFunction, Request, Response } from 'express';
 import getEnvConnection from '../utils/get-env-connection';
 import validateEntity from '../utils/validateEntity';
 import { filterObj } from '../utils/filterObject';
 import CustomError from '../utils/CustomError';
 import { Entities } from '../entity/Entities';
+import dayjs from 'dayjs';
 
 /*
 	You can use these HandlerFactory
@@ -63,6 +64,33 @@ class HandlerFactory {
     res.status(200).json({
       status: 'success',
       results: entities.length,
+      data: entities,
+    });
+  };
+
+  public getBetweenDates = (Entity: Entities) => async (
+    req: Request,
+    res: Response
+  ) => {
+    const entityRepo = getEnvConnection().getRepository(Entity);
+    const dateFrom =
+      String(req.query.dateFrom) || dayjs(new Date()).subtract(1, 'week');
+    const dateTo = String(req.query.dateTo) || dayjs(new Date()).add(1, 'day');
+
+    //format for query
+    const formatedDateFrom = dayjs(dateFrom).format('YYYY-MM-DD');
+    const formatedDateTo = dayjs(dateTo).format('YYYY-MM-DD');
+    console.log('query dateFrom =>', req.query.dateFrom);
+    console.log('dateFrom =>', dateFrom);
+    console.log('dateTo =>', dateTo);
+
+    const entities = await entityRepo.find({
+      where: { createdAt: Between(formatedDateFrom, formatedDateTo) },
+      order: { createdAt: 'DESC' },
+    });
+
+    res.status(200).json({
+      status: 'success',
       data: entities,
     });
   };
