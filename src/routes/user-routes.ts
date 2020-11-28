@@ -33,7 +33,7 @@ router.get(
     AdminRoles.admin,
     AdminRoles.mechanic
   ),
-  UserController.getAll
+  UserController.getMany
 );
 
 //admin protected get one user

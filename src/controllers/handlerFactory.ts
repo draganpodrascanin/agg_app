@@ -79,10 +79,7 @@ class HandlerFactory {
 
     //format for query
     const formatedDateFrom = dayjs(dateFrom).format('YYYY-MM-DD');
-    const formatedDateTo = dayjs(dateTo).format('YYYY-MM-DD');
-    console.log('query dateFrom =>', req.query.dateFrom);
-    console.log('dateFrom =>', dateFrom);
-    console.log('dateTo =>', dateTo);
+    const formatedDateTo = dayjs(dateTo).add(1, 'day').format('YYYY-MM-DD');
 
     const entities = await entityRepo.find({
       where: { createdAt: Between(formatedDateFrom, formatedDateTo) },
