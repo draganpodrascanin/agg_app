@@ -14,15 +14,7 @@ router.post('/forgotPassword', UserAuthController.forgotPasswordUser);
 router.patch('/resetPassword/:token', UserAuthController.passwordResetUser);
 
 //admin protected creates user
-router.post(
-  '/',
-  adminAuthMiddleware.restrictTo(
-    AdminRoles.superAdmin,
-    AdminRoles.admin,
-    AdminRoles.mechanic
-  ),
-  UserAuthController.signupUser
-);
+router.post('/signup', UserAuthController.signupUser);
 
 //admin protected get all users
 router.get(
@@ -34,6 +26,28 @@ router.get(
     AdminRoles.mechanic
   ),
   UserController.getMany
+);
+
+router.get(
+  '/count',
+  adminAuthMiddleware.protect,
+  adminAuthMiddleware.restrictTo(
+    AdminRoles.superAdmin,
+    AdminRoles.admin,
+    AdminRoles.mechanic
+  ),
+  UserController.getCount
+);
+
+router.post(
+  '/',
+  adminAuthMiddleware.protect,
+  adminAuthMiddleware.restrictTo(
+    AdminRoles.superAdmin,
+    AdminRoles.admin,
+    AdminRoles.mechanic
+  ),
+  UserController.createOne
 );
 
 //admin protected get one user

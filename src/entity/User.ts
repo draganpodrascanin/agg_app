@@ -4,6 +4,8 @@ import {
   Column,
   Index,
   OneToMany,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { Car } from './Car';
 import { IsEmail, Length } from 'class-validator';
@@ -46,6 +48,12 @@ export class User implements Authenticatable {
 
   @OneToMany(() => Car, (car) => car.user)
   cars: Car[];
+
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  @UpdateDateColumn({ name: 'updated_at' })
+  updatedAt: Date;
 
   setPasswordChangedAt() {
     this.passwordChangedAt = new Date(Date.now() - 1000);

@@ -30,6 +30,7 @@ class UserController {
     'phoneNumber',
   ]);
   public deleteOne = handlerFactory.deleteOne(Entities.User);
+  public getCount = handlerFactory.count(Entities.User);
 
   public createUser = async (req: Request, res: Response) => {
     const { firstName, lastName, password, passwordConfirm, email } = req.body;
@@ -77,15 +78,11 @@ class UserController {
     const limit = Number(req.query.limit) || 12;
     const offset = (page - 1) * limit;
     const search = req.query.search;
-
-    console.log('OVDDDEEEE ======== ', { page, limit, search });
-
     const repo = getEnvConnection().getCustomRepository(UserRepository);
 
     let query = repo.createQueryBuilder(Entities.User);
 
     if (search) {
-      console.log('USAO SEARCH ->', search);
       query = query
         .where(
           `CONCAT(${Entities.User}.firstName, ' ', ${Entities.User}.lastName) LIKE '%${search}%'`
@@ -95,11 +92,12 @@ class UserController {
 
     const response = await query
       .leftJoinAndSelect(`${Entities.User}.cars`, `${Entities.Car}`)
-      .offset(offset)
+      .skip(offset)
       .take(limit)
+      .orderBy(`${Entities.User}.createdAt`, 'DESC')
       .getMany();
 
-    const data = response.map((user) => {
+    const users = response.map((user) => {
       return {
         ...user,
         password: undefined,
@@ -109,9 +107,59 @@ class UserController {
       };
     });
 
+    const count = repo.createQueryBuilder(Entities.User);
+
+    if (search) {
+      count
+        .where(
+          `CONCAT(${Entities.User}.firstName, ' ', ${Entities.User}.lastName) LIKE '%${search}%'`
+        )
+        .orWhere(`${Entities.User}.phoneNumber LIKE '%${search}%'`);
+    }
+    const resCount = await count.getCount();
+
     res.status(200).json({
       status: 'success',
       count: response.length,
+      countAllThatMatch: resCount,
+      data: users,
+    });
+  };
+
+  public createOne = async (req: Request, res: Response) => {
+    const {
+      email,
+      password,
+      passwordConfirm,
+      firstName,
+      lastName,
+      phoneNumber,
+    } = req.body;
+
+    if (
+      !this._UserService.passwordMatchWithPasswordConfirm(
+        password,
+        passwordConfirm
+      )
+    ) {
+      throw new CustomError(
+        'password and password confirm does not match',
+        400
+      );
+    }
+
+    const newUser = await this._UserService.createNewUser({
+      email,
+      password,
+      firstName,
+      lastName,
+      phoneNumber,
+    });
+
+    const data = { ...newUser, password: undefined };
+
+    res.status(200).json({
+      status: 'success',
       data,
     });
   };

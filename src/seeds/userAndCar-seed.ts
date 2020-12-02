@@ -51,7 +51,7 @@ const seedDB = async () => {
       //for every user create 1 or 2 cars
       const carNum = Math.round(Math.random() + 1);
       for (let e = 1; e <= carNum; e++) {
-        //battle with linter, name is a because linter always break the line and ends up wit \n in db
+        //battle with linter, name is "a" because linter always break the line and ends up wit \n in db
         const a = (n: number) => faker.random.alphaNumeric(n);
 
         const carData = {
