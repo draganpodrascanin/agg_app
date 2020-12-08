@@ -3,6 +3,7 @@ import getEnvConnection from '../utils/get-env-connection';
 import createDBConnection from '../utils/create-typeorm-connection';
 import { JobConclusion } from '../entity/JobConclusion';
 import { Entities } from '../entity/Entities';
+import faker from 'faker';
 
 const getSeed = () => {
   const seed: any[] = [];
@@ -10,7 +11,7 @@ const getSeed = () => {
   for (let i = 0; i <= 300; i++) {
     seed.push({
       charged: Math.round(Math.random() * 250 + 10),
-      workDone: 'seed',
+      workDone: faker.company.catchPhrase(),
       createdAt: dayjs(new Date())
         .subtract(Math.round(Math.random() * 50), 'day')
         .format('YYYY-MM-DD'),
