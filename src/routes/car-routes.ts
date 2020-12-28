@@ -19,6 +19,18 @@ router.get(
 );
 
 //-------------------------------------------------------------------------
+router.get(
+  '/suggestions',
+  adminAuthMiddleware.protect,
+  adminAuthMiddleware.restrictTo(
+    AdminRoles.admin,
+    AdminRoles.superAdmin,
+    AdminRoles.mechanic
+  ),
+  CarController.getSuggestions
+);
+
+//-------------------------------------------------------------------------
 
 router.get(
   '/count',
@@ -45,6 +57,19 @@ router.post(
 );
 
 //-------------------------------------------------------------------------
+
+router.patch(
+  '/setOwnerByReg',
+  adminAuthMiddleware.protect,
+  adminAuthMiddleware.restrictTo(
+    AdminRoles.admin,
+    AdminRoles.mechanic,
+    AdminRoles.superAdmin
+  ),
+  CarController.setOwnerByRegistration
+);
+
+//------------------------------------------------------------------------
 
 router.patch(
   '/:id',

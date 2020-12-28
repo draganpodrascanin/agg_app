@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { NextFunction, Request, response, Response } from 'express';
 import { Entities } from '../entity/Entities';
 import { CarRepository } from '../repositories/CarRepository';
@@ -19,6 +20,22 @@ class CarController {
       status: 'success',
       results: responseCars?.length || 0,
       data: responseCars,
+    });
+  };
+
+  public getSuggestions = async (req: Request, res: Response) => {
+    const carRepo = getEnvConnection().getCustomRepository(CarRepository);
+    let search;
+
+    if (!req.query.search) search = '';
+    else search = String(req.query.search);
+
+    const cars = await carRepo.getSuggestions(search);
+
+    res.status(200).json({
+      status: 'success',
+      count: cars.length,
+      data: [...cars],
     });
   };
 
@@ -80,11 +97,14 @@ class CarController {
   //------------------------------------------------------------
 
   public create = async (req: Request, res: Response) => {
+    console.log('body! = ', req.body);
+
     const {
       registration,
       carBrand,
       carModel,
       productionYear,
+      milage,
       engine,
     } = req.body;
 
@@ -94,7 +114,8 @@ class CarController {
       registration,
       carBrand,
       carModel,
-      productionYear,
+      productionYear: dayjs(productionYear).format('YYYY'),
+      milage,
       engine,
     });
 
@@ -118,8 +139,27 @@ class CarController {
 
   public setUserOwnership = async (req: Request, res: Response) => {
     const carRepo = getEnvConnection().getCustomRepository(CarRepository);
+    console.log('body ->', req.body);
+    console.log('param ->', req.params.id);
+    console.log('req ->', req);
 
     const resCar = await carRepo.setOwner(req.params.id, req.body.userId);
+
+    res.status(200).json({
+      status: 'success',
+      data: resCar,
+    });
+  };
+
+  //------------------------------------------------------------
+
+  public setOwnerByRegistration = async (req: Request, res: Response) => {
+    const carRepo = getEnvConnection().getCustomRepository(CarRepository);
+
+    const resCar = await carRepo.setOwnerByRegistration(
+      req.body.carReg,
+      req.body.userId
+    );
 
     res.status(200).json({
       status: 'success',

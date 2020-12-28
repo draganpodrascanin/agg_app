@@ -1,4 +1,4 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { EntityRepository, Like, Repository } from 'typeorm';
 import { Car } from '../entity/Car';
 import CustomError from '../utils/CustomError';
 import getEnvConnection from '../utils/get-env-connection';
@@ -31,6 +31,13 @@ export class CarRepository extends Repository<Car> {
     car.user = user;
     return this.save(car);
   }
+
+  public getSuggestions = (search: string) => {
+    return this.find({
+      select: ['id', 'carBrand', 'carModel', 'productionYear', 'registration'],
+      where: { registration: Like(`%${search}%`) },
+    });
+  };
 
   public async setOwnerByRegistration(
     carReg: string,
