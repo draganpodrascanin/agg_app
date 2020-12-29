@@ -1,5 +1,6 @@
 import { EntityRepository, Like, Repository } from 'typeorm';
 import { Car } from '../entity/Car';
+import { Entities } from '../entity/Entities';
 import CustomError from '../utils/CustomError';
 import getEnvConnection from '../utils/get-env-connection';
 import { UserRepository } from './UserRepository';
@@ -8,11 +9,26 @@ import { UserRepository } from './UserRepository';
 export class CarRepository extends Repository<Car> {
   //----------------------------------------------------------------------------------
 
-  public findCarPage(page: number, limit: number): Promise<Car[] | undefined> {
+  public findCarPage(
+    page: number,
+    limit: number,
+    search?: string
+  ): Promise<Car[] | undefined> {
     const offset = (page - 1) * limit;
 
-    return this.createQueryBuilder('car')
+    let query = this.createQueryBuilder(Entities.Car);
+
+    if (search) {
+      query
+        .where(
+          `CONCAT(${Entities.Car}.carBrand, ' ', ${Entities.Car}.carModel) LIKE '%${search}%'`
+        )
+        .orWhere(`${Entities.Car}.registration LIKE '%${search}%'`);
+    }
+
+    return query
       .orderBy('car.created_at', 'DESC')
+      .leftJoinAndSelect('car.user', 'user')
       .offset(offset)
       .limit(limit)
       .getMany();

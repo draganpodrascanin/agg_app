@@ -12,13 +12,27 @@ class CarController {
   public getPage = async (req: Request, res: Response, next: NextFunction) => {
     const page = Number(req.query.page) || 1;
     const limit = Number(req.query.limit) || 20;
+    const search = req.query.search ? String(req.query.search) : '';
 
     const carRepo = getEnvConnection().getCustomRepository(CarRepository);
-    const responseCars = await carRepo.findCarPage(page, limit);
+    const responseCars = await carRepo.findCarPage(page, limit, search);
+
+    const count = carRepo.createQueryBuilder(Entities.Car);
+
+    if (search) {
+      count
+        .where(
+          `CONCAT(${Entities.Car}.carBrand, ' ', ${Entities.Car}.carModel) LIKE '%${search}%'`
+        )
+        .orWhere(`${Entities.Car}.registration LIKE '%${search}%'`);
+    }
+
+    const resCount = await count.getCount();
 
     res.status(200).json({
       status: 'success',
       results: responseCars?.length || 0,
+      count: resCount,
       data: responseCars,
     });
   };
@@ -108,10 +122,20 @@ class CarController {
       engine,
     } = req.body;
 
+    if (
+      !registration ||
+      !carBrand ||
+      !carModel ||
+      !productionYear ||
+      !milage ||
+      !engine
+    )
+      throw new CustomError('All fields all necessary', 400);
+
     const carRepo = getEnvConnection().getCustomRepository(CarRepository);
 
     const newCar = carRepo.create({
-      registration,
+      registration: registration.toUpperCase(),
       carBrand,
       carModel,
       productionYear: dayjs(productionYear).format('YYYY'),
