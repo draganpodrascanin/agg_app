@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import ExpenceController from '../controllers/ExpenseController';
+import ExpenseController from '../controllers/ExpenseController';
 import { AdminRoles } from '../entity/Admin';
 import adminAuthMiddleware from '../middlewares/adminAuthMiddleware';
 
@@ -9,42 +9,42 @@ router.get(
   '/',
   adminAuthMiddleware.protect,
   adminAuthMiddleware.restrictTo(AdminRoles.admin, AdminRoles.superAdmin),
-  ExpenceController.getPage
+  ExpenseController.getPage
 );
 
 router.get(
   '/betweenDates',
   adminAuthMiddleware.protect,
   adminAuthMiddleware.restrictTo(AdminRoles.admin, AdminRoles.superAdmin),
-  ExpenceController.getBetweenDates
+  ExpenseController.getBetweenDates
 );
 
 router.get(
   '/:id',
   adminAuthMiddleware.protect,
   adminAuthMiddleware.restrictTo(AdminRoles.admin, AdminRoles.superAdmin),
-  ExpenceController.getOne
+  ExpenseController.getOne
 );
 
 router.post(
   '/',
   adminAuthMiddleware.protect,
   adminAuthMiddleware.restrictTo(AdminRoles.admin, AdminRoles.superAdmin),
-  ExpenceController.create
+  ExpenseController.create
 );
 
 router.patch(
   '/:id',
   adminAuthMiddleware.protect,
   adminAuthMiddleware.restrictTo(AdminRoles.admin, AdminRoles.superAdmin),
-  ExpenceController.updateOne
+  ExpenseController.updateOne
 );
 
 router.delete(
   '/:id',
   adminAuthMiddleware.protect,
   adminAuthMiddleware.restrictTo(AdminRoles.admin, AdminRoles.superAdmin),
-  ExpenceController.deleteOne
+  ExpenseController.deleteOne
 );
 
 export default router;

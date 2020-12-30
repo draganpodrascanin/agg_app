@@ -12,11 +12,15 @@ class WorkOrderController {
     const page = Number(req.query.page) || 1;
     const limit = Number(req.query.limit) || 20;
 
+    console.log('lupio');
+
     const workOrderRepo = getEnvConnection().getCustomRepository(
       WorkOrderRepository
     );
 
     const workOrders = await workOrderRepo.getWorkOrderPage(page, limit);
+
+    console.log(workOrders);
 
     res.status(200).json({
       status: 'success',

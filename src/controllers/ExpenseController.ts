@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { Request, Response } from 'express';
 import { Entities } from '../entity/Entities';
-import { Expense } from '../entity/Expanse';
+import { Expense } from '../entity/Expense';
 import getEnvConnection from '../utils/get-env-connection';
 import handlerFactory from './handlerFactory';
 

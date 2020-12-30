@@ -1,5 +1,6 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Car } from '../entity/Car';
+import { Entities } from '../entity/Entities';
 import { WorkOrder } from '../entity/WorkOrder';
 import CustomError from '../utils/CustomError';
 import getEnvConnection from '../utils/get-env-connection';
@@ -16,6 +17,7 @@ export class WorkOrderRepository extends Repository<WorkOrder> {
     const offset = (page - 1) * limit;
 
     return this.createQueryBuilder('work_order')
+      .leftJoinAndSelect(`${Entities.WorkOrder}.car`, Entities.Car)
       .orderBy('work_order.created_at', 'DESC')
       .offset(offset)
       .limit(limit)

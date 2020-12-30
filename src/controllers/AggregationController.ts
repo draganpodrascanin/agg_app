@@ -1,13 +1,13 @@
 import { Request, Response } from 'express';
 import { JobConclusionRepository } from '../repositories/JobConclusionRepository';
 import getEnvConnection from '../utils/get-env-connection';
-import { Expense } from '../entity/Expanse';
+import { Expense } from '../entity/Expense';
 import dayjs from 'dayjs';
 import { Entities } from '../entity/Entities';
 import _ from 'lodash';
 
 class AggregationController {
-  public getExpancesAndProfit = async (req: Request, res: Response) => {
+  public getExpansesAndProfit = async (req: Request, res: Response) => {
     const connect = getEnvConnection();
     const jobConclusionRepo = connect.getCustomRepository(
       JobConclusionRepository
@@ -57,7 +57,7 @@ class AggregationController {
       return e;
     });
 
-    // joining profit and expences arrays
+    // joining profit and expenses arrays
     const getDatesWithProfitAndExpanses = () => {
       const profitDatesWithExpenses = profit.map((profitDay) => {
         const exp: any = _.filter(

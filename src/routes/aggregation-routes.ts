@@ -4,6 +4,6 @@ import AggregationController from '../controllers/AggregationController';
 
 const router = Router();
 
-router.get('/expencesAndProfit', AggregationController.getExpancesAndProfit);
+router.get('/expensesAndProfit', AggregationController.getExpansesAndProfit);
 
 export default router;
