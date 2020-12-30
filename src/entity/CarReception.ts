@@ -20,6 +20,12 @@ export class CarReception {
   @Column({ type: 'varchar', length: 1000, name: 'car_damage' })
   carDamage: string;
 
+  @Column({ type: 'int' })
+  milage: number;
+
+  @Column({ type: 'varchar' })
+  adminRecived: string;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
@@ -31,7 +37,4 @@ export class CarReception {
 
   @OneToOne((type) => WorkOrder, (workOrder) => workOrder.carReception)
   workOrder: WorkOrder;
-
-  // @OneToMany(() => Warranty, (warranty) => warranty.warrantyConditions)
-  // warranties: Warranty[];
 }

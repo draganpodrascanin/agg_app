@@ -5,6 +5,7 @@ import { WorkOrderRepository } from '../repositories/WorkOrderRepository';
 import CustomError from '../utils/CustomError';
 import getEnvConnection from '../utils/get-env-connection';
 import handlerFactory from './handlerFactory';
+import _ from 'lodash';
 
 class CarReceptionController {
   public getOne = handlerFactory.getOne(Entities.CarReception);
@@ -49,7 +50,11 @@ class CarReceptionController {
     const carReception = await carReceptionRepo.createAndSave({
       carDamage: req.body.carDamage,
       ownerRemarks: req.body.ownerRemarks,
+      milage: req.body.milage,
       workOrder,
+      adminRecived: `${_.upperFirst(req.admin?.firstName)} ${_.upperFirst(
+        req.admin?.lastName
+      )}`,
     });
 
     res.status(201).json({

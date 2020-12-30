@@ -6,6 +6,8 @@ interface ICarReceptionBody {
   workOrder: WorkOrder;
   ownerRemarks: string;
   carDamage: string;
+  milage: number;
+  adminRecived: string;
 }
 
 @EntityRepository(CarReception)
@@ -29,8 +31,10 @@ export class CarReceptionRepository extends Repository<CarReception> {
     carReceptionBody: ICarReceptionBody
   ): Promise<CarReception> {
     const workOrder = this.create({
+      adminRecived: carReceptionBody.adminRecived,
       carDamage: carReceptionBody.carDamage,
       ownerRemarks: carReceptionBody.ownerRemarks,
+      milage: carReceptionBody.milage,
       workOrder: carReceptionBody.workOrder,
     });
 

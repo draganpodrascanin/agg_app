@@ -18,6 +18,16 @@ export class WorkOrderRepository extends Repository<WorkOrder> {
 
     return this.createQueryBuilder('work_order')
       .leftJoinAndSelect(`${Entities.WorkOrder}.car`, Entities.Car)
+      .leftJoinAndSelect(
+        `${Entities.WorkOrder}.carReception`,
+        Entities.CarReception
+      )
+      .leftJoinAndSelect(`${Entities.WorkOrder}.carExam`, Entities.CarExam)
+      .leftJoinAndSelect(`${Entities.WorkOrder}.jobTickets`, Entities.JobTicket)
+      .leftJoinAndSelect(
+        `${Entities.WorkOrder}.jobConclusion`,
+        Entities.JobConclusion
+      )
       .orderBy('work_order.created_at', 'DESC')
       .offset(offset)
       .limit(limit)
