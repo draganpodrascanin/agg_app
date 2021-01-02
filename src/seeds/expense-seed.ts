@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import { Expense } from '../entity/Expanse';
+import { Expense } from '../entity/Expense';
 import getEnvConnection from '../utils/get-env-connection';
 import createDBConnection from '../utils/create-typeorm-connection';
 import { Entities } from '../entity/Entities';

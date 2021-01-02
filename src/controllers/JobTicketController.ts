@@ -49,6 +49,8 @@ class JobTicketController {
     if (!jobTicket)
       throw new CustomError('job ticket with provided id not found', 404);
 
+    console.log('status ', status);
+
     jobTicket.status = status;
     await validateEntity(jobTicket);
     const resData = await jobTicketRepo.save(jobTicket);

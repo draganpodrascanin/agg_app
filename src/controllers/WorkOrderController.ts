@@ -88,10 +88,24 @@ class WorkOrderController {
     });
   };
 
+  public getOne = async (req: Request, res: Response) => {
+    const workOrderRepo = getEnvConnection().getCustomRepository(
+      WorkOrderRepository
+    );
+
+    if (!req.params.id) throw new CustomError('you neew to provide id', 400);
+
+    const workOrder = await workOrderRepo.findOneAndPopulate(
+      String(req.params.id)
+    );
+
+    res.status(200).json({
+      status: 'success',
+      data: workOrder,
+    });
+  };
+
   public getCount = handlerFactory.count(Entities.WorkOrder);
-  public getOne = handlerFactory.getOne(Entities.WorkOrder, {
-    relations: ['carExam', 'jobConclusion', 'carReception', 'jobTickets'],
-  });
 }
 
 export default new WorkOrderController();

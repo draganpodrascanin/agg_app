@@ -42,4 +42,22 @@ export class WorkOrderRepository extends Repository<WorkOrder> {
     const wo = this.create({ car: car });
     return this.save(wo);
   }
+
+  public findOneAndPopulate(id: string): Promise<WorkOrder | undefined> {
+    return this.createQueryBuilder(Entities.WorkOrder)
+      .where(`${Entities.WorkOrder}.id = :id`, { id: id })
+      .leftJoinAndSelect(`${Entities.WorkOrder}.car`, Entities.Car)
+      .leftJoinAndSelect(
+        `${Entities.WorkOrder}.carReception`,
+        Entities.CarReception
+      )
+      .leftJoinAndSelect(`${Entities.WorkOrder}.carExam`, Entities.CarExam)
+      .leftJoinAndSelect(`${Entities.WorkOrder}.jobTickets`, Entities.JobTicket)
+      .leftJoinAndSelect(
+        `${Entities.WorkOrder}.jobConclusion`,
+        Entities.JobConclusion
+      )
+      .leftJoinAndSelect(`${Entities.Car}.user`, Entities.User)
+      .getOne();
+  }
 }
