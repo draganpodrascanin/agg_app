@@ -81,6 +81,7 @@ class WorkOrderController {
 
     workOrder.completed = true;
     const resWorkOrder = await workOrderRepo.save(workOrder);
+    resWorkOrder.jobTickets = [];
 
     res.status(200).json({
       status: 'success',

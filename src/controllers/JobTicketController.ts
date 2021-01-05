@@ -12,11 +12,14 @@ class JobTicketController {
   public getPage = handlerFactory.getPage(Entities.JobTicket);
   public getOne = handlerFactory.getOne(Entities.JobTicket);
   public count = handlerFactory.count(Entities.JobTicket);
-  public updateOne = handlerFactory.updateOne(Entities.JobTicket, ['ticket']);
+  public updateOne = handlerFactory.updateOne(Entities.JobTicket, [
+    'ticket',
+    'status',
+  ]);
   public deleteOne = handlerFactory.deleteOne(Entities.JobTicket);
 
   public create = async (req: Request, res: Response) => {
-    const { workOrderId, ticket } = req.body;
+    const { workOrderId, ticket, status } = req.body;
     if (!workOrderId) throw new CustomError('need to provide workOrderID', 400);
 
     const connection = getEnvConnection();
@@ -30,6 +33,7 @@ class JobTicketController {
     const jobTicket = await jobTicketRepo.createAndSave({
       ticket,
       workOrder,
+      status,
     });
 
     res.status(200).json({
@@ -48,8 +52,6 @@ class JobTicketController {
     const jobTicket = await jobTicketRepo.findOne(req.params.id);
     if (!jobTicket)
       throw new CustomError('job ticket with provided id not found', 404);
-
-    console.log('status ', status);
 
     jobTicket.status = status;
     await validateEntity(jobTicket);
