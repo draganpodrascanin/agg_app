@@ -39,6 +39,8 @@ export class JobTicket {
   @Column({ type: 'varchar', length: 50, nullable: true })
   workOrderId: string;
 
-  @ManyToOne((type) => WorkOrder, (workOrder) => workOrder.jobTickets)
+  @ManyToOne((type) => WorkOrder, (workOrder) => workOrder.jobTickets, {
+    onDelete: 'CASCADE',
+  })
   workOrder: WorkOrder;
 }

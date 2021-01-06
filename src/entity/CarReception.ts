@@ -35,6 +35,8 @@ export class CarReception {
   @Column({ nullable: true, type: 'varchar', length: 50 })
   workOrderId: string;
 
-  @OneToOne((type) => WorkOrder, (workOrder) => workOrder.carReception)
+  @OneToOne((type) => WorkOrder, (workOrder) => workOrder.carReception, {
+    onDelete: 'CASCADE',
+  })
   workOrder: WorkOrder;
 }

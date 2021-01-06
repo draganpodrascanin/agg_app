@@ -61,6 +61,15 @@ router.get(
 
 //---------------------------------------------------------------------------
 
+router.delete(
+  '/:id',
+  adminAuthMiddleware.protect,
+  adminAuthMiddleware.restrictTo(AdminRoles.admin, AdminRoles.superAdmin),
+  WorkOrderController.delete
+);
+
+//---------------------------------------------------------------------------
+
 router.patch(
   '/:id/complete',
   adminAuthMiddleware.protect,

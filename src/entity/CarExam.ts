@@ -24,6 +24,8 @@ export class CarExam {
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
-  @OneToOne((type) => WorkOrder, (workOrder) => workOrder.carExam)
+  @OneToOne((type) => WorkOrder, (workOrder) => workOrder.carExam, {
+    onDelete: 'CASCADE',
+  })
   workOrder: WorkOrder;
 }

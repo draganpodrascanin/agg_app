@@ -32,6 +32,8 @@ export class JobConclusion {
   @Column({ type: 'varchar', length: 50, nullable: true })
   workOrderId: string;
 
-  @OneToOne((type) => WorkOrder, (workOrder) => workOrder.jobConclusion)
+  @OneToOne((type) => WorkOrder, (workOrder) => workOrder.jobConclusion, {
+    onDelete: 'SET NULL',
+  })
   workOrder: WorkOrder;
 }

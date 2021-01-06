@@ -107,6 +107,7 @@ class WorkOrderController {
   };
 
   public getCount = handlerFactory.count(Entities.WorkOrder);
+  public delete = handlerFactory.deleteOne(Entities.WorkOrder);
 }
 
 export default new WorkOrderController();
