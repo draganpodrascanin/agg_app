@@ -11,21 +11,23 @@ class WorkOrderController {
   public getPage = async (req: Request, res: Response) => {
     const page = Number(req.query.page) || 1;
     const limit = Number(req.query.limit) || 20;
-
-    console.log('lupio');
+    const completed = Boolean(req.query.completed);
 
     const workOrderRepo = getEnvConnection().getCustomRepository(
       WorkOrderRepository
     );
 
-    const workOrders = await workOrderRepo.getWorkOrderPage(page, limit);
-
-    console.log(workOrders);
+    const results = await workOrderRepo.getWorkOrderPage(
+      page,
+      limit,
+      completed
+    );
 
     res.status(200).json({
       status: 'success',
-      results: workOrders?.length || 0,
-      data: workOrders || [],
+      results: results.workOrders.length || 0,
+      count: results.count,
+      data: results.workOrders || [],
     });
   };
 

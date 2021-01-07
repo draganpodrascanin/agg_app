@@ -35,7 +35,7 @@ class CarReceptionController {
   public create = async (req: Request, res: Response) => {
     const { workOrderId } = req.body;
     if (!workOrderId) throw new CustomError('need to provide workOrderId', 400);
-    console.log('workOrderId - ', workOrderId);
+
     const connection = getEnvConnection();
 
     const workOrderRepo = connection.getCustomRepository(WorkOrderRepository);

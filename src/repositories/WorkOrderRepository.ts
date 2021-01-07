@@ -10,13 +10,27 @@ import { UserRepository } from './UserRepository';
 export class WorkOrderRepository extends Repository<WorkOrder> {
   //----------------------------------------------------------------------------------
 
-  public getWorkOrderPage(
+  public async getWorkOrderPage(
     page: number,
-    limit: number
-  ): Promise<WorkOrder[] | undefined> {
+    limit: number,
+    completed?: boolean
+  ): Promise<{
+    count: number;
+    workOrders: WorkOrder[];
+  }> {
     const offset = (page - 1) * limit;
 
-    return this.createQueryBuilder('work_order')
+    const count = await this.createQueryBuilder('work_order').getCount();
+
+    let workOrders = this.createQueryBuilder('work_order');
+
+    if (!completed) {
+      workOrders.where('work_order.completed = :bool', {
+        bool: false,
+      });
+    }
+
+    const res = await workOrders
       .leftJoinAndSelect(`${Entities.WorkOrder}.car`, Entities.Car)
       .leftJoinAndSelect(
         `${Entities.WorkOrder}.carReception`,
@@ -32,6 +46,8 @@ export class WorkOrderRepository extends Repository<WorkOrder> {
       .offset(offset)
       .limit(limit)
       .getMany();
+
+    return { count, workOrders: res };
   }
 
   public getActiveWorkOrders(): Promise<WorkOrder[] | undefined> {
