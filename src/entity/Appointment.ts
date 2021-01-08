@@ -4,7 +4,6 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne,
 } from 'typeorm';
 
 @Entity('appointment')
@@ -20,6 +19,9 @@ class Appointment {
 
   @Column({ type: 'varchar', length: 255, nullable: true })
   note: string;
+
+  @Column({ type: 'boolean', nullable: true })
+  showedUp: boolean;
 
   @Column({ type: 'varchar', length: 30 })
   phoneNumber: string;
