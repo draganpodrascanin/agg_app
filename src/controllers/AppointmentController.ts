@@ -11,10 +11,12 @@ class AppointmentController {
   public getAll = handlerFactory.getAll(Entities.Appointment);
   public getOne = handlerFactory.getOne(Entities.Appointment);
   public updateOne = handlerFactory.updateOne(Entities.Appointment, [
-    'date',
-    'time',
+    'datetime',
     'name',
     'phoneNumber',
+    'note',
+    'showedUp',
+    'car',
   ]);
 
   public getBetweenDates = async (req: Request, res: Response) => {
