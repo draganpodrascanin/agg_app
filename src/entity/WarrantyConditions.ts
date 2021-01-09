@@ -22,7 +22,7 @@ export class WarrantyConditions {
   })
   conditionsTitle: string;
 
-  @Column({ type: 'varchar', length: 1000 })
+  @Column({ type: 'varchar', length: 10000 })
   condition: string;
 
   @CreateDateColumn({ name: 'created_at' })

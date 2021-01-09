@@ -9,9 +9,9 @@ import handlerFactory from './handlerFactory';
 
 class WarantyController {
   public create = async (req: Request, res: Response) => {
-    if (!req.body.carRegistration) {
+    if (!req.body.carId) {
       throw new CustomError(
-        'need to specify registration of a car which warranty is for',
+        'need to specify car id which warranty is for',
         400
       );
     }
@@ -26,7 +26,7 @@ class WarantyController {
     //get car
     const connection = getEnvConnection();
     const carRepo = connection.getCustomRepository(CarRepository);
-    const car = await carRepo.findByRegistration(req.body.carRegistration);
+    const car = await carRepo.findOne({ where: { id: req.body.carId } });
 
     if (!car) {
       throw new CustomError('car with provided registration not found', 404);

@@ -86,6 +86,11 @@ export class CarRepository extends Repository<Car> {
       .where(`${Entities.Car}.id = :id`, { id: id })
       .leftJoinAndSelect(`${Entities.Car}.workOrders`, Entities.WorkOrder)
       .leftJoinAndSelect(`${Entities.Car}.user`, Entities.User)
+      .leftJoinAndSelect(`${Entities.Car}.warranties`, Entities.Warranty)
+      .leftJoinAndSelect(
+        `${Entities.Warranty}.warrantyConditions`,
+        Entities.WarrantyConditions
+      )
       .leftJoinAndSelect(
         `${Entities.WorkOrder}.carReception`,
         Entities.CarReception
