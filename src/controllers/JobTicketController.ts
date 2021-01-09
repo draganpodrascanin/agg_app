@@ -42,6 +42,20 @@ class JobTicketController {
     });
   };
 
+  public getActive = async (req: Request, res: Response) => {
+    const jobTicketRepo = getEnvConnection().getCustomRepository(
+      JobTicketRepository
+    );
+
+    const activeTickets = await jobTicketRepo.getActive();
+
+    res.status(200).json({
+      status: 'success',
+      results: activeTickets.length,
+      data: activeTickets,
+    });
+  };
+
   public changeStatus = async (req: Request, res: Response) => {
     const { status } = req.body;
 

@@ -80,4 +80,22 @@ export class CarRepository extends Repository<Car> {
   public async findByRegistration(reg: string): Promise<Car | undefined> {
     return this.findOne({ where: { registration: reg } });
   }
+
+  public findOneAndPopulate(id: string): Promise<Car | undefined> {
+    return this.createQueryBuilder(Entities.Car)
+      .where(`${Entities.Car}.id = :id`, { id: id })
+      .leftJoinAndSelect(`${Entities.Car}.workOrders`, Entities.WorkOrder)
+      .leftJoinAndSelect(`${Entities.Car}.user`, Entities.User)
+      .leftJoinAndSelect(
+        `${Entities.WorkOrder}.carReception`,
+        Entities.CarReception
+      )
+      .leftJoinAndSelect(`${Entities.WorkOrder}.carExam`, Entities.CarExam)
+      .leftJoinAndSelect(`${Entities.WorkOrder}.jobTickets`, Entities.JobTicket)
+      .leftJoinAndSelect(
+        `${Entities.WorkOrder}.jobConclusion`,
+        Entities.JobConclusion
+      )
+      .getOne();
+  }
 }

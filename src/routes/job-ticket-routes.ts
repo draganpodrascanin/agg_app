@@ -12,8 +12,9 @@ router.get(
     AdminRoles.superAdmin,
     AdminRoles.mechanic
   ),
-  JobTicketController.getPage
+  JobTicketController.getActive
 );
+
 router.get(
   '/count',
   adminAuthMiddleware.protect,

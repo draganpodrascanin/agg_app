@@ -92,11 +92,10 @@ class CarController {
   //------------------------------------------------------------
 
   public getOne = async (req: Request, res: Response, next: NextFunction) => {
-    const { carId } = req.body;
-
+    const id = String(req.params.id);
     const carRepo = getEnvConnection().getCustomRepository(CarRepository);
 
-    const carRes = await carRepo.findOne(carId);
+    const carRes = await carRepo.findOneAndPopulate(id);
 
     if (!carRes) {
       throw new CustomError('No car with that id', 404);

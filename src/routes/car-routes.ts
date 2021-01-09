@@ -109,4 +109,17 @@ router.get(
   CarController.getMyCars
 );
 
+//------------------------------------------------------------------------
+
+router.get(
+  '/:id',
+  adminAuthMiddleware.protect,
+  adminAuthMiddleware.restrictTo(
+    AdminRoles.admin,
+    AdminRoles.superAdmin,
+    AdminRoles.mechanic
+  ),
+  CarController.getOne
+);
+
 export default router;

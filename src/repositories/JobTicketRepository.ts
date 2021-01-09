@@ -1,4 +1,6 @@
-import { EntityRepository, Repository } from 'typeorm';
+import { notEquals } from 'class-validator';
+import { EntityRepository, Not, Repository } from 'typeorm';
+import { Entities } from '../entity/Entities';
 import { JobTicket, JobTicketStatus } from '../entity/JobTicket';
 import { WorkOrder } from '../entity/WorkOrder';
 
@@ -20,5 +22,11 @@ export class JobTicketRepository extends Repository<JobTicket> {
     });
 
     return this.save(workOrder);
+  }
+
+  public getActive(): Promise<JobTicket[]> {
+    return this.find({
+      where: { status: Not('finished') },
+    });
   }
 }
