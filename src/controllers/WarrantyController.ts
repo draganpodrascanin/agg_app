@@ -1,4 +1,6 @@
+import { validate } from 'class-validator';
 import { Request, Response } from 'express';
+import { wrap } from 'lodash';
 import { Entities } from '../entity/Entities';
 import { WarrantyConditions } from '../entity/WarrantyConditions';
 import { CarRepository } from '../repositories/CarRepository';
@@ -9,6 +11,8 @@ import handlerFactory from './handlerFactory';
 
 class WarantyController {
   public create = async (req: Request, res: Response) => {
+    console.log('body', req.body);
+
     if (!req.body.carId) {
       throw new CustomError(
         'need to specify car id which warranty is for',
@@ -115,12 +119,61 @@ class WarantyController {
     });
   };
 
+  public getForCar = async (req: Request, res: Response) => {
+    const warrantyRepo = getEnvConnection().getCustomRepository(
+      WarrantyRepository
+    );
+
+    let carId;
+
+    if (req.params.carId) {
+      carId = String(req.params.carId);
+    } else if (req.query.carId) {
+      carId = String(req.query.carId);
+    } else {
+      throw new CustomError('Need to provide carId', 400);
+    }
+
+    const warranties = await warrantyRepo.getForCar(carId);
+
+    res.status(200).json({
+      status: 'success',
+      results: warranties.length,
+      data: warranties,
+    });
+  };
+
+  public updateOne = async (req: Request, res: Response) => {
+    const { validUntil, partsUnderWarranty } = req.body;
+    const warrantyId = req.params.id;
+
+    const warrantyRepo = getEnvConnection().getCustomRepository(
+      WarrantyRepository
+    );
+    const warranty = await warrantyRepo.findOne({
+      where: { id: warrantyId },
+      relations: ['warrantyConditions'],
+    });
+
+    if (!warranty) {
+      throw new CustomError('No warrantie with this id', 404);
+    }
+
+    if (validUntil) warranty.validUntil = validUntil;
+    if (partsUnderWarranty) warranty.partsUnderWarranty = partsUnderWarranty;
+
+    await validate(warranty);
+
+    await warrantyRepo.save(warranty);
+
+    res.status(200).json({
+      status: 'success',
+      data: warranty,
+    });
+  };
+
   public getAll = handlerFactory.getAll(Entities.Warranty);
   public deleteOne = handlerFactory.deleteOne(Entities.Warranty);
-  public updateOne = handlerFactory.updateOne(Entities.Warranty, [
-    'partsUnderWarranty',
-    'validUntil',
-  ]);
 }
 
 export default new WarantyController();

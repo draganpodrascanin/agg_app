@@ -16,6 +16,18 @@ router.get(
   WarrantyController.getAll
 );
 
+//get for car
+router.get(
+  ['/forCar', '/forCar/:carId'],
+  adminAuthMiddleware.protect,
+  adminAuthMiddleware.restrictTo(
+    AdminRoles.admin,
+    AdminRoles.superAdmin,
+    AdminRoles.mechanic
+  ),
+  WarrantyController.getForCar
+);
+
 //create new warrantie
 router.post(
   '/',

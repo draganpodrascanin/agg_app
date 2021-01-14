@@ -1,5 +1,6 @@
 import { EntityRepository, InsertResult, Repository } from 'typeorm';
 import { Car } from '../entity/Car';
+import { Entities } from '../entity/Entities';
 import { Warranty } from '../entity/Warranty';
 import { WarrantyConditions } from '../entity/WarrantyConditions';
 import CustomError from '../utils/CustomError';
@@ -26,5 +27,11 @@ export class WarrantyRepository extends Repository<Warranty> {
     });
 
     return this.save(warranty);
+  }
+
+  public async getForCar(carId: string): Promise<Warranty[]> {
+    return this.createQueryBuilder(Entities.Warranty)
+      .where(`${Entities.Warranty}.carId = :carId`, { carId })
+      .getMany();
   }
 }
