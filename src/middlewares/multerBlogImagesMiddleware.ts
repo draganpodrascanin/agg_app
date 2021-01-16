@@ -17,6 +17,8 @@ const filter = async (
   file: Express.Multer.File,
   cb: FileFilterCallback
 ) => {
+  console.log('FILE -> ', file);
+
   if (!file.mimetype.startsWith('image'))
     return cb(
       new CustomError('Not an image! Please upload only image files', 400)

@@ -6,19 +6,22 @@ import { uploadBlogImages } from '../middlewares/multerBlogImagesMiddleware';
 
 const router = Router();
 
-router.get(
-  '/',
-  adminAuthMiddleware.protect,
-  adminAuthMiddleware.restrictTo(AdminRoles.superAdmin, AdminRoles.blogger),
-  ImageController.getPage
-);
+router.get('/', adminAuthMiddleware.protect, ImageController.getPage);
 
 router.post(
   '/',
-  uploadBlogImages.array('blogImages', 10),
+  uploadBlogImages.single('blogImage'),
   adminAuthMiddleware.protect,
   adminAuthMiddleware.restrictTo(AdminRoles.superAdmin, AdminRoles.blogger),
   ImageController.upload
+);
+
+router.post(
+  '/multi',
+  uploadBlogImages.array('blogImages', 10),
+  adminAuthMiddleware.protect,
+  adminAuthMiddleware.restrictTo(AdminRoles.superAdmin, AdminRoles.blogger),
+  ImageController.uploadMulti
 );
 
 export default router;
