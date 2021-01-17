@@ -10,18 +10,25 @@ router.get('/', adminAuthMiddleware.protect, ImageController.getPage);
 
 router.post(
   '/',
-  uploadBlogImages.single('blogImage'),
   adminAuthMiddleware.protect,
   adminAuthMiddleware.restrictTo(AdminRoles.superAdmin, AdminRoles.blogger),
+  uploadBlogImages.single('blogImage'),
   ImageController.upload
 );
 
 router.post(
   '/multi',
-  uploadBlogImages.array('blogImages', 10),
   adminAuthMiddleware.protect,
   adminAuthMiddleware.restrictTo(AdminRoles.superAdmin, AdminRoles.blogger),
+  uploadBlogImages.array('blogImages', 10),
   ImageController.uploadMulti
+);
+
+router.delete(
+  '/:id',
+  adminAuthMiddleware.protect,
+  adminAuthMiddleware.restrictTo(AdminRoles.superAdmin, AdminRoles.blogger),
+  ImageController.deleteImage
 );
 
 export default router;

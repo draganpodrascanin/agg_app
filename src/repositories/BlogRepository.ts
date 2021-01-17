@@ -8,7 +8,9 @@ interface IBlogBody {
   image: Image;
   admin: Admin;
   title: string;
-  markdown: string;
+  content: string;
+  imageAlt: string;
+  thumbnailAlt: string;
 }
 
 @EntityRepository(Blog)
@@ -16,14 +18,14 @@ export class BlogRepository extends Repository<Blog> {
   //----------------------------------------------------------------------------------
 
   public createAndSave(blogBody: IBlogBody): Promise<Blog> {
-    const { thumbnail, image, admin, title, markdown } = blogBody;
+    const { thumbnail, image, admin, title, content } = blogBody;
 
     const blog = this.create({
       admin,
       image,
       thumbnail,
       title,
-      markdown,
+      content,
     });
 
     return this.save(blog);

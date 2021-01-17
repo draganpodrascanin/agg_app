@@ -42,29 +42,41 @@ class BlogController {
 
   public create = async (req: Request, res: Response) => {
     if (!req.admin) throw new CustomError('you need to be logged in', 401);
-    const { imageName, thumbnailName, markdown, title } = req.body;
+    const {
+      imageId,
+      thumbnailId,
+      imageAlt,
+      thumbnailAlt,
+      content,
+      title,
+    } = req.body;
 
-    if (!imageName || !thumbnailName)
-      throw new CustomError('Need to provide valid image names', 400);
+    if (!imageId || !thumbnailId)
+      throw new CustomError("Need to provide valid image id's", 400);
+
+    if (!imageAlt || !thumbnailAlt)
+      throw new CustomError('Need to provide Image nad Thumbnail ALT', 400);
 
     const connect = getEnvConnection();
     const imageRepo = connect.getRepository(Image);
 
-    const image = await imageRepo.findOne({ where: { name: imageName } });
-    if (!image) throw new CustomError('imageName is invalid', 400);
+    const image = await imageRepo.findOne({ where: { id: imageId } });
+    if (!image) throw new CustomError('imageId is invalid', 400);
 
     const thumbnail = await imageRepo.findOne({
-      where: { name: thumbnailName },
+      where: { id: thumbnailId },
     });
-    if (!thumbnail) throw new CustomError('thumbnailName is invalid', 400);
+    if (!thumbnail) throw new CustomError('thumbnailId is invalid', 400);
 
     const blogRepo = connect.getCustomRepository(BlogRepository);
     const blog = await blogRepo.createAndSave({
       title,
       image,
       admin: req.admin,
-      markdown,
+      content,
       thumbnail,
+      imageAlt,
+      thumbnailAlt,
     });
 
     res.status(201).json({

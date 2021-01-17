@@ -27,7 +27,7 @@ export class Blog {
   slug: string;
 
   @Column({ type: 'text' })
-  markdown: string;
+  content: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
@@ -80,6 +80,6 @@ export class Blog {
 
   @BeforeInsert()
   createSynopsis() {
-    if (!this.synopsis) this.synopsis = this.markdown.slice(0, 147) + '...';
+    if (!this.synopsis) this.synopsis = this.content.slice(3, 150) + '...';
   }
 }

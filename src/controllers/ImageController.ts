@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import { Entities } from '../entity/Entities';
 import { Image } from '../entity/Image';
-import { asyncForEach } from '../utils/asyncForEach';
+import fs from 'fs';
+import path from 'path';
 import CustomError from '../utils/CustomError';
 import getEnvConnection from '../utils/get-env-connection';
 import handlerFactory from './handlerFactory';
@@ -16,6 +17,26 @@ declare global {
 
 class ImageController {
   public getPage = handlerFactory.getPage(Entities.Image);
+
+  public deleteImage = async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const repo = getEnvConnection().getRepository(Image);
+
+    const image = await repo.findOne(id);
+
+    if (!image) throw new CustomError('No image with that id', 400);
+
+    fs.unlink(path.resolve(__dirname, `../../public${image.path}`), (err) => {
+      if (err) throw new CustomError(err.message, 400);
+
+      repo.delete(image.id).then(() => {
+        res.status(200).json({
+          status: 'success',
+          message: 'image deleted successfully',
+        });
+      });
+    });
+  };
 
   public upload = async (req: Request, res: Response) => {
     //@ts-ignore
