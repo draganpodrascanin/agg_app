@@ -38,6 +38,22 @@ router.get(
 );
 
 //-------------------------------------------------------------------------
+router.patch(
+  '/:id',
+  adminAuthMiddleware.protect,
+  adminAuthMiddleware.restrictTo(AdminRoles.superAdmin, AdminRoles.blogger),
+  BlogController.updateOne
+);
+
+//-------------------------------------------------------------------------
+router.patch(
+  '/:id/publish',
+  adminAuthMiddleware.protect,
+  adminAuthMiddleware.restrictTo(AdminRoles.superAdmin, AdminRoles.blogger),
+  BlogController.publish
+);
+
+//-------------------------------------------------------------------------
 router.delete(
   '/:id',
   adminAuthMiddleware.protect,

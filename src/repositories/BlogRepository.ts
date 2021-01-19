@@ -1,6 +1,7 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Admin } from '../entity/Admin';
 import { Blog } from '../entity/Blog';
+import { Entities } from '../entity/Entities';
 import { Image } from '../entity/Image';
 
 interface IBlogBody {
@@ -11,6 +12,7 @@ interface IBlogBody {
   content: string;
   imageAlt: string;
   thumbnailAlt: string;
+  synopsis?: string;
 }
 
 @EntityRepository(Blog)
@@ -18,7 +20,7 @@ export class BlogRepository extends Repository<Blog> {
   //----------------------------------------------------------------------------------
 
   public createAndSave(blogBody: IBlogBody): Promise<Blog> {
-    const { thumbnail, image, admin, title, content } = blogBody;
+    const { thumbnail, image, admin, title, content, synopsis } = blogBody;
 
     const blog = this.create({
       admin,
@@ -26,17 +28,38 @@ export class BlogRepository extends Repository<Blog> {
       thumbnail,
       title,
       content,
+      synopsis,
     });
 
     return this.save(blog);
   }
 
-  public getPage(page: number, limit: number): Promise<Blog[]> {
+  public getPage(
+    page: number,
+    limit: number,
+    search?: string
+  ): Promise<Blog[]> {
     const offset = (page - 1) * limit;
-    return this.createQueryBuilder('blog')
+    const query = this.createQueryBuilder('blog').select([
+      `${Entities.Blog}.id`,
+      `${Entities.Blog}.thumbnailAlt`,
+      `${Entities.Blog}.thumbnailId`,
+      `${Entities.Blog}.title`,
+      `${Entities.Blog}.synopsis`,
+      `${Entities.Blog}.slug`,
+      `${Entities.Blog}.published`,
+      `${Entities.Blog}.createdAt`,
+    ]);
+
+    if (search)
+      query.where(
+        `CONCAT(${Entities.Blog}.title, ' ', ${Entities.Blog}.synopsis) LIKE '%${search}%'`
+      );
+
+    return query
       .offset(offset)
       .limit(limit)
-      .leftJoinAndSelect('blog.thumbnail', 'image')
+      .leftJoinAndSelect(`${Entities.Blog}.thumbnail`, 'image')
       .getMany();
   }
 }

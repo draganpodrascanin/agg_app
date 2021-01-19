@@ -22,6 +22,9 @@ export class Blog {
   @Column({ type: 'varchar', length: 255 })
   title: string;
 
+  @Column({ type: 'boolean', default: false })
+  published: boolean;
+
   @Column({ type: 'varchar', length: 255, unique: true })
   @Index('blog-slug')
   slug: string;

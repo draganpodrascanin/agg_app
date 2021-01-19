@@ -57,7 +57,7 @@ app.use('/api/v1/carExams', carExamRoutes);
 app.use('/api/v1/invoices', invoiceRoutes);
 app.use('/api/v1/expenses', expensesRoutes);
 app.use('/api/v1/images', imageRoutes);
-app.use('/api/v1/blogs', blogRoutes);
+app.use('/api/v1/blog', blogRoutes);
 app.use('/api/v1/aggregations', aggregationRoutes);
 //not found api route
 app.use('/api/v1/*', (req, res, next) => {
