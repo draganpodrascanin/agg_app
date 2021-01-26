@@ -52,7 +52,11 @@ export class WorkOrder {
   @JoinColumn()
   carExam: CarExam;
 
-  @OneToOne((type) => JobConclusion, (jobConclusion) => jobConclusion.workOrder)
+  @OneToOne(
+    (type) => JobConclusion,
+    (jobConclusion) => jobConclusion.workOrder,
+    { onDelete: 'SET NULL' }
+  )
   @JoinColumn()
   jobConclusion: JobConclusion;
 

@@ -3,4 +3,5 @@ export let TYPES = {
   UserService: Symbol('UserService'),
   AdminService: Symbol('AdminService'),
   Email: Symbol('Email'),
+  InvoiceService: Symbol('InvoiceService'),
 };

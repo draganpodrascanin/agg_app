@@ -1,10 +1,21 @@
 import { Request, Response } from 'express';
+import { inject, injectable } from 'inversify';
+import container from '../container.config';
 import { Entities } from '../entity/Entities';
+import IInvoiceService from '../interfaces/services/IInvoiceService';
 import { InvoiceRepository } from '../repositories/InvoiceRepository';
+import { TYPES } from '../types';
 import getEnvConnection from '../utils/get-env-connection';
 import handlerFactory from './handlerFactory';
 
+@injectable()
 class InvoiceController {
+  private _InvoiceService;
+
+  constructor(@inject(TYPES.InvoiceService) InvoiceS: IInvoiceService) {
+    this._InvoiceService = InvoiceS;
+  }
+
   public getPage = handlerFactory.getPage(Entities.Invoice);
   public count = handlerFactory.count(Entities.Invoice);
   public getOne = handlerFactory.getOne(Entities.Invoice, {
@@ -31,4 +42,6 @@ class InvoiceController {
   };
 }
 
-export default new InvoiceController();
+export default new InvoiceController(
+  container.get<IInvoiceService>(TYPES.InvoiceService)
+);
