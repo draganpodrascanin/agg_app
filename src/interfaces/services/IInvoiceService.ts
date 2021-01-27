@@ -1,3 +1,5 @@
+import { UnitEnum } from '../../entity/InvoiceDesc';
+
 export enum pdfFormat {
   A4 = 'A4',
   A3 = 'A3',
@@ -6,15 +8,9 @@ export enum pdfFormat {
   Letter = 'Letter',
 }
 
-export enum JedinicaMjere {
-  kom = 'kom',
-  h = 'h',
-  komplet = 'komplet',
-}
-
 export interface IinvoiceRow {
   nazivRobe: string;
-  jedinicaMjere: JedinicaMjere;
+  jedinicaMjere: UnitEnum;
   kolicina: number;
   cenaBezPdva: number;
   popust: number;
@@ -29,7 +25,7 @@ export interface ICreateInvoiceTemplateArg {
   valuta: string;
   datumIsporuke: string;
   po: string;
-  ime: string;
+  imeKupca: string;
   adresa?: string;
   postanskiBrojNaselje?: string;
   brojTelefonaKupca?: string;
@@ -37,8 +33,7 @@ export interface ICreateInvoiceTemplateArg {
   infoKupca?: string;
   invoiceTitle: string;
   invoiceNumber: number;
-  invoiceRow: IinvoiceRow[];
-  pdv: number;
+  invoiceRows: IinvoiceRow[];
   ukupanIznosBezPdv: number;
   pdvUkupan: number;
   ukupanIznosSaPdv: number;
@@ -54,5 +49,5 @@ export default interface IInvoiceService {
     location: string,
     name: string,
     format: pdfFormat
-  ): any;
+  ): Promise<any>;
 }

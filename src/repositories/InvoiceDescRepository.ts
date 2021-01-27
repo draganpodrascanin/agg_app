@@ -1,13 +1,15 @@
 import { EntityRepository, Repository } from 'typeorm';
 import { Invoice } from '../entity/Invoice';
-import { InvoiceDesc } from '../entity/InvoiceDesc';
+import { InvoiceDesc, UnitEnum } from '../entity/InvoiceDesc';
 
 interface IInvoiceDescBody {
-  invoice: Invoice;
+  invoice?: Invoice;
   pricePerUnit: number;
   qty: number;
   tax: number;
   desc: string;
+  discount?: number;
+  unit?: UnitEnum;
 }
 
 @EntityRepository(InvoiceDesc)
@@ -17,16 +19,26 @@ export class InvoiceDescRepository extends Repository<InvoiceDesc> {
   public createAndSave(
     InvoiceDescBody: IInvoiceDescBody
   ): Promise<InvoiceDesc> {
-    const { invoice, pricePerUnit, qty, tax, desc } = InvoiceDescBody;
-    console.log(invoice);
-    const invoiceDesc = this.create({
+    const {
+      invoice,
       pricePerUnit,
       qty,
       tax,
       desc,
+      discount,
+      unit,
+    } = InvoiceDescBody;
+
+    const invoiceDesc = this.create({
+      desc,
+      qty,
+      pricePerUnit,
+      tax,
+      discount,
+      unit,
     });
-    invoiceDesc.invoice = invoice;
-    console.log(invoiceDesc);
+
+    if (invoice) invoiceDesc.invoice = invoice;
 
     return this.save(invoiceDesc);
   }

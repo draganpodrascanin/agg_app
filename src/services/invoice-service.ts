@@ -19,26 +19,25 @@ export class InvoiceService implements IInvoiceService {
       valuta,
       datumIsporuke,
       po,
-      ime,
+      imeKupca,
       invoiceTitle,
       invoiceNumber,
-      pdv,
       ukupanIznosBezPdv,
       pdvUkupan,
       ukupanIznosSaPdv,
       slovima,
+      adresa,
+      postanskiBrojNaselje,
+      brojTelefonaKupca,
+      emailKupca,
+      infoKupca,
     } = invoice;
 
-    const adresa = invoice.adresa || '';
-    const postanskiBrojNaselje = invoice.postanskiBrojNaselje || '';
-    const brojTelefonaKupca = invoice.brojTelefonaKupca || '';
-    const emailKupca = invoice.emailKupca || '';
-    const infoKupca = invoice.infoKupca || '';
     const predracunVaziBezPecata = invoice.predracunVaziBezPecata || '';
 
     let rows = ``;
 
-    invoice.invoiceRow.forEach((row: IinvoiceRow, i) => {
+    invoice.invoiceRows.forEach((row: IinvoiceRow, i: number) => {
       const {
         nazivRobe,
         jedinicaMjere,
@@ -46,6 +45,7 @@ export class InvoiceService implements IInvoiceService {
         cenaBezPdva,
         cenaSaPdvom,
         popust,
+        pdv,
       } = row;
 
       rows += `
@@ -150,17 +150,14 @@ export class InvoiceService implements IInvoiceService {
             */
             html {
               background: #eee;
-              padding: 30px;
             }
 
             body {
-              max-width: 1240px;
-              min-width: 1240px;
               margin: 0 auto;
               background: #fff;
               position: relative;
-              min-height: 1754px;
-              max-height: 1754px;
+              "height": "210mm",
+              "width": "297mm",
             }
 
             .clearfix {
@@ -170,10 +167,13 @@ export class InvoiceService implements IInvoiceService {
 
             #container {
               font: normal 15px/1.5em 'Open Sans', Sans-serif;
-              margin: 0 auto;
-              padding:50px;
+
               min-height: 1754px;
               max-height: 1754px;
+              max-width: 1240px;
+              min-width: 1240px;
+              margin: 0 auto;
+              padding:50px;
             }
 
             #memo .logo {
@@ -386,7 +386,7 @@ export class InvoiceService implements IInvoiceService {
 
             #mp {
               position: absolute;
-              bottom: 60px;
+              bottom: 120px;
               left: 50%;
               transform: translate(-50%, -50%);
             }
@@ -412,7 +412,7 @@ export class InvoiceService implements IInvoiceService {
         <div id="container">
           <section id="memo">
             <div class="logo">
-              <img src="./logoblack.svg" data-logo="{company_logo}" />
+              <img src="http://localhost:5000/img/logoblack.png" data-logo="{company_logo}" />
             </div>
             
             <div class="company-info">
@@ -457,28 +457,48 @@ export class InvoiceService implements IInvoiceService {
           <section id="client-info">
             <span>Kupac:</span>
             <div>
-              <span>${ime}</span>
+              <span>${imeKupca}</span>
             </div>
             
-            <div>
+           ${
+             adresa
+               ? `<div>
               <span>${adresa}</span>
-            </div>
+            </div>`
+               : ''
+           }
             
-            <div>
+           ${
+             postanskiBrojNaselje
+               ? `<div>
               <span>${postanskiBrojNaselje}</span>
-            </div>
+            </div>`
+               : ''
+           }
             
-            <div>
+           ${
+             brojTelefonaKupca
+               ? `<div>
               <span>${brojTelefonaKupca}</span>
-            </div>
+            </div>`
+               : ''
+           }
             
-            <div>
+           ${
+             emailKupca
+               ? `<div>
               <span>${emailKupca}</span>
-            </div>
+            </div>`
+               : ''
+           }
             
-            <div>
+           ${
+             infoKupca
+               ? `<div>
               <span>${infoKupca}</span>
-            </div>
+            </div>`
+               : ''
+           }
           </section>
           
           <div class="clearfix"></div>
@@ -536,7 +556,7 @@ export class InvoiceService implements IInvoiceService {
               
               <tr data-hide-on-quote="true">
                 <th>Za Naplatu</th>
-                <td>{ukupanIznosSaPdv}</td>
+                <td>${ukupanIznosSaPdv}</td>
               </tr>
               <tr>
                 <th>Slovima:</th>
