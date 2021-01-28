@@ -156,8 +156,10 @@ export class InvoiceService implements IInvoiceService {
               margin: 0 auto;
               background: #fff;
               position: relative;
-              "height": "210mm",
-              "width": "297mm",
+              min-height: 1754px;
+              min-width: 1240px;
+              max-height: 1754px;
+              max-width: 1240px;
             }
 
             .clearfix {
@@ -167,7 +169,7 @@ export class InvoiceService implements IInvoiceService {
 
             #container {
               font: normal 15px/1.5em 'Open Sans', Sans-serif;
-
+              box-sizing: border-box;
               min-height: 1754px;
               max-height: 1754px;
               max-width: 1240px;
@@ -601,6 +603,10 @@ export class InvoiceService implements IInvoiceService {
     const options: CreateOptions = {
       format: format,
       paginationOffset: 1,
+      // width: '210mm',
+      // height: '297mm',
+      height: '1754px',
+      width: '1240px',
     };
 
     return new Promise((resolve, reject) => {

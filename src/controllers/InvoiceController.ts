@@ -139,13 +139,13 @@ class InvoiceController {
 
     const htmlTemplate: string = this._InvoiceService.createTemplate({
       datumIsporuke: dayjs(invoice.createdAt).format('DD.MM.YYYY.'),
-      dpo: dayjs(invoice.dpo).format('DD.MM.YYYY'),
-      valuta: dayjs(invoice.dueDate).format('DD.MM.YYYY'),
+      dpo: dayjs(invoice.dpo).format('DD.MM.YYYY.'),
+      valuta: dayjs(invoice.dueDate).format('DD.MM.YYYY.'),
+      izdanoDana: dayjs(invoice.createdAt).format('DD.MM.YYYY.'),
       imeKupca: invoice.customerName,
       invoiceNumber: invoice.invoiceNo,
       invoiceRows: rows,
       invoiceTitle: invoice.invoiceTitle,
-      izdanoDana: dayjs(invoice.createdAt).format('DD.MM.YYYY.'),
       mjesto: invoice.location,
       po: invoice.po,
       pdvUkupan: ukupanPdv,
@@ -158,7 +158,7 @@ class InvoiceController {
     const pdf = await this._InvoiceService.createPdf(
       htmlTemplate,
       '../../public/documents',
-      `${invoice.invoiceTitle}-#${invoice.po}.png`,
+      `${invoice.invoiceTitle}-#${invoice.po}.pdf`,
       pdfFormat.A4
     );
 
