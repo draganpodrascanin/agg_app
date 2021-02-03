@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import { EntityRepository, MoreThan, Repository } from 'typeorm';
+import { Entities } from '../entity/Entities';
 import { Invoice, InvoiceTitleEnum } from '../entity/Invoice';
 
 interface IInvoiceBody {
@@ -21,6 +22,30 @@ interface IInvoiceBody {
 @EntityRepository(Invoice)
 export class InvoiceRepository extends Repository<Invoice> {
   //----------------------------------------------------------------------------------
+
+  public findInvoicePage(
+    page: number,
+    limit: number,
+    search?: string
+  ): Promise<Invoice[]> {
+    const offset = (page - 1) * limit;
+
+    let query = this.createQueryBuilder(Entities.Invoice);
+
+    if (search) {
+      query.where(`${Entities.Invoice}.customerName LIKE '%${search}%'`);
+    }
+
+    return query
+      .orderBy(`${Entities.Invoice}.createdAt`, 'DESC')
+      .leftJoinAndSelect(
+        `${Entities.Invoice}.invoiceDescs`,
+        `${Entities.InvoiceDesc}`
+      )
+      .offset(offset)
+      .limit(limit)
+      .getMany();
+  }
 
   public async createAndSave(invoiceBody: IInvoiceBody): Promise<Invoice> {
     const year = dayjs(new Date()).format('YYYY-01-01 00:00:00');

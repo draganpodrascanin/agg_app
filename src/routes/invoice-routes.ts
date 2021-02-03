@@ -21,6 +21,13 @@ router.get(
 );
 
 router.get(
+  '/pdf/:id',
+  adminAuthMiddleware.protect,
+  adminAuthMiddleware.restrictTo(AdminRoles.admin, AdminRoles.superAdmin),
+  InvoiceController.getPdf
+);
+
+router.get(
   '/:id',
   adminAuthMiddleware.protect,
   adminAuthMiddleware.restrictTo(AdminRoles.admin, AdminRoles.superAdmin),

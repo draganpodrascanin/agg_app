@@ -11,8 +11,11 @@ import IInvoiceService, {
 import { InvoiceDescRepository } from '../repositories/InvoiceDescRepository';
 import { InvoiceRepository } from '../repositories/InvoiceRepository';
 import { TYPES } from '../types';
+import CustomError from '../utils/CustomError';
 import getEnvConnection from '../utils/get-env-connection';
 import handlerFactory from './handlerFactory';
+import path from 'path';
+import { readFile, readFileSync } from 'fs';
 
 @injectable()
 class InvoiceController {
@@ -22,7 +25,6 @@ class InvoiceController {
     this._InvoiceService = InvoiceS;
   }
 
-  public getPage = handlerFactory.getPage(Entities.Invoice);
   public count = handlerFactory.count(Entities.Invoice);
   public getOne = handlerFactory.getOne(Entities.Invoice, {
     relations: ['invoiceDescs'],
@@ -30,6 +32,31 @@ class InvoiceController {
   public updateOne = handlerFactory.updateOne(Entities.Invoice, [
     //Stavi sve za update
   ]);
+
+  public getPage = async (req: Request, res: Response) => {
+    const page = Number(req.query.page) || 1;
+    const limit = Number(req.query.limit) || 20;
+    const search = req.query.search ? String(req.query.search) : '';
+    const invoiceRepo = getEnvConnection().getCustomRepository(
+      InvoiceRepository
+    );
+
+    const invoicesPage = await invoiceRepo.findInvoicePage(page, limit, search);
+
+    const count = invoiceRepo.createQueryBuilder(Entities.Invoice);
+
+    if (search) {
+      count.where(`${Entities.Invoice}.customerName LIKE '%${search}%'`);
+    }
+
+    const resCount = await count.getCount();
+
+    res.status(200).json({
+      status: 'success',
+      count: resCount,
+      data: invoicesPage,
+    });
+  };
 
   public create = async (req: Request, res: Response) => {
     const invoiceRepo = getEnvConnection().getCustomRepository(
@@ -155,12 +182,21 @@ class InvoiceController {
       ukupanIznosZaNaplatu: ukupanIznosSaPdv,
     });
 
+    const dateNow = Date.now();
+
     const pdf = await this._InvoiceService.createPdf(
       htmlTemplate,
       '../../public/documents',
-      `${invoice.invoiceTitle}-#${invoice.po}.pdf`,
+      `${invoice.invoiceTitle}${invoice.po.slice(1, 999)}-${dateNow}.pdf`,
       pdfFormat.A4
     );
+
+    invoice.pdfName = `${invoice.invoiceTitle}${invoice.po.slice(
+      1,
+      999
+    )}-${dateNow}.pdf`;
+
+    await invoiceRepo.save(invoice);
 
     res.status(200).json({
       status: 'success',
@@ -172,6 +208,21 @@ class InvoiceController {
         pdf,
       },
     });
+  };
+
+  public getPdf = async (req: Request, res: Response) => {
+    const id = req.params.id;
+
+    const repo = getEnvConnection().getCustomRepository(InvoiceRepository);
+    const invoice = await repo.findOne(id);
+
+    if (!invoice) throw new CustomError('No invoice found with that ID', 404);
+
+    const data = readFileSync(
+      path.join(__dirname, `../../public/documents/${invoice.pdfName}`)
+    );
+    res.contentType('application/pdf');
+    res.send(data);
   };
 }
 

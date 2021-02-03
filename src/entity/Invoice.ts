@@ -71,6 +71,9 @@ export class Invoice {
   @Column({ type: 'varchar', length: 100 })
   priceInWriting: string;
 
+  @Column({ type: 'varchar', length: 200, nullable: true })
+  pdfName: string;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
