@@ -165,10 +165,10 @@ class InvoiceController {
     );
 
     const htmlTemplate: string = this._InvoiceService.createTemplate({
-      datumIsporuke: dayjs(invoice.createdAt).format('DD.MM.YYYY.'),
-      dpo: dayjs(invoice.dpo).format('DD.MM.YYYY.'),
-      valuta: dayjs(invoice.dueDate).format('DD.MM.YYYY.'),
-      izdanoDana: dayjs(invoice.createdAt).format('DD.MM.YYYY.'),
+      datumIsporuke: dayjs(invoice.createdAt).format('DD.MM.YYYY'),
+      dpo: dayjs(invoice.dpo).format('DD.MM.YYYY'),
+      valuta: dayjs(invoice.dueDate).format('DD.MM.YYYY'),
+      izdanoDana: dayjs(invoice.createdAt).format('DD.MM.YYYY'),
       imeKupca: invoice.customerName,
       invoiceNumber: invoice.invoiceNo,
       invoiceRows: rows,

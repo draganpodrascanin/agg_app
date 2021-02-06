@@ -21,7 +21,7 @@ export class InvoiceDesc {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ type: 'varchar', length: 150, name: 'bill_to' })
+  @Column({ type: 'varchar', length: 150 })
   desc: string; // item or service being billed
 
   @Column({ type: 'int', default: 1 })
