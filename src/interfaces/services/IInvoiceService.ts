@@ -12,10 +12,11 @@ export interface IinvoiceRow {
   nazivRobe: string;
   jedinicaMjere: UnitEnum;
   kolicina: number;
-  cenaBezPdva: number;
+  cenaPoJedinci: string;
+  cenaBezPdva: string;
   popust: number;
   pdv: number;
-  cenaSaPdvom: number;
+  cenaSaPdvom: string;
 }
 
 export interface ICreateInvoiceTemplateArg {
@@ -34,10 +35,10 @@ export interface ICreateInvoiceTemplateArg {
   invoiceTitle: string;
   invoiceNumber: number;
   invoiceRows: IinvoiceRow[];
-  ukupanIznosBezPdv: number;
-  pdvUkupan: number;
-  ukupanIznosSaPdv: number;
-  ukupanIznosZaNaplatu?: number;
+  ukupanIznosBezPdv: string;
+  pdvUkupan: string;
+  ukupanIznosSaPdv: string;
+  ukupanIznosZaNaplatu?: string;
   slovima: string;
   predracunVaziBezPecata?: string;
 }

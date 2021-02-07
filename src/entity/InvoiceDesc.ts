@@ -59,7 +59,7 @@ export class InvoiceDesc {
 
   @BeforeInsert()
   setPreTaxPrice() {
-    this.preTaxPrice = this.pricePerUnit * this.qty;
+    this.preTaxPrice = this.pricePerUnit * this.qty * (1 - this.discount / 100);
   }
 
   @BeforeInsert()

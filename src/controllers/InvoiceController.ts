@@ -54,6 +54,7 @@ class InvoiceController {
     res.status(200).json({
       status: 'success',
       count: resCount,
+      results: invoicesPage.length,
       data: invoicesPage,
     });
   };
@@ -129,13 +130,15 @@ class InvoiceController {
           qty,
           tax,
           unit,
+          pricePerUnit,
         } = invoiceDesc;
 
         return {
           kolicina: qty,
           jedinicaMjere: unit,
-          cenaBezPdva: preTaxPrice,
-          cenaSaPdvom: priceTaxInc,
+          cenaPoJedinci: pricePerUnit.toFixed(2),
+          cenaBezPdva: preTaxPrice.toFixed(2),
+          cenaSaPdvom: priceTaxInc.toFixed(2),
           pdv: tax,
           nazivRobe: desc,
           popust: discount,
@@ -143,26 +146,23 @@ class InvoiceController {
       }
     );
 
-    const ukupanPdv: number = invoiceDescs.reduce(
-      (accumulator: number, desc: InvoiceDesc) => {
+    const ukupanPdv: string = invoiceDescs
+      .reduce((accumulator: number, desc: InvoiceDesc) => {
         return accumulator + (desc.priceTaxInc - desc.preTaxPrice);
-      },
-      0
-    );
+      }, 0)
+      .toFixed(2);
 
-    const ukupanIznosBezPdv: number = invoiceDescs.reduce(
-      (accumulator: number, desc: InvoiceDesc) => {
+    const ukupanIznosBezPdv: string = invoiceDescs
+      .reduce((accumulator: number, desc: InvoiceDesc) => {
         return accumulator + desc.preTaxPrice;
-      },
-      0
-    );
+      }, 0)
+      .toFixed(2);
 
-    const ukupanIznosSaPdv: number = invoiceDescs.reduce(
-      (accumulator: number, desc: InvoiceDesc) => {
+    const ukupanIznosSaPdv: string = invoiceDescs
+      .reduce((accumulator: number, desc: InvoiceDesc) => {
         return accumulator + desc.priceTaxInc;
-      },
-      0
-    );
+      }, 0)
+      .toFixed(2);
 
     const htmlTemplate: string = this._InvoiceService.createTemplate({
       datumIsporuke: dayjs(invoice.createdAt).format('DD.MM.YYYY'),

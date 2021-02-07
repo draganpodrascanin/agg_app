@@ -33,7 +33,8 @@ export class InvoiceService implements IInvoiceService {
       infoKupca,
     } = invoice;
 
-    const predracunVaziBezPecata = invoice.predracunVaziBezPecata || '';
+    const predracunVaziBezPecata =
+      invoice.predracunVaziBezPecata || 'Faktura važi bez pečata i potpisa.';
 
     let rows = ``;
 
@@ -46,6 +47,7 @@ export class InvoiceService implements IInvoiceService {
         cenaSaPdvom,
         popust,
         pdv,
+        cenaPoJedinci,
       } = row;
 
       rows += `
@@ -54,6 +56,7 @@ export class InvoiceService implements IInvoiceService {
               i + 1
             }</td> <!-- Don't remove this column as it's needed for the row commands -->
             <td><span class="show-mobile">{item_description_label}</span> <span>${nazivRobe}</span></td>
+            <td><span class="show-mobile">{item_unit_label}</span> <span>${cenaPoJedinci}</span></td>
             <td><span class="show-mobile">{item_unit_label}</span> <span>${jedinicaMjere}</span></td>
             <td><span class="show-mobile">{item_quantity_label}</span> <span>${kolicina}</span></td>
             <td><span class="show-mobile">{item_price_label}</span> <span>${cenaBezPdva}</span></td>
@@ -277,6 +280,7 @@ export class InvoiceService implements IInvoiceService {
 
             table {
               table-layout: fixed;
+              font-size: 14px;
             }
             table th, table td {
               vertical-align: top;
@@ -394,10 +398,9 @@ export class InvoiceService implements IInvoiceService {
             }
             .predracun {
               position: absolute;
-              text-align: center;
-              left: 50%;
-              bottom: 10px;
-              transform: translate(-50%, -50%);
+              display: inline-block;
+              left: 50px;
+              bottom: 25px;
               font-size: 12px;
             }
             /**
@@ -521,6 +524,7 @@ export class InvoiceService implements IInvoiceService {
               <tr>
                 <th></th> <!-- Dummy cell for the row number and row commands -->
                 <th>Naziv Robe/Usluge</th>
+                <th>Cijena Po Jedinici</th>
                 <th>Jedinica Mjere</th>
                 <th>Količina</th>
                 <th>Cijena Bez PDV-a</th>

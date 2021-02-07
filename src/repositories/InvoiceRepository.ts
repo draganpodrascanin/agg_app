@@ -42,8 +42,8 @@ export class InvoiceRepository extends Repository<Invoice> {
         `${Entities.Invoice}.invoiceDescs`,
         `${Entities.InvoiceDesc}`
       )
-      .offset(offset)
-      .limit(limit)
+      .skip(offset)
+      .take(limit)
       .getMany();
   }
 

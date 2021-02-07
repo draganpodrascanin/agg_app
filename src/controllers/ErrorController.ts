@@ -41,7 +41,7 @@ export default (
   res: Response,
   _next: NextFunction
 ) => {
-  console.log(err);
+  console.log('error - >', err);
   let error;
 
   //check for DB and other known errors that aren't made by us
