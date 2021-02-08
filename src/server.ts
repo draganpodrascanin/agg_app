@@ -2,6 +2,9 @@ import 'reflect-metadata';
 import createDBConnection from './utils/create-typeorm-connection';
 import app from './app';
 import { config } from 'dotenv';
+import { createServer } from 'http';
+import { Server } from 'socket.io';
+import { Socket } from 'net';
 
 config({ path: 'config.env' });
 const env = process.env.NODE_ENV;
@@ -9,6 +12,15 @@ if (!env) {
   console.log('ERROR SET YOUR ENV VARIABLES, EXITING APP NOW');
   process.exit(1);
 }
+
+//setting up socket-io
+const httpServer = createServer(app);
+export const io = new Server(httpServer, {
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['POST', 'GET'],
+  },
+});
 
 const bootstrap = async () => {
   //CONNECT TO DB
@@ -22,7 +34,8 @@ const bootstrap = async () => {
   }
 
   const PORT = process.env.PORT || 5000;
-  app.listen(PORT, () => {
+
+  httpServer.listen(PORT, () => {
     console.log(`app running on port ${PORT}`);
   });
 };

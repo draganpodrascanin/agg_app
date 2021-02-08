@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { NextFunction, Request } from 'express';
 //allows us just to throw errors without calling next and catching async
 import 'express-async-errors';
 import path from 'path';
@@ -25,6 +25,7 @@ import imageRoutes from './routes/image-routes';
 import expensesRoutes from './routes/expenses-routes';
 import blogRoutes from './routes/blog-routes';
 import aggregationRoutes from './routes/aggregation-routes';
+import messagesRoutes from './routes/messages-routes';
 
 import ViewsController from './controllers/ViewsController';
 import ErrorController from './controllers/ErrorController';
@@ -59,6 +60,7 @@ app.use('/api/v1/expenses', expensesRoutes);
 app.use('/api/v1/images', imageRoutes);
 app.use('/api/v1/blog', blogRoutes);
 app.use('/api/v1/aggregations', aggregationRoutes);
+app.use('/api/v1/messages', messagesRoutes);
 //not found api route
 app.use('/api/v1/*', (req, res, next) => {
   throw new CustomError(

@@ -13,6 +13,12 @@ export class Message {
   id: string;
 
   @Column({
+    type: 'boolean',
+    default: false,
+  })
+  seen: Boolean;
+
+  @Column({
     type: 'varchar',
     length: 100,
   })
