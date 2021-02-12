@@ -8,8 +8,10 @@ import { TYPES } from '../types';
 import container from '../container.config';
 import { Email } from '../interfaces/services/Email';
 import { AdminServiceInterface } from '../interfaces/services/AdminService';
-import { Admin } from '../entity/Admin';
+import { Admin, AdminRoles } from '../entity/Admin';
 import { AdminRepository } from '../repositories/AdminRepository';
+import { Not } from 'typeorm';
+import { phone } from 'faker';
 
 //extending Request object to take user if provided by middleware
 declare global {
@@ -261,7 +263,7 @@ class AdminAuthController {
     this._AdminAuthenticationService.createSendJWTToken(admin, 200, req, res);
   };
 
-  getCurrentAdmin = (req: Request, res: Response) => {
+  public getCurrentAdmin = (req: Request, res: Response) => {
     const admin = req.admin;
 
     if (!admin) {
@@ -276,6 +278,118 @@ class AdminAuthController {
     res.status(200).json({
       status: 'success',
       data: response,
+    });
+  };
+
+  public createAdmin = async (req: Request, res: Response) => {
+    const {
+      email,
+      password,
+      passwordConfirm,
+      firstName,
+      lastName,
+      phoneNumber,
+      username,
+    } = req.body;
+
+    if (
+      !this._AdminAuthenticationService.passwordMatchWithPasswordConfirm(
+        password,
+        passwordConfirm
+      )
+    ) {
+      throw new CustomError(
+        'password and password confirm does not match',
+        400
+      );
+    }
+
+    const newUser = await this._AdminAuthenticationService.createNewAdmin({
+      email,
+      password,
+      username,
+      firstName,
+      lastName,
+      phoneNumber,
+    });
+
+    res.status(201).json({
+      status: 'success',
+      data: newUser,
+    });
+  };
+
+  public getAll = async (req: Request, res: Response) => {
+    if (!req.admin) throw new CustomError('Need to be logged in', 401);
+    const repo = getEnvConnection().getCustomRepository(AdminRepository);
+
+    let filter = {};
+    if (req.admin.role !== AdminRoles.superAdmin)
+      filter = { where: { role: Not(AdminRoles.superAdmin) } };
+
+    const admins = await repo.find(filter);
+
+    res.status(200).json({
+      status: 'success',
+      data: admins,
+    });
+  };
+
+  public updateOne = async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const {
+      firstName,
+      lastName,
+      phoneNumber,
+      email,
+      username,
+      role,
+    } = req.body;
+    const repo = getEnvConnection().getCustomRepository(AdminRepository);
+    const admin = await repo.findOne(id);
+
+    if (!admin) throw new CustomError('Admin with that ID not found', 404);
+
+    if (firstName) admin.firstName = firstName;
+    if (lastName) admin.lastName = lastName;
+    if (phoneNumber) admin.phoneNumber = phoneNumber;
+    if (email) admin.email = email;
+    if (username) admin.username = username;
+    if (role) admin.role = role;
+
+    await repo.save(admin);
+
+    res.status(200).json({
+      status: 'success',
+      data: admin,
+    });
+  };
+
+  public updateAdminPassword = async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const { password, passwordConfirm } = req.body;
+    const repo = getEnvConnection().getCustomRepository(AdminRepository);
+
+    //CHECK IF PASSWORD AND PASSWORD_CONFIRM MATCH
+    if (
+      !this._AdminAuthenticationService.passwordMatchWithPasswordConfirm(
+        password,
+        passwordConfirm
+      )
+    )
+      throw new CustomError('password and passwordConfirm does not match', 400);
+
+    //FIND ADMIN
+    const admin = await repo.findOne(id);
+    if (!admin) throw new CustomError('Admin with provided ID not found', 404);
+
+    //SET NEW PASSWORD AND HASH IT
+    admin.password = await this._AdminAuthenticationService.hash(password);
+    await validateEntity(admin);
+    await repo.save(admin);
+
+    res.status(200).json({
+      status: 'success',
     });
   };
 }

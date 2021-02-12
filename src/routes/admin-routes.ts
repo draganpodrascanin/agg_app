@@ -2,7 +2,7 @@ import { Router } from 'express';
 import UserAuthController from '../controllers/UserAuthController';
 import adminAuthMiddleware from '../middlewares/adminAuthMiddleware';
 import AdminAuthController from '../controllers/AdminAuthController';
-// import UserController from '../controllers/UserController';
+import { AdminRoles } from '../entity/Admin';
 
 const router = Router();
 
@@ -26,16 +26,19 @@ router.get(
   AdminAuthController.getCurrentAdmin
 );
 
-// router.get('/getMe', adminAuthMiddleware.getMe, UserController.getOne);
-// router.patch('/updateMe', adminAuthMiddleware.getMe, UserController.updateOne);
-// router.delete('/deleteMe', adminAuthMiddleware.getMe, UserController.deleteOne);
+// router.get('/getMe', adminAuthMiddleware.getMe, AdminAuthController.getOne);
+// router.patch('/updateMe', adminAuthMiddleware.getMe, AdminAuthController.updateOne);
+// router.delete('/deleteMe', adminAuthMiddleware.getMe, AdminAuthController.deleteOne);
 
-// //restricted to users with admin roles
-// router.use(authMiddleware.restrictTo(UserRole.HEAD_ADMIN, UserRole.ADMIN));
+router.use(
+  adminAuthMiddleware.protect,
+  adminAuthMiddleware.restrictTo(AdminRoles.superAdmin, AdminRoles.admin)
+);
 
-// router.get('/', UserController.getAll);
-// router.get('/:id', UserController.getOne);
-// router.patch('/:id', UserController.updateOne);
-// router.delete('/:id', UserController.deleteOne);
+router.get('/', AdminAuthController.getAll);
+// router.get('/:id', AdminAuthController.getOne);
+router.patch('/:id', AdminAuthController.updateOne);
+router.patch('/:id/updatePassword', AdminAuthController.updateAdminPassword);
+// router.delete('/:id', AdminAuthController.deleteOne);
 
 export default router;
