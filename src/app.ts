@@ -4,6 +4,7 @@ import 'express-async-errors';
 import path from 'path';
 import cookieParser from 'cookie-parser';
 import CustomError from './utils/CustomError';
+import cors from 'cors';
 
 import viewsRoutes from './routes/views-routes';
 import userRoutes from './routes/user-routes';
@@ -34,6 +35,13 @@ const app = express();
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '../views'));
+
+//DEV
+app.use(
+  cors({
+    origin: ['http://localhost:3000', 'http://localhost:4000'],
+  })
+);
 
 //Serving static files
 app.use(express.static(path.join(__dirname, '../public')));
