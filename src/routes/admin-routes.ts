@@ -6,7 +6,6 @@ import { AdminRoles } from '../entity/Admin';
 
 const router = Router();
 
-router.post('/', AdminAuthController.signupAdmin);
 router.post('/login', AdminAuthController.loginAdmin);
 router.post('/logout', AdminAuthController.logoutAdmin);
 router.post('/forgotPassword', AdminAuthController.forgotPassword);
@@ -36,9 +35,9 @@ router.use(
 );
 
 router.get('/', AdminAuthController.getAll);
-// router.get('/:id', AdminAuthController.getOne);
+router.post('/createAdmin', AdminAuthController.createAdmin);
 router.patch('/:id', AdminAuthController.updateOne);
 router.patch('/:id/updatePassword', AdminAuthController.updateAdminPassword);
-// router.delete('/:id', AdminAuthController.deleteOne);
+router.delete('/:id', AdminAuthController.deleteOne);
 
 export default router;

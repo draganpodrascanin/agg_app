@@ -12,6 +12,9 @@ import { Admin, AdminRoles } from '../entity/Admin';
 import { AdminRepository } from '../repositories/AdminRepository';
 import { Not } from 'typeorm';
 import { phone } from 'faker';
+import { throws } from 'assert';
+import handlerFactory from './handlerFactory';
+import { Entities } from '../entity/Entities';
 
 //extending Request object to take user if provided by middleware
 declare global {
@@ -34,47 +37,6 @@ class AdminAuthController {
     this._AdminAuthenticationService = Auth;
     this._EmailService = Email;
   }
-
-  //----------------------------------------------------------------------------------
-
-  public signupAdmin = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    const {
-      email,
-      password,
-      passwordConfirm,
-      firstName,
-      lastName,
-      phoneNumber,
-      username,
-    } = req.body;
-
-    if (
-      !this._AdminAuthenticationService.passwordMatchWithPasswordConfirm(
-        password,
-        passwordConfirm
-      )
-    ) {
-      throw new CustomError(
-        'password and password confirm does not match',
-        400
-      );
-    }
-
-    const newUser = await this._AdminAuthenticationService.createNewAdmin({
-      email,
-      password,
-      username,
-      firstName,
-      lastName,
-      phoneNumber,
-    });
-
-    this._AdminAuthenticationService.createSendJWTToken(newUser, 201, req, res);
-  };
 
   //===================================================================================================================
 
@@ -384,14 +346,23 @@ class AdminAuthController {
     if (!admin) throw new CustomError('Admin with provided ID not found', 404);
 
     //SET NEW PASSWORD AND HASH IT
-    admin.password = await this._AdminAuthenticationService.hash(password);
+    admin.password = password;
     await validateEntity(admin);
+    admin.password = await this._AdminAuthenticationService.hash(
+      admin.password
+    );
+
+    admin.setPasswordChangedAt();
+
     await repo.save(admin);
 
     res.status(200).json({
       status: 'success',
+      data: admin,
     });
   };
+
+  public deleteOne = handlerFactory.deleteOne(Entities.Admin);
 }
 
 export default new AdminAuthController(
