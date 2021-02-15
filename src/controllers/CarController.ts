@@ -162,9 +162,6 @@ class CarController {
 
   public setUserOwnership = async (req: Request, res: Response) => {
     const carRepo = getEnvConnection().getCustomRepository(CarRepository);
-    console.log('body ->', req.body);
-    console.log('param ->', req.params.id);
-    console.log('req ->', req);
 
     const resCar = await carRepo.setOwner(req.params.id, req.body.userId);
 
