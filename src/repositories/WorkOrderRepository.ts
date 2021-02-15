@@ -20,7 +20,10 @@ export class WorkOrderRepository extends Repository<WorkOrder> {
   }> {
     const offset = (page - 1) * limit;
 
-    const count = await this.createQueryBuilder('work_order').getCount();
+    let countQuery = this.createQueryBuilder('work_order');
+    if (!completed)
+      countQuery.where('work_order.completed = :bool', { bool: false });
+    const count = await countQuery.getCount();
 
     let workOrders = this.createQueryBuilder('work_order');
 
