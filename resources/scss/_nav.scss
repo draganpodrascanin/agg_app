@@ -163,7 +163,11 @@
     display: flex;
     background-color: transparent;
     justify-content: flex-start;
-    align-items: center;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin: 0 auto;
+    max-width: 117rem;
+
     @media only screen and (max-width: $bp-tablet-landscape) {
       flex-direction: column;
       align-items: flex-start;
@@ -180,6 +184,7 @@
       padding: 1.2rem 2rem;
       border-radius: 4px;
       transition: all 0.2s;
+      max-width: 22rem;
     }
     &__link:hover,
     &__link:active {

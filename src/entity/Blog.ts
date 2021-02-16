@@ -78,7 +78,8 @@ export class Blog {
   @BeforeInsert()
   @BeforeUpdate()
   createSlug() {
-    this.slug = this.title.split(' ').join('-');
+    const title = this.title.replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');
+    this.slug = title.split(' ').join('-').toLowerCase();
   }
 
   @BeforeInsert()

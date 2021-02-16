@@ -75,7 +75,7 @@ form.addEventListener('submit', async function submitForm(e) {
   }, 10000);
 
   try {
-    await axios.post('/api/v1/contact', data);
+    await axios.post('/api/v1/messages', data);
 
     name.value = '';
     phone.value = '';

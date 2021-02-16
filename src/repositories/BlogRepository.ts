@@ -37,7 +37,8 @@ export class BlogRepository extends Repository<Blog> {
   public getPage(
     page: number,
     limit: number,
-    search?: string
+    search?: string,
+    hideUnpublished?: boolean
   ): Promise<Blog[]> {
     const offset = (page - 1) * limit;
     const query = this.createQueryBuilder('blog').select([
@@ -56,10 +57,19 @@ export class BlogRepository extends Repository<Blog> {
         `CONCAT(${Entities.Blog}.title, ' ', ${Entities.Blog}.synopsis) LIKE '%${search}%'`
       );
 
+    if (hideUnpublished) query.where('blog.published = true');
+
     return query
       .offset(offset)
       .limit(limit)
       .leftJoinAndSelect(`${Entities.Blog}.thumbnail`, 'image')
       .getMany();
+  }
+
+  public findBySlug(slug: string): Promise<Blog | undefined> {
+    return this.findOne({
+      where: { slug: slug },
+      relations: ['image', 'thumbnail'],
+    });
   }
 }

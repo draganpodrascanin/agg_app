@@ -12,5 +12,7 @@ router.get('/slepsluzba', ViewsController.slep);
 router.get('/automehanicarskeusluge', ViewsController.mehanika);
 router.get('/eservisnaknjizica', ViewsController.eknjizica);
 router.get('/userlogin', ViewsController.userlogin);
+router.get('/blog', ViewsController.blog);
+router.get('/blog/:slug', ViewsController.blogContent);
 
 export default router;

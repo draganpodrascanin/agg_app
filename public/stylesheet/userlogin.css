@@ -281,7 +281,10 @@ body {
     display: flex;
     background-color: transparent;
     justify-content: flex-start;
-    align-items: center; }
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin: 0 auto;
+    max-width: 117rem; }
     @media only screen and (max-width: 75em) {
       .nav__usluge {
         flex-direction: column;
@@ -296,7 +299,8 @@ body {
       text-transform: uppercase;
       padding: 1.2rem 2rem;
       border-radius: 4px;
-      transition: all 0.2s; }
+      transition: all 0.2s;
+      max-width: 22rem; }
     .nav__usluge__link:hover, .nav__usluge__link:active {
       background-color: rgba(0, 0, 0, 0.1); }
     .nav__usluge__link:active {
