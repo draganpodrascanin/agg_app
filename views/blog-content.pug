@@ -26,10 +26,10 @@ block head
   title Auto Gas Gaga | Automehaničarske Usluge
 
 block content 
-  - console.log()
   .blog#blog
     header.blog__header(style=`--bg-image: url(${image.path});`)
-      h1=title
+      .blog__header__overlay
+        h1=title
     .content!=content
 
 block scripts

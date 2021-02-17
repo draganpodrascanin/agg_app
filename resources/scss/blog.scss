@@ -11,18 +11,22 @@
   padding-bottom: 5rem;
 
   &__header {
-    background-image: var(--bg-image);
-  }
-
-  & header {
-    padding: 20rem 14rem;
+    background: var(--bg-image);
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-size: cover !important;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     margin-bottom: 20px;
+
+    &__overlay {
+      padding: 20rem 14rem;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      // background-color: #000;
+      background-color: rgba(4, 47, 78, 0.6);
+    }
   }
 
   & h1 {

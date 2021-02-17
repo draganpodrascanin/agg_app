@@ -1,5 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import { BlogRepository } from '../repositories/BlogRepository';
+import { CarRepository } from '../repositories/CarRepository';
+import { UserRepository } from '../repositories/UserRepository';
+import CustomError from '../utils/CustomError';
 import getEnvConnection from '../utils/get-env-connection';
 
 class ViewsController {
@@ -21,12 +24,31 @@ class ViewsController {
     res.status(200).render('mehanika.pug');
   };
 
-  public eknjizica = (req: Request, res: Response) => {
-    res.status(200).render('eknjizica.pug');
+  public eknjizica = async (req: Request, res: Response) => {
+    const user = req.user;
+    if (!user) throw new CustomError('server error', 500);
+
+    const carRepo = getEnvConnection().getCustomRepository(CarRepository);
+    const cars = await carRepo.getUserOwnedCars(user.id);
+
+    res.status(200).render('eknjizica.pug', { cars });
+  };
+
+  public eknjizicaCar = async (req: Request, res: Response) => {
+    const carId = req.params.id;
+    const carRepo = getEnvConnection().getCustomRepository(CarRepository);
+
+    const car = await carRepo.findOneAndPopulate(carId);
+
+    res.status(200).render('eknjizica-car.pug', { car });
   };
 
   public userlogin = (req: Request, res: Response) => {
     res.status(200).render('userlogin.pug');
+  };
+
+  public forgotpassword = (req: Request, res: Response) => {
+    res.status(200).render('forgot-password.pug');
   };
 
   public blog = async (req: Request, res: Response) => {
@@ -41,8 +63,12 @@ class ViewsController {
     const blog = await blogRepo.findBySlug(req.params.slug);
 
     if (!blog) res.status(404).render('404.pug');
-    console.log(blog);
+
     res.status(200).render('blog-content.pug', blog);
+  };
+
+  public passwordReset = async (req: Request, res: Response) => {
+    res.status(200).render('reset-password.pug');
   };
 
   public NotFound404View = (req: Request, res: Response) => {

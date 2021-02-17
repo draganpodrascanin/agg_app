@@ -73,7 +73,6 @@ export class CarRepository extends Repository<Car> {
   }
 
   public async getUserOwnedCars(userId: string): Promise<Car[]> {
-    console.log(userId);
     return this.find({ where: { userId: userId } });
   }
 
@@ -85,6 +84,7 @@ export class CarRepository extends Repository<Car> {
     return this.createQueryBuilder(Entities.Car)
       .where(`${Entities.Car}.id = :id`, { id: id })
       .leftJoinAndSelect(`${Entities.Car}.workOrders`, Entities.WorkOrder)
+      .orderBy(`${Entities.WorkOrder}.createdAt`, 'DESC')
       .leftJoinAndSelect(`${Entities.Car}.user`, Entities.User)
       .leftJoinAndSelect(`${Entities.Car}.warranties`, Entities.Warranty)
       .leftJoinAndSelect(

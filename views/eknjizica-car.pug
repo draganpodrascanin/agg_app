@@ -1,0 +1,91 @@
+extends base-user
+
+block head
+  title Auto Gas Gaga | E-servisna knjizica login
+  meta(property='og:locale' content='sr_rs')
+  meta(property='og:locale:alternate' content='bs-ba')
+  meta(property='og:type' content='website')
+  meta(property='og:title' content='Auto Gas Gaga | Resetujte Šifru')
+  meta(property='og:description' content='Ulogujte se da vidite vašu servisnu knjižicu.')
+  meta(property='og:url' content='https://autogasgaga.ba/userlogin')
+  meta(property='og:image' content='https://autogasgaga.ba/OGhero.jpg')
+  link(rel='stylesheet' href='/stylesheet/eknjizica.css')
+
+block content
+  main.servisi-section
+    .container
+      h1.servisi-section__heading Vaši Servisi. 
+      .table100-nextcols
+        table.vasi-servisi
+          thead
+            tr.row100.head
+              th.cell100.column1 Datum
+              th.cell100.column2 Razlog posete
+              th.cell100.column3 Kilometraža
+              th.cell100.column4 Odrađeno
+              th.cell100.column5 Napomena
+          each workOrder in car.workOrders
+            tr.row100.body
+              td.cell100.column1=workOrder.createdAt.toLocaleString('SR-latn', { day:'numeric', month: 'long', year: 'numeric'})
+              if workOrder && workOrder.carReception && workOrder.carReception.ownerRemarks
+                td.cell100.column2=workOrder.carReception.ownerRemarks 
+              else 
+                td.cell100.column2 -
+              if  workOrder && workOrder.carReception && workOrder.carReception.milage
+                td.cell100.column3=workOrder.carReception.milage 
+              else 
+                td.cell100.column3 -
+              if workOrder && workOrder.jobConclusion && workOrder.jobConclusion.workDone
+                td.cell100.column4=workOrder.jobConclusion.workDone 
+              else
+                td.cell100.column4 -
+              if workOrder && workOrder.jobConclusion && workOrder.jobConclusion.note
+                td.cell100.column5=workOrder.jobConclusion.note
+              else 
+                td.cell100.column5 -
+      h2.active-work__heading Garancije.
+      .table100-nextcols.warrantiesTableContainer
+        table.warrantiesTable
+          thead
+            tr.row100.head
+              th.cell100.colJobTicket1head Delovi
+              th.cell100.colJobTicket2head Važi Do
+              th.cell100.colJobTicket2head Status
+            if car.warranties.length < 1
+              tr.row100.body
+                td.cell100.colJobTicket1 -
+                td.cell100 -
+                td.cell100 -
+            else
+              each warrantie in car.warranties
+                tr.row100.body
+                  td.cell100.colJobTicket1=warrantie.partsUnderWarranty
+                  td.cell100.warrantyStatus=warrantie.validUntil.toLocaleString('SR-latn', { day:'numeric', month: 'long', year: 'numeric'})
+                  if warrantie.validUntil > new Date()
+                    td.cell100.warrantieActive Aktivna
+                  else 
+                    td.cell100.warrantieInactive Istekla
+      h2.active-work__heading Radovi u Toku.
+      .table100-nextcols.jobTicketTableContainer
+        table.jobTicketTable
+          thead
+            tr.row100.head
+              th.cell100.colJobTicket1head Rad
+              th.cell100.colJobTicket2head Status
+            each workOrder in car.workOrders
+              if !workOrder.jobConclusion 
+                if workOrder.jobTickets.length >= 1
+                  each jobTicket in workOrder.jobTickets
+                    tr.row100.body
+                      td.cell100.colJobTicket1=jobTicket.ticket
+                      td.cell100.colJobTicketStatus=jobTicket.status 
+                else 
+                  tr.row100.body
+                    td.cell100.colJobTicket1 -
+                    td.cell100.colJobTicket2 -
+     
+                    
+           
+
+block scripts
+  script(src="/javascript/eknjizica.bundle.js")

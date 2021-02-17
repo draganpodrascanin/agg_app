@@ -11,8 +11,11 @@ class EmailService implements Email {
   public to: string;
   public name: string;
   private user: User;
-  protected from: string = `Auto Gas Gaga <${process.env.EMAIL_FROM!}>`;
+  protected from: string;
 
+  constructor() {
+    this.from = `Auto Gas Gaga <${process.env.EMAIL_FROM}>`;
+  }
   /**
    * setting user that some methods might use
    */

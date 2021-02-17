@@ -41,7 +41,7 @@
     width: 22rem;
   }
   @media only screen and (max-width: $bp-s-phone) {
-    width: 20rem;
+    width: fit-content;
   }
 }
 .cta--1:hover,
@@ -74,7 +74,7 @@
     width: 22rem;
   }
   @media only screen and (max-width: $bp-s-phone) {
-    width: 20rem;
+    width: fit-content;
   }
 }
 .cta--2:hover,

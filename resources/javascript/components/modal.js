@@ -43,12 +43,10 @@ window.onkeydown = function (event) {
 inputPhone.addEventListener('input', () => {
   const prevAlert = document.querySelector('.phone-warn');
   if (prevAlert) prevAlert.remove();
-  console.log(inputPhone.value);
+
   // not a phone number, allowed numbers only or start with +
   const regex = /(^[0-9]{0,15}$(?![a-zA-Z])|^\+[0-9]{0,15}$(?![a-zA-Z])|$^|^\+$)/;
   if (!regex.test(inputPhone.value)) {
-    console.log('true');
-
     const res = new ResponseAlert(modalForm, 'custom', {
       class: 'phone-warn',
       innerHTML: '<p>Broj telefona nije validan.</p>',
@@ -91,7 +89,7 @@ modalForm.addEventListener('submit', async function modalFormSubmit(e) {
   }, 10000);
 
   try {
-    await axios.post('/api/v1/contact', data);
+    await axios.post('/api/v1/messages', data);
 
     inputName.value = '';
     inputPhone.value = '';

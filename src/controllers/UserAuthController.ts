@@ -13,6 +13,7 @@ import { Authentication } from '../interfaces/services/Authentication';
 import container from '../container.config';
 import { Email } from '../interfaces/services/Email';
 import { UserServiceInterface } from '../interfaces/services/UserService';
+import EmailService from '../services/email-service';
 
 //extending Request object to take user if provided by middleware
 declare global {
@@ -26,14 +27,9 @@ declare global {
 @injectable()
 class UserAuthController {
   private _UserService;
-  private _EmailService;
 
-  constructor(
-    @inject(TYPES.UserService) userService: UserServiceInterface,
-    @inject(TYPES.Email) Email: Email
-  ) {
+  constructor(@inject(TYPES.UserService) userService: UserServiceInterface) {
     this._UserService = userService;
-    this._EmailService = Email;
   }
 
   //----------------------------------------------------------------------------------
@@ -114,6 +110,7 @@ class UserAuthController {
     next: NextFunction
   ) => {
     const { email } = req.body;
+    const EmailServiceInst = new EmailService();
 
     const userRepo = getEnvConnection().getCustomRepository(UserRepository);
 
@@ -132,11 +129,11 @@ class UserAuthController {
     //send EMAIL with token and link for password reset
     try {
       //req.protocol = (http/https), req.get('host) = ex. www.mysyite.com
-      const resetURL = `${req.protocol}://${req.get('host')}/resetPassword/${
+      const resetURL = `${req.protocol}://${req.get('host')}/zaboravili-sifru/${
         createdToken.resetToken
       }`;
 
-      await this._EmailService.sendPasswordReset(user.email, resetURL);
+      await EmailServiceInst.sendPasswordReset(user.email, resetURL);
 
       res.status(200).json({
         status: 'success',
@@ -247,6 +244,5 @@ class UserAuthController {
 }
 
 export default new UserAuthController(
-  container.get<UserServiceInterface>(TYPES.UserService),
-  container.get<Email>(TYPES.Email)
+  container.get<UserServiceInterface>(TYPES.UserService)
 );

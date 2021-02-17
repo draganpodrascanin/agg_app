@@ -494,44 +494,6 @@ body {
 #modal-mscl-wrapper {
   margin-bottom: 1.5rem; }
 
-.header {
-  width: 100%;
-  height: 50vh;
-  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url(/img/hero_mehanika.jpg);
-  background-size: cover;
-  background-position: bottom;
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-  .header .header__wrap {
-    text-align: center; }
-    .header .header__wrap .header__wrap > *:not(:last-child) {
-      margin-bottom: 1.5rem; }
-
-.about {
-  padding: 7rem 0; }
-  .about .about__textwrap {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3rem; }
-    @media only screen and (max-width: 54em) {
-      .about .about__textwrap {
-        grid-template-columns: 1fr; } }
-
-.contact {
-  padding: 7rem 0;
-  background-color: #fff; }
-  .contact .contact__content {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 3rem; }
-    @media only screen and (max-width: 54em) {
-      .contact .contact__content {
-        grid-template-columns: 1fr; } }
-
-#contact .form__group:last-child {
-  text-align: start; }
-
 .form .flex .form__group {
   flex-grow: 1;
   align-items: center; }
@@ -843,37 +805,212 @@ body {
     margin: 2rem;
     fill: #4a5155; }
 
-.leftalign {
-  text-align: left; }
+.lds-ring {
+  display: none;
+  position: fixed;
+  position: center;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  z-index: 10000; }
 
-.centalign {
-  text-align: center; }
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent; }
 
-.about {
-  padding: 3rem 0; }
-  .about .about__btn,
-  .about .about__btn:focus {
-    display: block;
-    cursor: pointer;
-    padding: 1.4rem 0;
-    background-color: transparent;
-    text-decoration: none;
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 1.5rem;
-    font-weight: 600;
-    font-style: normal;
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s; }
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s; }
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s; }
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
+.lds-ring--display {
+  display: block; }
+
+.overlay__bg {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: none;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.35);
+  transition: opacity 0.2s;
+  backdrop-filter: blur(7px); }
+
+.overlay__bg--show {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 1; }
+
+.cars-section {
+  padding: 20rem 0 5rem 0;
+  min-height: 85vh; }
+  .cars-section__heading {
+    font-size: 3.4rem;
     color: #4a5155;
-    border: 1px solid #d8d8d8;
-    letter-spacing: 1px;
-    border-radius: 40px;
-    min-width: 45rem;
-    transition: all 0.2s;
-    outline: none;
-    margin: 2rem auto; }
-  .about .about__btn:hover,
-  .about .about__btn:active {
-    color: #1e7be2; }
+    line-height: 120%; }
+    .cars-section__heading__container {
+      max-width: 117rem;
+      width: 80%;
+      margin: 0 auto;
+      min-height: 5rem;
+      margin-bottom: 0.5rem; }
 
-.gmb {
-  background-color: #f9f9f9; }
+.cars-container {
+  max-width: 117rem;
+  width: 80%;
+  display: flex;
+  margin: 0 auto; }
+  @media screen and (max-width: 900px) {
+    .cars-container {
+      flex-direction: column; } }
+
+.car-card {
+  padding: 3rem;
+  background-color: #f3a536;
+  color: #fff;
+  margin-right: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none; }
+  .car-card:hover {
+    background-color: rgba(243, 165, 54, 0.8); }
+  @media screen and (max-width: 900px) {
+    .car-card {
+      margin-right: 0;
+      margin-bottom: 1rem; } }
+  .car-card h3 {
+    font-size: 1.8rem;
+    line-height: 150%; }
+  .car-card span {
+    font-size: 1.5rem; }
+
+.servisi-section {
+  padding: 20rem 0;
+  min-height: 85vh; }
+  .servisi-section__container {
+    max-width: 117rem;
+    width: 80%;
+    margin: 0 auto;
+    min-height: 5rem; }
+  .servisi-section__heading {
+    color: #4a5155;
+    font-size: 3.4rem;
+    line-height: 120%;
+    margin-bottom: 2rem; }
+
+.containerLogout {
+  width: 80%; }
+
+.cta--2.logout-btn {
+  padding-left: 4rem;
+  padding-right: 4rem;
+  width: auto;
+  margin: 25rem 0 0 0;
+  background-color: #f33936;
+  border-radius: 0;
+  border: none; }
+
+#nav {
+  background-color: #363946; }
+
+.active-work__heading {
+  color: #4a5155;
+  font-size: 3.4rem;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  line-height: 120%; }
+
+.table100-nextcols {
+  overflow-x: scroll; }
+
+table {
+  border-collapse: collapse;
+  margin: 0; }
+  table:last-child {
+    margin-bottom: 2.5rem; }
+
+table.vasi-servisi {
+  min-width: 1000px;
+  max-width: 117rem;
+  width: 100%; }
+
+table.jobTicketTable {
+  min-width: 350px;
+  max-width: 750px; }
+
+table.warrantiesTable {
+  min-width: 540px;
+  max-width: 750px; }
+
+table th,
+table td {
+  color: #4a5155; }
+
+.row100 {
+  overflow: scroll;
+  text-align: start;
+  border-bottom: 1px solid rgba(54, 57, 70, 0.2); }
+  .row100.body {
+    border-bottom: 1px solid rgba(54, 57, 70, 0.1); }
+  .row100 th {
+    padding: 0.6rem 1.2rem;
+    text-align: start;
+    font-size: 1.6rem;
+    font-weight: 600; }
+  .row100 td {
+    padding: 0.9rem 1.2rem;
+    text-align: start;
+    font-size: 1.5rem;
+    width: auto; }
+
+.table100-nextcols.jobTicketTableContainer {
+  width: 360px; }
+
+.table100-nextcols.warrantiesTableContainer {
+  max-width: 540px;
+  overflow-x: scroll; }
+
+.colJobTicketStatus {
+  color: #2ecc71; }
+
+.warrantieActive {
+  color: #2ecc71; }
+
+.cell100.colJobTicket1 {
+  width: 205px; }
+
+.warrantieInactive {
+  color: #e74c3c; }
+
+.row100.body:last-child {
+  border-bottom: none; }
+
+.column2 {
+  width: 300px; }
+
+.column4 {
+  width: 350px; }

@@ -1,0 +1,211 @@
+@import 'variables';
+@import 'base';
+@import 'typography';
+@import 'utilities';
+@import 'nav';
+@import 'modal';
+@import 'form';
+@import 'cta';
+@import 'footer';
+@import 'spinner';
+
+.cars-section {
+  padding: 20rem 0 5rem 0;
+  min-height: 85vh;
+
+  &__heading {
+    font-size: 3.4rem;
+    color: $color-gray-dark;
+    line-height: 120%;
+
+    &__container {
+      max-width: 117rem;
+      width: 80%;
+      margin: 0 auto;
+      min-height: 5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+.cars-container {
+  max-width: 117rem;
+  width: 80%;
+  display: flex;
+  margin: 0 auto;
+
+  @media screen and (max-width: 900px) {
+    flex-direction: column;
+  }
+}
+
+.car-card {
+  padding: 3rem;
+  background-color: $color-secondary;
+  color: $color-white;
+  margin-right: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+
+  &:hover {
+    background-color: rgba($color-secondary, 0.8);
+  }
+
+  @media screen and (max-width: 900px) {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+
+  & h3 {
+    font-size: 1.8rem;
+    line-height: 150%;
+  }
+  & span {
+    font-size: 1.5rem;
+  }
+}
+
+.servisi-section {
+  padding: 20rem 0;
+  min-height: 85vh;
+
+  &__container {
+    max-width: 117rem;
+    width: 80%;
+    margin: 0 auto;
+    min-height: 5rem;
+  }
+
+  &__heading {
+    color: $color-gray-dark;
+    font-size: 3.4rem;
+    line-height: 120%;
+    margin-bottom: 2rem;
+  }
+}
+
+.containerLogout {
+  width: 80%;
+}
+.cta--2.logout-btn {
+  padding-left: 4rem;
+  padding-right: 4rem;
+  width: auto;
+  margin: 25rem 0 0 0;
+  background-color: $color-error;
+  border-radius: 0;
+  border: none;
+}
+
+#nav {
+  background-color: $color-black;
+}
+
+.active-work__heading {
+  color: $color-gray-dark;
+  font-size: 3.4rem;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+  line-height: 120%;
+}
+
+//===============================================================================
+.table100-nextcols {
+  overflow-x: scroll;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 0;
+
+  &:last-child {
+    margin-bottom: 2.5rem;
+  }
+}
+
+table.vasi-servisi {
+  min-width: 1000px;
+  max-width: 117rem;
+  width: 100%;
+}
+
+table.jobTicketTable {
+  min-width: 350px;
+  max-width: 750px;
+}
+
+table.warrantiesTable {
+  min-width: 540px;
+  max-width: 750px;
+}
+
+table th,
+table td {
+  color: $color-gray-dark;
+}
+
+.row100 {
+  overflow: scroll;
+  text-align: start;
+  border-bottom: 1px solid rgba($color-black, 0.2);
+
+  &.body {
+    border-bottom: 1px solid rgba($color-black, 0.1);
+  }
+
+  & th {
+    padding: 0.6rem 1.2rem;
+    text-align: start;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  & td {
+    padding: 0.9rem 1.2rem;
+    text-align: start;
+    font-size: 1.5rem;
+    width: auto;
+  }
+
+  // .column1 {
+  //   width: 240px;
+  // }
+}
+
+.table100-nextcols.jobTicketTableContainer {
+  width: 360px;
+}
+
+.table100-nextcols.warrantiesTableContainer {
+  max-width: 540px;
+  overflow-x: scroll;
+}
+
+.colJobTicketStatus {
+  color: $color-green;
+}
+
+.warrantieActive {
+  color: $color-green;
+}
+
+.cell100.colJobTicket1 {
+  width: 205px;
+}
+
+.warrantieInactive {
+  color: $color-red;
+}
+
+.row100.body:last-child {
+  border-bottom: none;
+}
+
+.column2 {
+  width: 300px;
+}
+
+.column4 {
+  width: 350px;
+}

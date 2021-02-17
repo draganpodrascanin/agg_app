@@ -48,7 +48,7 @@ export default class UserAuthService
     const user = await repo.findUserByEmail(email);
 
     if (!user) {
-      throw new CustomError('User does not exisst', 400);
+      throw new CustomError('User does not exist', 400);
     }
 
     if (!(await this.isCorrectPassword(password, user))) {

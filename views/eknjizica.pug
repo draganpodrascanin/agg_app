@@ -1,9 +1,28 @@
-extends base
+extends base-user
 
 block head
-  - if(!user)
-    script.
-     location.replace('/userlogin')
+  title Auto Gas Gaga | E-servisna knjizica login
+  meta(property='og:locale' content='sr_rs')
+  meta(property='og:locale:alternate' content='bs-ba')
+  meta(property='og:type' content='website')
+  meta(property='og:title' content='Auto Gas Gaga | Resetujte Šifru')
+  meta(property='og:description' content='Ulogujte se da vidite vašu servisnu knjižicu.')
+  meta(property='og:url' content='https://autogasgaga.ba/userlogin')
+  meta(property='og:image' content='https://autogasgaga.ba/OGhero.jpg')
+  link(rel='stylesheet' href='/stylesheet/eknjizica.css')
+
+block content
+  main.cars-section 
+    .cars-section__heading__container
+      h1.cars-section__heading Vaši automobili
+    .cars-container
+      each car in cars 
+        a.car-card(href=`/eservisnaknjizica/${car.id}`)
+          h3=`${car.carBrand} ${car.carModel} ${car.productionYear}`
+          span=car.registration
+    .container.containerLogout
+      button#logout.cta--2.logout-btn Logout 
+      
 
 block scripts
   script(src="javascript/eknjizica.bundle.js")

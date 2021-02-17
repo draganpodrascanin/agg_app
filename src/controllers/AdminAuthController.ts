@@ -15,6 +15,7 @@ import { phone } from 'faker';
 import { throws } from 'assert';
 import handlerFactory from './handlerFactory';
 import { Entities } from '../entity/Entities';
+import EmailService from '../services/email-service';
 
 //extending Request object to take user if provided by middleware
 declare global {
@@ -28,14 +29,9 @@ declare global {
 @injectable()
 class AdminAuthController {
   private _AdminAuthenticationService;
-  private _EmailService;
 
-  constructor(
-    @inject(TYPES.AdminService) Auth: AdminServiceInterface,
-    @inject(TYPES.Email) Email: Email
-  ) {
+  constructor(@inject(TYPES.AdminService) Auth: AdminServiceInterface) {
     this._AdminAuthenticationService = Auth;
-    this._EmailService = Email;
   }
 
   //===================================================================================================================
@@ -77,6 +73,7 @@ class AdminAuthController {
     next: NextFunction
   ) => {
     const { username } = req.body;
+    const emailService = new EmailService();
 
     const adminRepo = getEnvConnection().getCustomRepository(AdminRepository);
 
@@ -101,16 +98,13 @@ class AdminAuthController {
         createdToken.resetToken
       }`;
 
-      console.log(createdToken.resetToken);
-
-      await this._EmailService.sendPasswordReset(admin.email, resetURL);
+      await emailService.sendPasswordReset(admin.email, resetURL);
 
       res.status(200).json({
         status: 'success',
         message: 'Token sent to email!',
       });
     } catch (err) {
-      console.log(err);
       admin.passwordResetToken = null;
       admin.passwordResetExpires = null;
 
@@ -366,6 +360,5 @@ class AdminAuthController {
 }
 
 export default new AdminAuthController(
-  container.get<AdminServiceInterface>(TYPES.AdminService),
-  container.get<Email>(TYPES.Email)
+  container.get<AdminServiceInterface>(TYPES.AdminService)
 );

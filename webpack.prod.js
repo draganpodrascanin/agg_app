@@ -10,6 +10,8 @@ module.exports = {
     error404: './resources/javascript/error404.js',
     userlogin: './resources/javascript/userlogin.js',
     eknjizica: './resources/javascript/eknjizica.js',
+    forgotpassword: './resources/javascript/forgotpassword.js',
+    resetpassword: './resources/javascript/resetpassword.js',
     map: './resources/javascript/components/map.js',
   },
   output: {

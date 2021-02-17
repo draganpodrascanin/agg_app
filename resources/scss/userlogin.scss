@@ -32,7 +32,7 @@
   max-width: 50rem;
   color: $color-black;
   background: $color-white;
-  padding: 3rem 2rem;
+  padding: 3rem 2rem 2.3rem 2rem;
 }
 
 .form {
@@ -47,4 +47,30 @@
   color: white;
   background: $color-warn;
   padding: 1rem 1.5rem;
+}
+
+.forgot-password {
+  &__container {
+    margin-top: 0.7rem;
+  }
+
+  &__anchor {
+    font-size: 1.4rem;
+    color: $color-gray-dark;
+    cursor: pointer;
+  }
+}
+
+h1 {
+  line-height: 100%;
+}
+
+.alert {
+  margin-top: 1.2rem;
+  color: $color-white;
+}
+
+.alert-warn {
+  margin-top: 1.2rem;
+  color: $color-white;
 }

@@ -50,7 +50,7 @@ html(lang="sr-BA")
           a.nav__logo__link(href='/')
             img.nav__logo(src='/img/logowhite.svg' alt='Auto Gas Gaga logo')
           //- Usluge, dropdown on click
-          button#ulsugeBtn.nav__link Usluge
+          button#uslugeBtn.nav__link meni
         ul.nav__menu
           //- 3-piece call button
           li.nav__list.elaborate
@@ -60,7 +60,7 @@ html(lang="sr-BA")
               span.nav__list--text2 Pozovite nas
             a.nav__btn--1(href='tel:+38765701308')
               svg.nav__list--img
-                use(xlink:href='img/sprite.svg#icon-phone')
+                use(xlink:href='/img/sprite.svg#icon-phone')
               span (+387) 65 701 308
           //- Pop up button
           li.nav__list
@@ -118,14 +118,18 @@ html(lang="sr-BA")
             a.footer__nav__link(href='/ugradnjaplina') Auto gas
           li.footer__nav__list
             a.footer__nav__link(href='/eservisnaknjizica') E Servisna Knjižica
+          li.footer__nav__list
+            a.footer__nav__link(href='/#kontakt') kontakt
+          li.footer__nav__list
+            a.footer__nav__link(href='/blog') blog
         ul.footer__menu
           li
             a.footer__link(href='tel:+38765701308')
               svg.footer__icon
-                use(xlink:href='img/sprite.svg#icon-phone')
+                use(xlink:href='/img/sprite.svg#icon-phone')
           li
             a.footer__link(href='https://www.facebook.com/gaga.autogas/' target='_blank')
               svg.footer__icon
-                use(xlink:href='img/sprite.svg#icon-facebook')
+                use(xlink:href='/img/sprite.svg#icon-facebook')
       p.copyright Copyright &copy; Auto Gas Gaga 2020 All Rights Reserved
     block scripts

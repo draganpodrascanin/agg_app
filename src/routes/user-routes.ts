@@ -50,6 +50,23 @@ router.post(
   UserController.createOne
 );
 
+router.use(userAuthMiddleware.isLoggedIn);
+router.patch(
+  '/updatePassword',
+  userAuthMiddleware.getMe,
+  UserAuthController.updatePasswordUser
+);
+
+router.get(
+  '/getMe',
+  userAuthMiddleware.isLoggedIn,
+  userAuthMiddleware.getMe,
+  UserController.getOne
+);
+// //protected only for logged-in users
+// router.patch('/updateMe', authMiddleware.getMe, UserController.updateOne);
+// router.delete('/deleteMe', authMiddleware.getMe, UserController.deleteOne);
+
 //admin protected get one user
 router.get(
   '/:id',
@@ -61,16 +78,5 @@ router.get(
   ),
   UserController.getOne
 );
-
-// //protected only for logged-in users
-router.use(userAuthMiddleware.protect);
-router.patch(
-  '/updatePassword',
-  userAuthMiddleware.getMe,
-  UserAuthController.updatePasswordUser
-);
-// router.get('/getMe', authMiddleware.getMe, UserController.getOne);
-// router.patch('/updateMe', authMiddleware.getMe, UserController.updateOne);
-// router.delete('/deleteMe', authMiddleware.getMe, UserController.deleteOne);
 
 export default router;

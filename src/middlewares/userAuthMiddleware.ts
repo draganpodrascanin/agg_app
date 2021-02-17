@@ -54,7 +54,10 @@ class AuthMiddleware {
         return next;
 
       //if everthing is ok add user tu res.locals
-      res.locals.user = user;
+      const resUser = { ...user, password: undefined };
+      req.user = user;
+      res.locals.user = resUser;
+
       return next();
     }
 
@@ -73,11 +76,8 @@ class AuthMiddleware {
     } else if (req.cookies.jwt) {
       token = req.cookies.jwt;
     }
-    if (!token)
-      throw new CustomError(
-        'You are not logged in! Please log in to get access.',
-        401
-      );
+    if (!token) return res.status(401).redirect('/userlogin');
+
     // 2) Verification token
     const decodedjwt = (await promisify(jwt.verify)(
       token,
@@ -88,31 +88,25 @@ class AuthMiddleware {
     const userRepo = connect.getRepository(User);
 
     // 3) Get user and Check if user still exists
-    const user = await userRepo.findOneOrFail(decodedjwt.id).catch((err) => {
-      throw new CustomError(
-        'user that belongs to this token no longer exist',
-        401
-      );
-    });
+    const user = await userRepo.findOne(decodedjwt.id);
+
+    if (!user) return res.status(401).redirect('/userlogin');
 
     // 4) Check if user changed password after the token was issued
     if (this._UserService.changedPasswordAfter(user, new Date(decodedjwt.iat)))
-      throw new CustomError(
-        'User recently changed password! Please log in again.',
-        401
-      );
+      return res.status(401).redirect('/userlogin');
 
     // IF EVERYTHING OK, GRANT ACCESS TO PROTECTED ROUTE
     //set user to req and to locals
     req.user = user;
     res.locals.user = user;
+
     next();
   };
 
-  //only after protect, set currentUser id to param id so we can use existing controllers
+  //only after protect, or isLoggedIn middleware set currentUser id to param id so we can use existing controllers
   getMe = (req: Request, res: Response, next: NextFunction) => {
-    if (!req.user)
-      throw new CustomError('getMe middleware must be on protected route', 500);
+    if (!req.user) throw new CustomError('not logged in', 400);
 
     req.params.id = req.user.id;
 

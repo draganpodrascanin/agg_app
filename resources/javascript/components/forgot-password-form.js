@@ -1,16 +1,8 @@
 import axios from 'axios';
 import { ResponseAlert } from './alert.js';
 import { hideSpinner, showSpinner } from './spinner';
-const form = document.querySelector('#login-form');
+const form = document.querySelector('#forgot-password-form');
 const email = document.querySelector('#email');
-const password = document.querySelector('#password');
-
-(async function () {
-  try {
-    const res = await axios.get('/api/v1/users/getMe');
-    if (res) window.location.replace(`/eservisnaknjizica`);
-  } catch (e) {}
-})();
 
 //alternative listener
 //need to wait before submiting form again
@@ -23,7 +15,7 @@ const pleaseWaitToSubmitAgain = (e) => {
   res.innerHTML = `<p>Molimo Vas sačekajte malo, pre nego što ponovo pošaljete zahtev.</p>`;
   setTimeout(() => {
     res.remove();
-  }, 3000);
+  }, 5000);
 };
 
 //SUBMIT
@@ -34,7 +26,6 @@ form.addEventListener('submit', async function submitForm(e) {
 
   const data = {
     email: email.value,
-    password: password.value,
   };
 
   //after form submit, prevent next submit for 10sec
@@ -47,19 +38,13 @@ form.addEventListener('submit', async function submitForm(e) {
   }, 10000);
 
   try {
-    await axios.post(`/api/v1/users/login`, data);
-    password.email = '';
-    password.value = '';
+    await axios.post('/api/v1/users/forgotPassword', data);
+    email.value = '';
 
     const res = new ResponseAlert(form, 'custom', {
       class: 'alert-success',
-      innerHTML: '<p>Uspešno ulogovani.</p>',
+      innerHTML: '<p>Email sa linkom za resetovanje šifre Vam je poslat.</p>',
     });
-
-    if (res)
-      setTimeout(() => {
-        window.location.replace(`/eservisnaknjizica`);
-      }, 1000);
 
     //render success alert
     res.render();
@@ -70,19 +55,10 @@ form.addEventListener('submit', async function submitForm(e) {
       res.delete();
     }, 5000);
   } catch (e) {
-    console.dir(e);
-
-    let innerHTML =
-      '<p>Došlo je do greške. Molimo Vas probajte ponovo kasnije.</p>';
-
-    if (e?.response?.data?.message === 'Wrong password')
-      innerHTML = '<p>Pogrešna šifra</p>';
-    else if (e?.response?.data?.message === 'User does not exist')
-      innerHTML = '<p>Pogrešan email.</p>';
-
     new ResponseAlert(form, 'custom', {
       class: 'alert-fail',
-      innerHTML,
+      innerHTML:
+        '<p>Došlo je do greške. Molimo Vas probajte ponovo kasnije.</p>',
     }).render();
     hideSpinner();
   }

@@ -28,7 +28,6 @@ phone.addEventListener('input', () => {
   // not a phone number, allowed numbers only or start with +
   const regex = /(^[0-9]{0,15}$(?![a-zA-Z])|^\+[0-9]{0,15}$(?![a-zA-Z])|$^|^\+$)/;
   if (!regex.test(phone.value)) {
-    console.log('true');
     const res = new ResponseAlert(form, 'custom', {
       class: 'phone-warn',
       innerHTML: '<p>Broj telefona nije validan.</p>',

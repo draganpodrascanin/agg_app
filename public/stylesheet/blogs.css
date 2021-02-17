@@ -539,7 +539,7 @@ body {
     .cta--1,
     .cta--1:link,
     .cta--1:visited {
-      width: 20rem; } }
+      width: fit-content; } }
 
 .cta--1:hover,
 .cta--1:active {
@@ -574,7 +574,7 @@ body {
   @media only screen and (max-width: 30em) {
     .cta--2,
     .cta--2:focus {
-      width: 20rem; } }
+      width: fit-content; } }
 
 .cta--2:hover,
 .cta--2:active {
@@ -596,13 +596,16 @@ body {
   .footer .footer__nav {
     list-style: none;
     display: flex;
-    justify-content: space-around;
-    align-items: center; }
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap; }
     @media only screen and (max-width: 65em) {
       .footer .footer__nav {
-        justify-content: center; } }
+        flex-wrap: wrap;
+        justify-content: space-evenly; } }
     @media only screen and (max-width: 32.5em) {
       .footer .footer__nav {
+        justify-content: center;
         justify-content: flex-start;
         flex-wrap: wrap; } }
     @media only screen and (max-width: 30em) {
