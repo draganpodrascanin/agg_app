@@ -14,9 +14,6 @@ router.post('/forgotPassword', UserAuthController.forgotPasswordUser);
 router.patch('/resetPassword/:token', UserAuthController.passwordResetUser);
 
 //admin protected creates user
-router.post('/signup', UserAuthController.signupUser);
-
-//admin protected get all users
 router.get(
   '/',
   adminAuthMiddleware.protect,

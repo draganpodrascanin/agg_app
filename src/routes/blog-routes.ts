@@ -38,7 +38,7 @@ router.get(
 );
 
 //-------------------------------------------------------------------------
-router.patch(
+router.put(
   '/:id',
   adminAuthMiddleware.protect,
   adminAuthMiddleware.restrictTo(AdminRoles.superAdmin, AdminRoles.blogger),
