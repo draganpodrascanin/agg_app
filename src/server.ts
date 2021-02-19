@@ -4,7 +4,6 @@ import app from './app';
 import { config } from 'dotenv';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
-import { Socket } from 'net';
 
 config({ path: 'config.env' });
 const env = process.env.NODE_ENV;

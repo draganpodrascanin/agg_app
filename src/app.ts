@@ -1,4 +1,4 @@
-import express, { NextFunction, Request } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 //allows us just to throw errors without calling next and catching async
 import 'express-async-errors';
 import path from 'path';
@@ -37,14 +37,16 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, '../views'));
 
 //DEV
-app.use(
-  cors({
-    origin: ['http://localhost:3000', 'http://localhost:4000'],
-  })
-);
+if (process.env.NODE_ENV === 'development')
+  app.use(
+    cors({
+      origin: ['http://localhost:3000', 'http://localhost:4000'],
+    })
+  );
 
 //Serving static files
 app.use(express.static(path.join(__dirname, '../public')));
+// app.use(express.static(path.join(__dirname, '../public/build')));
 
 app.use(express.json());
 app.use(cookieParser());
@@ -78,6 +80,7 @@ app.use('/api/v1/*', (req, res, next) => {
 });
 
 app.use('/', viewsRoutes);
+
 app.use('*', ViewsController.NotFound404View);
 
 app.use(ErrorController);

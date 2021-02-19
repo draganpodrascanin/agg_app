@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import ViewsController from '../controllers/ViewsController';
 import authMiddleware from '../middlewares/userAuthMiddleware';
+import dashboardRoutes from './dashboard-routes';
 
 const router = Router();
 
@@ -27,5 +28,8 @@ router.get('/zaboravili-sifru', ViewsController.forgotpassword);
 router.get('/zaboravili-sifru/:id', ViewsController.passwordReset);
 router.get('/blog', ViewsController.blog);
 router.get('/blog/:slug', ViewsController.blogContent);
+
+//react-app
+router.use('/dashboard', dashboardRoutes);
 
 export default router;

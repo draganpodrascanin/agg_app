@@ -1,0 +1,30 @@
+{
+  "files": {
+    "main.css": "/build/static/css/main.f7385783.chunk.css",
+    "main.js": "/build/static/js/main.7b6724b8.chunk.js",
+    "main.js.map": "/build/static/js/main.7b6724b8.chunk.js.map",
+    "runtime-main.js": "/build/static/js/runtime-main.7812b42e.js",
+    "runtime-main.js.map": "/build/static/js/runtime-main.7812b42e.js.map",
+    "build/static/css/2.c984a218.chunk.css": "/build/static/css/2.c984a218.chunk.css",
+    "build/static/js/2.86f61e96.chunk.js": "/build/static/js/2.86f61e96.chunk.js",
+    "build/static/js/2.86f61e96.chunk.js.map": "/build/static/js/2.86f61e96.chunk.js.map",
+    "build/static/js/3.1db8b70a.chunk.js": "/build/static/js/3.1db8b70a.chunk.js",
+    "build/static/js/3.1db8b70a.chunk.js.map": "/build/static/js/3.1db8b70a.chunk.js.map",
+    "build/app.html": "/app.html",
+    "build/service-worker.js": "/service-worker.js",
+    "build/service-worker.js.map": "/service-worker.js.map",
+    "build/static/css/2.c984a218.chunk.css.map": "/build/static/css/2.c984a218.chunk.css.map",
+    "build/static/css/main.f7385783.chunk.css.map": "/build/static/css/main.f7385783.chunk.css.map",
+    "build/static/js/2.86f61e96.chunk.js.LICENSE.txt": "/build/static/js/2.86f61e96.chunk.js.LICENSE.txt",
+    "build/static/media/blueNetwork.5a06aeb6.png": "/build/static/media/blueNetwork.5a06aeb6.png",
+    "/build/static/media/notification.55235d70.mp3": "//build/static/media/notification.55235d70.mp3",
+    "build/static/media/index.css": "/build/static/media/roboto-vietnamese-400-normal.52cebac0.woff2"
+  },
+  "entrypoints": [
+    "build/static/js/runtime-main.7812b42e.js",
+    "build/static/css/2.c984a218.chunk.css",
+    "build/static/js/2.86f61e96.chunk.js",
+    "build/static/css/main.f7385783.chunk.css",
+    "build/static/js/main.7b6724b8.chunk.js"
+  ]
+}
