@@ -47,6 +47,10 @@ Business websajt i aplikacija za poslovne potrebe Auto Gas Gaga doo.
   - Redux Saga
   - Material UI
 
+### Dijagram Baze
+
+![sql dijargam](https://i.postimg.cc/Gmbs4j13/sql-diagram-whole.jpg 'DB dijagram')
+
 # API endpoints
 
 ## CREATE CAR
