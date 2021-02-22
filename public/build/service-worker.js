@@ -3580,17 +3580,17 @@
             (self.addEventListener('install', ve),
             self.addEventListener('activate', de));
       })([
-        { revision: 'ba5696de813006e4e12a4ebd699a4928', url: '/index.html' },
+        { revision: '5f4a9a72235ef1b060481173b9acad70', url: '/index.html' },
         { revision: null, url: '/build/static/css/2.c984a218.chunk.css' },
         { revision: null, url: '/build/static/css/main.f7385783.chunk.css' },
         { revision: null, url: '/build/static/js/2.86f61e96.chunk.js' },
         { revision: null, url: '/build/static/js/3.1db8b70a.chunk.js' },
-        { revision: null, url: '/build/static/js/main.7b6724b8.chunk.js' },
+        { revision: null, url: '/build/static/js/main.1e45508b.chunk.js' },
         { revision: null, url: '/build/static/js/runtime-main.7812b42e.js' },
         { revision: null, url: '/build/static/media/blueNetwork.5a06aeb6.png' },
         {
           revision: null,
-          url: '/build/static/notification.55235d70.mp3',
+          url: '/build/static/media/notification.55235d70.mp3',
         },
         {
           revision: null,
@@ -3673,18 +3673,13 @@
         !n.pathname.match(qe)
       );
     }, ((Le = '/index.html'), oe().createHandlerBoundToURL(Le))),
-      ke(
-        function (e) {
-          var t = e.url;
-          return (
-            t.origin === self.location.origin && t.pathname.endsWith('.png')
-          );
-        },
-        new Ee({
-          cacheName: 'images',
-          plugins: [new te({ maxEntries: 50 })],
-        })
-      ),
+      ke(function (e) {
+        var t = e.url;
+        return t.origin === self.location.origin && t.pathname.endsWith('.png');
+      }, new Ee({
+        cacheName: 'images',
+        plugins: [new te({ maxEntries: 50 })],
+      })),
       self.addEventListener('message', function (e) {
         e.data && 'SKIP_WAITING' === e.data.type && self.skipWaiting();
       }),

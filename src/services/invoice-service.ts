@@ -417,7 +417,7 @@ export class InvoiceService implements IInvoiceService {
         <div id="container">
           <section id="memo">
             <div class="logo">
-              <img src="http://localhost:5000/img/logoblack.png" data-logo="{company_logo}" />
+              <img src="http://gagatest.xyz/img/logoblack.png" data-logo="{company_logo}" />
             </div>
             
             <div class="company-info">
