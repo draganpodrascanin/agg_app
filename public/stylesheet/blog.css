@@ -723,12 +723,10 @@ body {
     margin: 24px auto; }
   .blog .image-style-align-left {
     float: left;
-    width: 1200px;
-    max-width: 50%; }
+    width: 50%; }
   .blog .image-style-align-right {
     float: right;
-    width: 1200px;
-    max-width: 50%; }
+    width: 50%; }
   .blog figcaption {
     font-size: 1.4rem;
     text-align: center;
