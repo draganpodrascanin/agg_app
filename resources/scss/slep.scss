@@ -10,6 +10,11 @@
 @import 'form';
 @import 'cta';
 @import 'footer';
+
+#nav {
+  width: 100vw;
+}
+
 .about__wrapper {
   text-align: center;
   display: flex;
@@ -38,7 +43,8 @@
     border: 1px solid $color-gray-lighty;
     letter-spacing: 1px;
     border-radius: 40px;
-    min-width: 45rem;
+    width: 45rem;
+    max-width: 90%;
     transition: all 0.2s;
     margin: 2rem 0;
   }

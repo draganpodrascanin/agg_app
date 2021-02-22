@@ -40,6 +40,9 @@
   @media only screen and (max-width: $bp-s-tablet-portrait) {
     width: 22rem;
   }
+  @media only screen and (max-width: $bp-l-phone) {
+    margin: 10px;
+  }
   @media only screen and (max-width: $bp-s-phone) {
     width: fit-content;
   }
@@ -72,6 +75,10 @@
   outline: none;
   @media only screen and (max-width: $bp-s-tablet-portrait) {
     width: 22rem;
+  }
+
+  @media only screen and (max-width: $bp-l-phone) {
+    margin: 0 0 10px 0;
   }
   @media only screen and (max-width: $bp-s-phone) {
     width: fit-content;

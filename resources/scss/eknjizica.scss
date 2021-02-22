@@ -133,6 +133,10 @@ table.vasi-servisi {
 table.jobTicketTable {
   min-width: 350px;
   max-width: 750px;
+
+  @media screen and (max-width: 900px) {
+    min-width: 300px;
+  }
 }
 
 table.warrantiesTable {
@@ -175,6 +179,14 @@ table td {
 
 .table100-nextcols.jobTicketTableContainer {
   width: 360px;
+
+  @media screen and (max-width: 600px) {
+    width: 300px;
+  }
+
+  @media screen and (max-width: 400px) {
+    width: 250px;
+  }
 }
 
 .table100-nextcols.warrantiesTableContainer {

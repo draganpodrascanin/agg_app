@@ -1371,28 +1371,30 @@
             A = function (e) {
               e.preventDefault();
             },
-            y = ye.b().shape({
-              firstName: ye.d().required('Polje Obavezno!'),
-              lastName: ye.d().required('Polje Obavezno!'),
-              phoneNumber: ye.d().required('Polje Obavezno!'),
-              email: ye.d().required('Polje Obavezno!'),
-              username: ye.d().required('Polje Obavezno!'),
-              role: ye.d().required('Polje Obavezno!'),
-              password:
-                l.create &&
-                ye
-                  .d()
-                  .min(8, 'Najmanje 8 karaktera.')
-                  .required('Polje obavezno'),
-              passwordConfirm:
-                l.create &&
-                ye
-                  .d()
-                  .oneOf([
-                    ye.c('password'),
-                    'Mora biti isto kao polje \u0161ifra.',
-                  ]),
-            }),
+            y = ye
+              .b()
+              .shape({
+                firstName: ye.d().required('Polje Obavezno!'),
+                lastName: ye.d().required('Polje Obavezno!'),
+                phoneNumber: ye.d().required('Polje Obavezno!'),
+                email: ye.d().required('Polje Obavezno!'),
+                username: ye.d().required('Polje Obavezno!'),
+                role: ye.d().required('Polje Obavezno!'),
+                password:
+                  l.create &&
+                  ye
+                    .d()
+                    .min(8, 'Najmanje 8 karaktera.')
+                    .required('Polje obavezno'),
+                passwordConfirm:
+                  l.create &&
+                  ye
+                    .d()
+                    .oneOf([
+                      ye.c('password'),
+                      'Mora biti isto kao polje \u0161ifra.',
+                    ]),
+              }),
             _ = Object(m.a)({
               initialValues: {
                 firstName: t || '',
@@ -1596,18 +1598,20 @@
             p = function (e) {
               e.preventDefault();
             },
-            j = ye.b().shape({
-              password: ye
-                .d()
-                .min(8, 'Najmanje 8 karaktera.')
-                .required('Polje obavezno'),
-              passwordConfirm: ye
-                .d()
-                .oneOf([
-                  ye.c('password'),
-                  'Mora biti isto kao polje \u0161ifra.',
-                ]),
-            }),
+            j = ye
+              .b()
+              .shape({
+                password: ye
+                  .d()
+                  .min(8, 'Najmanje 8 karaktera.')
+                  .required('Polje obavezno'),
+                passwordConfirm: ye
+                  .d()
+                  .oneOf([
+                    ye.c('password'),
+                    'Mora biti isto kao polje \u0161ifra.',
+                  ]),
+              }),
             b = Object(m.a)({
               initialValues: { password: '', passwordConfirm: '' },
               onSubmit: e.onSubmit,
@@ -2333,12 +2337,14 @@
             ]),
             l = St(),
             u = Object(d.b)(),
-            p = ye.b().shape({
-              name: ye.d().required('Polje Obavezno!'),
-              car: ye.d().required('Polje Obavezno!'),
-              note: ye.d().required('Polje Obavezno!'),
-              phoneNumber: ye.d().required('Polje Obavezno!'),
-            }),
+            p = ye
+              .b()
+              .shape({
+                name: ye.d().required('Polje Obavezno!'),
+                car: ye.d().required('Polje Obavezno!'),
+                note: ye.d().required('Polje Obavezno!'),
+                phoneNumber: ye.d().required('Polje Obavezno!'),
+              }),
             j = Object(m.a)({
               initialValues: {
                 name: a || '',
@@ -2904,9 +2910,11 @@
             r = Object(Ae.a)(e, ['partsUnderWarranty', 'validUntil']),
             c = Vt(),
             i = Object(d.b)(),
-            o = ye.b().shape({
-              partsUnderWarranty: ye.d().required('Polje Obavezno!'),
-            }),
+            o = ye
+              .b()
+              .shape({
+                partsUnderWarranty: ye.d().required('Polje Obavezno!'),
+              }),
             s = Object(m.a)({
               initialValues: {
                 partsUnderWarranty: t || '',
@@ -4091,14 +4099,16 @@
                 return e.apply(this, arguments);
               };
             })(),
-            A = ye.b().shape({
-              title: ye.d().required('Polje Obavezno!'),
-              blog: ye.d().required('Sadr\u017eaj bloga je obavezan..'),
-              imageId: ye.d().required('Glavna slika je obavezna.'),
-              imageAlt: ye.d().required('Alt naziv je obavezan.'),
-              thumbnailId: ye.d().required('Thumbnail slika je obavezna.'),
-              thumbnailAlt: ye.d().required('Alt naziv je obavezan.'),
-            }),
+            A = ye
+              .b()
+              .shape({
+                title: ye.d().required('Polje Obavezno!'),
+                blog: ye.d().required('Sadr\u017eaj bloga je obavezan..'),
+                imageId: ye.d().required('Glavna slika je obavezna.'),
+                imageAlt: ye.d().required('Alt naziv je obavezan.'),
+                thumbnailId: ye.d().required('Thumbnail slika je obavezna.'),
+                thumbnailAlt: ye.d().required('Alt naziv je obavezan.'),
+              }),
             _ = Object(m.a)({
               initialValues: {
                 title: e.title || '',
@@ -4977,7 +4987,6 @@
                 }
               );
             }, []),
-            console.log(u),
             Object(n.jsxs)('div', {
               children: [
                 Object(n.jsxs)('div', {
@@ -7040,14 +7049,13 @@
             }),
             b = function (e, t) {
               j.setFieldValue(t, ut()(e).format('YYYY-MM-DDTHH:mm'));
+            },
+            h = function (e, t) {
+              var a = Object(er.a)(j.values.invoiceDescs);
+              (a[t][e.target.name] = e.target.value),
+                j.setFieldValue('invoiceDescs', a),
+                e.target.focus && e.target.focus();
             };
-          console.log('formik.values', j.values);
-          var h = function (e, t) {
-            var a = Object(er.a)(j.values.invoiceDescs);
-            (a[t][e.target.name] = e.target.value),
-              j.setFieldValue('invoiceDescs', a),
-              e.target.focus && e.target.focus();
-          };
           return Object(n.jsxs)(n.Fragment, {
             children: [
               Object(n.jsx)(tt, {
@@ -7241,141 +7249,137 @@
                       Object(r.useMemo)(
                         function () {
                           var e = ['kom', 'h', 'komplet'];
-                          return (
-                            console.log('descs rerender'),
-                            j.values.invoiceDescs.map(function (t, r) {
-                              return Object(n.jsxs)(
-                                'div',
-                                {
-                                  className: a.invoiceDesc,
-                                  children: [
-                                    Object(n.jsxs)(f.a, {
-                                      variant: 'h5',
-                                      children: ['Linija ', r + 1],
-                                    }),
-                                    Object(n.jsxs)('div', {
-                                      className: a.formRow,
-                                      children: [
-                                        Object(n.jsx)(E.a, {
-                                          className: a.textField,
-                                          name: 'desc',
-                                          label: 'Ime Proizvoda/Usluge',
-                                          value: t.desc,
-                                          onChange: function (e) {
-                                            console.log('bas before', j.values),
-                                              h(e, r);
-                                          },
-                                          variant: 'standard',
+                          return j.values.invoiceDescs.map(function (t, r) {
+                            return Object(n.jsxs)(
+                              'div',
+                              {
+                                className: a.invoiceDesc,
+                                children: [
+                                  Object(n.jsxs)(f.a, {
+                                    variant: 'h5',
+                                    children: ['Linija ', r + 1],
+                                  }),
+                                  Object(n.jsxs)('div', {
+                                    className: a.formRow,
+                                    children: [
+                                      Object(n.jsx)(E.a, {
+                                        className: a.textField,
+                                        name: 'desc',
+                                        label: 'Ime Proizvoda/Usluge',
+                                        value: t.desc,
+                                        onChange: function (e) {
+                                          h(e, r);
+                                        },
+                                        variant: 'standard',
+                                      }),
+                                      Object(n.jsx)(E.a, {
+                                        className: a.select,
+                                        name: 'unit',
+                                        label: 'Jedinica Mere',
+                                        value: t.unit,
+                                        select: !0,
+                                        onChange: function (e) {
+                                          h(e, r);
+                                        },
+                                        variant: 'standard',
+                                        children: e.map(function (e, t) {
+                                          return Object(n.jsx)(
+                                            Re.a,
+                                            { value: e, children: e },
+                                            t
+                                          );
                                         }),
-                                        Object(n.jsx)(E.a, {
-                                          className: a.select,
-                                          name: 'unit',
-                                          label: 'Jedinica Mere',
-                                          value: t.unit,
-                                          select: !0,
-                                          onChange: function (e) {
-                                            h(e, r);
-                                          },
-                                          variant: 'standard',
-                                          children: e.map(function (e, t) {
-                                            return Object(n.jsx)(
-                                              Re.a,
-                                              { value: e, children: e },
-                                              t
-                                            );
-                                          }),
-                                        }),
-                                      ],
-                                    }),
-                                    Object(n.jsxs)('div', {
-                                      className: a.formRow,
-                                      children: [
-                                        Object(n.jsx)(E.a, {
-                                          className: a.select,
-                                          name: 'pricePerUnit',
-                                          label: 'Cena Po Jedinici',
-                                          value: t.pricePerUnit,
-                                          type: 'number',
-                                          onChange: function (e) {
-                                            h(e, r);
-                                          },
-                                          variant: 'standard',
-                                        }),
-                                        Object(n.jsx)(E.a, {
-                                          className: a.select,
-                                          name: 'qty',
-                                          label: 'Koli\u010dina',
-                                          value: t.qty,
-                                          type: 'number',
-                                          onChange: function (e) {
-                                            h(e, r);
-                                          },
-                                          variant: 'standard',
-                                        }),
-                                        Object(n.jsx)(E.a, {
-                                          className: a.select,
-                                          name: 'discount',
-                                          label: 'Popust %',
-                                          value: t.discount,
-                                          type: 'number',
-                                          onChange: function (e) {
-                                            h(e, r);
-                                          },
-                                          variant: 'standard',
-                                        }),
-                                        Object(n.jsx)(E.a, {
-                                          className: a.select,
-                                          name: 'tax',
-                                          label: 'PDV %',
-                                          value: t.tax,
-                                          type: 'number',
-                                          onChange: function (e) {
-                                            h(e, r);
-                                          },
-                                          variant: 'standard',
-                                        }),
-                                      ],
-                                    }),
-                                    Object(n.jsxs)(f.a, {
-                                      variant: 'caption',
-                                      component: 'p',
-                                      style: { marginTop: 5 },
-                                      color: 'textSecondary',
-                                      children: [
-                                        'Cena bez PDV-a:',
-                                        ' ',
-                                        (
-                                          t.pricePerUnit *
-                                          t.qty *
-                                          (1 - t.discount / 100)
-                                        ).toFixed(2),
-                                        ' ',
-                                        'KM',
-                                      ],
-                                    }),
-                                    Object(n.jsxs)(f.a, {
-                                      variant: 'caption',
-                                      component: 'p',
-                                      color: 'textSecondary',
-                                      children: [
-                                        'Cena sa PDV-om:',
-                                        ' ',
-                                        (
-                                          t.pricePerUnit *
-                                          t.qty *
-                                          (1 - t.discount / 100) *
-                                          (1 + t.tax / 100)
-                                        ).toFixed(2),
-                                        ' ',
-                                        'KM',
-                                      ],
-                                    }),
-                                  ],
-                                },
-                                r
-                              );
-                            })
-                          );
+                                      }),
+                                    ],
+                                  }),
+                                  Object(n.jsxs)('div', {
+                                    className: a.formRow,
+                                    children: [
+                                      Object(n.jsx)(E.a, {
+                                        className: a.select,
+                                        name: 'pricePerUnit',
+                                        label: 'Cena Po Jedinici',
+                                        value: t.pricePerUnit,
+                                        type: 'number',
+                                        onChange: function (e) {
+                                          h(e, r);
+                                        },
+                                        variant: 'standard',
+                                      }),
+                                      Object(n.jsx)(E.a, {
+                                        className: a.select,
+                                        name: 'qty',
+                                        label: 'Koli\u010dina',
+                                        value: t.qty,
+                                        type: 'number',
+                                        onChange: function (e) {
+                                          h(e, r);
+                                        },
+                                        variant: 'standard',
+                                      }),
+                                      Object(n.jsx)(E.a, {
+                                        className: a.select,
+                                        name: 'discount',
+                                        label: 'Popust %',
+                                        value: t.discount,
+                                        type: 'number',
+                                        onChange: function (e) {
+                                          h(e, r);
+                                        },
+                                        variant: 'standard',
+                                      }),
+                                      Object(n.jsx)(E.a, {
+                                        className: a.select,
+                                        name: 'tax',
+                                        label: 'PDV %',
+                                        value: t.tax,
+                                        type: 'number',
+                                        onChange: function (e) {
+                                          h(e, r);
+                                        },
+                                        variant: 'standard',
+                                      }),
+                                    ],
+                                  }),
+                                  Object(n.jsxs)(f.a, {
+                                    variant: 'caption',
+                                    component: 'p',
+                                    style: { marginTop: 5 },
+                                    color: 'textSecondary',
+                                    children: [
+                                      'Cena bez PDV-a:',
+                                      ' ',
+                                      (
+                                        t.pricePerUnit *
+                                        t.qty *
+                                        (1 - t.discount / 100)
+                                      ).toFixed(2),
+                                      ' ',
+                                      'KM',
+                                    ],
+                                  }),
+                                  Object(n.jsxs)(f.a, {
+                                    variant: 'caption',
+                                    component: 'p',
+                                    color: 'textSecondary',
+                                    children: [
+                                      'Cena sa PDV-om:',
+                                      ' ',
+                                      (
+                                        t.pricePerUnit *
+                                        t.qty *
+                                        (1 - t.discount / 100) *
+                                        (1 + t.tax / 100)
+                                      ).toFixed(2),
+                                      ' ',
+                                      'KM',
+                                    ],
+                                  }),
+                                ],
+                              },
+                              r
+                            );
+                          });
                         },
                         [j.values.invoiceDescs]
                       ),
@@ -7519,108 +7523,105 @@
             j = function () {
               s(!o);
             };
-          return (
-            console.log(d, o),
-            t && t[0]
-              ? Object(n.jsxs)('div', {
-                  children: [
-                    Object(n.jsx)(sr, { open: o, onClose: j, path: d }),
-                    Object(n.jsx)(Wt.a, {
-                      component: Ft.a,
-                      style: { marginTop: 50 },
-                      children: Object(n.jsxs)(tn.a, {
-                        className: a.table,
-                        'aria-label': 'simple table',
-                        children: [
-                          Object(n.jsx)(Kt.a, {
-                            children: Object(n.jsxs)(zt.a, {
-                              children: [
-                                Object(n.jsx)(lr, { children: 'Tip Fakture' }),
-                                Object(n.jsx)(lr, {
-                                  align: 'right',
-                                  children: 'Broj Fakture',
-                                }),
-                                Object(n.jsx)(lr, {
-                                  align: 'right',
-                                  children: 'Ime Kupca / Naziv Firme',
-                                }),
-                                Object(n.jsx)(lr, {
-                                  align: 'right',
-                                  children: 'Ra\u010dun Otkucan Dana',
-                                }),
-                                Object(n.jsx)(lr, {
-                                  align: 'right',
-                                  children: 'Valuta',
-                                }),
-                                Object(n.jsx)(lr, {
-                                  align: 'right',
-                                  children: 'Skini / \u0160tampaj',
-                                }),
-                              ],
-                            }),
+          return t && t[0]
+            ? Object(n.jsxs)('div', {
+                children: [
+                  Object(n.jsx)(sr, { open: o, onClose: j, path: d }),
+                  Object(n.jsx)(Wt.a, {
+                    component: Ft.a,
+                    style: { marginTop: 50 },
+                    children: Object(n.jsxs)(tn.a, {
+                      className: a.table,
+                      'aria-label': 'simple table',
+                      children: [
+                        Object(n.jsx)(Kt.a, {
+                          children: Object(n.jsxs)(zt.a, {
+                            children: [
+                              Object(n.jsx)(lr, { children: 'Tip Fakture' }),
+                              Object(n.jsx)(lr, {
+                                align: 'right',
+                                children: 'Broj Fakture',
+                              }),
+                              Object(n.jsx)(lr, {
+                                align: 'right',
+                                children: 'Ime Kupca / Naziv Firme',
+                              }),
+                              Object(n.jsx)(lr, {
+                                align: 'right',
+                                children: 'Ra\u010dun Otkucan Dana',
+                              }),
+                              Object(n.jsx)(lr, {
+                                align: 'right',
+                                children: 'Valuta',
+                              }),
+                              Object(n.jsx)(lr, {
+                                align: 'right',
+                                children: 'Skini / \u0160tampaj',
+                              }),
+                            ],
                           }),
-                          Object(n.jsx)(an.a, {
-                            children: t.map(function (e) {
-                              return Object(n.jsxs)(
-                                ur,
-                                {
-                                  children: [
-                                    Object(n.jsx)(lr, {
-                                      component: 'th',
-                                      scope: 'invoice',
-                                      children: e.invoiceTitle,
-                                    }),
-                                    Object(n.jsx)(lr, {
-                                      align: 'right',
-                                      children: e.po,
-                                    }),
-                                    Object(n.jsx)(lr, {
-                                      align: 'right',
-                                      children: e.customerName,
-                                    }),
-                                    Object(n.jsx)(lr, {
-                                      align: 'right',
-                                      children: ut()(e.createdAt).format(
-                                        'DD.MM.YYYY.'
-                                      ),
-                                    }),
-                                    Object(n.jsx)(lr, {
-                                      align: 'right',
-                                      children: ut()(e.valuta).format(
-                                        'DD.MM.YYYY.'
-                                      ),
-                                    }),
-                                    Object(n.jsxs)(lr, {
-                                      align: 'right',
-                                      className: a.printIcon,
-                                      onClick: function () {
-                                        var t;
-                                        (t = '/documents/'.concat(e.pdfName)),
-                                          p(t),
-                                          j();
-                                      },
-                                      children: [
-                                        Object(n.jsx)(cr.a, {}),
-                                        Object(n.jsx)(ir.a, {}),
-                                      ],
-                                    }),
-                                  ],
-                                },
-                                e.id
-                              );
-                            }),
+                        }),
+                        Object(n.jsx)(an.a, {
+                          children: t.map(function (e) {
+                            return Object(n.jsxs)(
+                              ur,
+                              {
+                                children: [
+                                  Object(n.jsx)(lr, {
+                                    component: 'th',
+                                    scope: 'invoice',
+                                    children: e.invoiceTitle,
+                                  }),
+                                  Object(n.jsx)(lr, {
+                                    align: 'right',
+                                    children: e.po,
+                                  }),
+                                  Object(n.jsx)(lr, {
+                                    align: 'right',
+                                    children: e.customerName,
+                                  }),
+                                  Object(n.jsx)(lr, {
+                                    align: 'right',
+                                    children: ut()(e.createdAt).format(
+                                      'DD.MM.YYYY.'
+                                    ),
+                                  }),
+                                  Object(n.jsx)(lr, {
+                                    align: 'right',
+                                    children: ut()(e.valuta).format(
+                                      'DD.MM.YYYY.'
+                                    ),
+                                  }),
+                                  Object(n.jsxs)(lr, {
+                                    align: 'right',
+                                    className: a.printIcon,
+                                    onClick: function () {
+                                      var t;
+                                      (t = '/documents/'.concat(e.pdfName)),
+                                        p(t),
+                                        j();
+                                    },
+                                    children: [
+                                      Object(n.jsx)(cr.a, {}),
+                                      Object(n.jsx)(ir.a, {}),
+                                    ],
+                                  }),
+                                ],
+                              },
+                              e.id
+                            );
                           }),
-                        ],
-                      }),
+                        }),
+                      ],
                     }),
-                    Object(n.jsx)(y, {}),
-                  ],
-                })
-              : Object(n.jsx)(f.a, {
-                  variant: 'h5',
-                  children: 'Nema Ra\u010duna..',
-                })
-          );
+                  }),
+                  Object(n.jsx)(y, {}),
+                ],
+              })
+            : Object(n.jsx)(f.a, {
+                variant: 'h5',
+                children: 'Nema Ra\u010duna..',
+              });
         },
         jr = Object(h.a)(function (e) {
           return {
@@ -8205,10 +8206,12 @@
             r = Object(d.c)(function (e) {
               return e.workOrder;
             }),
-            c = ye.b().shape({
-              workDone: ye.d().required('Polje Obavezno!'),
-              charged: ye.a().required('Polje Obavezno!'),
-            }),
+            c = ye
+              .b()
+              .shape({
+                workDone: ye.d().required('Polje Obavezno!'),
+                charged: ye.a().required('Polje Obavezno!'),
+              }),
             i = Object(m.a)({
               initialValues: {
                 workDone: e.workDone || '',
@@ -8532,10 +8535,12 @@
             r = Object(d.c)(function (e) {
               return e.workOrder;
             }),
-            c = ye.b().shape({
-              ticket: ye.d().required('Polje Obavezno!'),
-              status: ye.d().required('Obavezno ozna\u010diti status!'),
-            }),
+            c = ye
+              .b()
+              .shape({
+                ticket: ye.d().required('Polje Obavezno!'),
+                status: ye.d().required('Obavezno ozna\u010diti status!'),
+              }),
             i = Object(m.a)({
               initialValues: { ticket: e.ticket || '', status: e.status || '' },
               onSubmit:
@@ -8653,6 +8658,7 @@
             ticketContainer: {
               marginTop: 10,
               display: 'flex',
+              flexWrap: 'wrap',
               '@media screen and (max-width:900px)': {
                 flexDirection: 'column',
                 alignItems: 'center',
@@ -8662,6 +8668,7 @@
               maxWidth: 345,
               minWidth: 300,
               marginRight: 10,
+              marginBottom: 10,
               color: '#fff',
               '@media screen and (max-width:900px)': {
                 marginRight: 0,
@@ -8892,10 +8899,12 @@
             r = Object(d.c)(function (e) {
               return e.workOrder;
             }),
-            c = ye.b().shape({
-              ownerRemarks: ye.d().required('Polje Obavezno!'),
-              milage: ye.a().required('Polje Obavezno!'),
-            }),
+            c = ye
+              .b()
+              .shape({
+                ownerRemarks: ye.d().required('Polje Obavezno!'),
+                milage: ye.a().required('Polje Obavezno!'),
+              }),
             i = Object(m.a)({
               initialValues: {
                 ownerRemarks: e.ownerRemarks || '',
@@ -9944,7 +9953,7 @@
         },
         xc =
           (a(682), Object(s.a)({ palette: { primary: { main: '#1e7be2' } } })),
-        fc = Object(b.io)('https://gagatest.xyz'),
+        fc = Object(b.io)('https://gagetest.xyz'),
         Ec = new u.Howl({ src: be }),
         gc = function () {
           var e = Object(d.c)(function (e) {
@@ -10314,13 +10323,10 @@
             case bi:
               return Object(S.a)(Object(S.a)({}, e), {}, { uiError: '' });
             case mi:
-              return (
-                console.log(t.payload),
-                Object(S.a)(
-                  Object(S.a)({}, e),
-                  {},
-                  { messageRecieved: t.payload }
-                )
+              return Object(S.a)(
+                Object(S.a)({}, e),
+                {},
+                { messageRecieved: t.payload }
               );
             case Oi:
               return Object(S.a)(
@@ -10872,20 +10878,19 @@
                 case 6:
                   return (
                     (a = n.sent),
-                    console.log(a),
-                    (n.next = 10),
+                    (n.next = 9),
                     Object(yi.put)({
                       type: O.CREATE_ADMIN,
                       payload: a.data.data,
                     })
                   );
-                case 10:
+                case 9:
                   return (
-                    (n.next = 12), Object(yi.put)({ type: O.CLEAR_LOADING })
+                    (n.next = 11), Object(yi.put)({ type: O.CLEAR_LOADING })
                   );
-                case 12:
+                case 11:
                   return (
-                    (n.next = 14),
+                    (n.next = 13),
                     Object(yi.put)({
                       type: O.SUCCESS,
                       payload: 'Uspe\u0161no napravljen novi '.concat(
@@ -10893,33 +10898,33 @@
                       ),
                     })
                   );
-                case 14:
-                  n.next = 22;
+                case 13:
+                  n.next = 21;
                   break;
-                case 16:
+                case 15:
                   return (
-                    (n.prev = 16),
+                    (n.prev = 15),
                     (n.t0 = n.catch(3)),
-                    (n.next = 20),
+                    (n.next = 19),
                     Object(yi.put)({ type: O.CLEAR_LOADING })
                   );
-                case 20:
+                case 19:
                   return (
-                    (n.next = 22),
+                    (n.next = 21),
                     Object(yi.put)({
                       type: O.UI_ERROR,
                       payload:
                         'Do\u0161lo je do gre\u0161ke pri kreiranju novog Administratora',
                     })
                   );
-                case 22:
+                case 21:
                 case 'end':
                   return n.stop();
               }
           },
           Si,
           null,
-          [[3, 16]]
+          [[3, 15]]
         );
       }
       function Ui() {
@@ -15007,4 +15012,4 @@
   },
   [[683, 1, 2]],
 ]);
-//# sourceMappingURL=main.1e45508b.chunk.js.map
+//# sourceMappingURL=main.3d7fe044.chunk.js.map

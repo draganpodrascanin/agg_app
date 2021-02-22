@@ -685,6 +685,11 @@ body {
     .cta--1:link,
     .cta--1:visited {
       width: 22rem; } }
+  @media only screen and (max-width: 40em) {
+    .cta--1,
+    .cta--1:link,
+    .cta--1:visited {
+      margin: 10px; } }
   @media only screen and (max-width: 30em) {
     .cta--1,
     .cta--1:link,
@@ -721,6 +726,10 @@ body {
     .cta--2,
     .cta--2:focus {
       width: 22rem; } }
+  @media only screen and (max-width: 40em) {
+    .cta--2,
+    .cta--2:focus {
+      margin: 0 0 10px 0; } }
   @media only screen and (max-width: 30em) {
     .cta--2,
     .cta--2:focus {
@@ -961,6 +970,9 @@ table.vasi-servisi {
 table.jobTicketTable {
   min-width: 350px;
   max-width: 750px; }
+  @media screen and (max-width: 900px) {
+    table.jobTicketTable {
+      min-width: 300px; } }
 
 table.warrantiesTable {
   min-width: 540px;
@@ -989,6 +1001,12 @@ table td {
 
 .table100-nextcols.jobTicketTableContainer {
   width: 360px; }
+  @media screen and (max-width: 600px) {
+    .table100-nextcols.jobTicketTableContainer {
+      width: 300px; } }
+  @media screen and (max-width: 400px) {
+    .table100-nextcols.jobTicketTableContainer {
+      width: 250px; } }
 
 .table100-nextcols.warrantiesTableContainer {
   max-width: 540px;

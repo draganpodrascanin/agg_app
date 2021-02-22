@@ -94,8 +94,8 @@
         a = 'function' === typeof Symbol ? Symbol : {},
         i = a.iterator || '@@iterator',
         c = a.asyncIterator || '@@asyncIterator',
-        o = a.toStringTag || '@@toStringTag';
-      function s(e, t, n) {
+        u = a.toStringTag || '@@toStringTag';
+      function o(e, t, n) {
         return (
           Object.defineProperty(e, t, {
             value: n,
@@ -107,13 +107,13 @@
         );
       }
       try {
-        s({}, '');
+        o({}, '');
       } catch (U) {
-        s = function (e, t, n) {
+        o = function (e, t, n) {
           return (e[t] = n);
         };
       }
-      function u(e, t, n, r) {
+      function s(e, t, n, r) {
         var a = t && t.prototype instanceof y ? t : y,
           i = Object.create(a.prototype),
           c = new O(r || []);
@@ -129,10 +129,10 @@
               for (n.method = a, n.arg = i; ; ) {
                 var c = n.delegate;
                 if (c) {
-                  var o = E(c, n);
-                  if (o) {
-                    if (o === d) continue;
-                    return o;
+                  var u = E(c, n);
+                  if (u) {
+                    if (u === d) continue;
+                    return u;
                   }
                 }
                 if ('next' === n.method) n.sent = n._sent = n.arg;
@@ -141,13 +141,13 @@
                   n.dispatchException(n.arg);
                 } else 'return' === n.method && n.abrupt('return', n.arg);
                 r = p;
-                var s = f(e, t, n);
-                if ('normal' === s.type) {
-                  if (((r = n.done ? v : l), s.arg === d)) continue;
-                  return { value: s.arg, done: n.done };
+                var o = f(e, t, n);
+                if ('normal' === o.type) {
+                  if (((r = n.done ? v : l), o.arg === d)) continue;
+                  return { value: o.arg, done: n.done };
                 }
-                'throw' === s.type &&
-                  ((r = v), (n.method = 'throw'), (n.arg = s.arg));
+                'throw' === o.type &&
+                  ((r = v), (n.method = 'throw'), (n.arg = o.arg));
               }
             };
           })(e, n, c)),
@@ -161,7 +161,7 @@
           return { type: 'throw', arg: U };
         }
       }
-      e.wrap = u;
+      e.wrap = s;
       var h = 'suspendedStart',
         l = 'suspendedYield',
         p = 'executing',
@@ -180,36 +180,36 @@
       var k = (g.prototype = y.prototype = Object.create(x));
       function _(e) {
         ['next', 'throw', 'return'].forEach(function (t) {
-          s(e, t, function (e) {
+          o(e, t, function (e) {
             return this._invoke(t, e);
           });
         });
       }
       function R(e, t) {
-        function n(a, i, c, o) {
-          var s = f(e[a], e, i);
-          if ('throw' !== s.type) {
-            var u = s.arg,
-              h = u.value;
+        function n(a, i, c, u) {
+          var o = f(e[a], e, i);
+          if ('throw' !== o.type) {
+            var s = o.arg,
+              h = s.value;
             return h && 'object' === typeof h && r.call(h, '__await')
               ? t.resolve(h.__await).then(
                   function (e) {
-                    n('next', e, c, o);
+                    n('next', e, c, u);
                   },
                   function (e) {
-                    n('throw', e, c, o);
+                    n('throw', e, c, u);
                   }
                 )
               : t.resolve(h).then(
                   function (e) {
-                    (u.value = e), c(u);
+                    (s.value = e), c(s);
                   },
                   function (e) {
-                    return n('throw', e, c, o);
+                    return n('throw', e, c, u);
                   }
                 );
           }
-          o(s.arg);
+          u(o.arg);
         }
         var a;
         this._invoke = function (e, r) {
@@ -295,7 +295,7 @@
       return (
         (m.prototype = k.constructor = g),
         (g.constructor = m),
-        (m.displayName = s(g, o, 'GeneratorFunction')),
+        (m.displayName = o(g, u, 'GeneratorFunction')),
         (e.isGeneratorFunction = function (e) {
           var t = 'function' === typeof e && e.constructor;
           return (
@@ -307,7 +307,7 @@
           return (
             Object.setPrototypeOf
               ? Object.setPrototypeOf(e, g)
-              : ((e.__proto__ = g), s(e, o, 'GeneratorFunction')),
+              : ((e.__proto__ = g), o(e, u, 'GeneratorFunction')),
             (e.prototype = Object.create(k)),
             e
           );
@@ -322,7 +322,7 @@
         (e.AsyncIterator = R),
         (e.async = function (t, n, r, a, i) {
           void 0 === i && (i = Promise);
-          var c = new R(u(t, n, r, a), i);
+          var c = new R(s(t, n, r, a), i);
           return e.isGeneratorFunction(n)
             ? c
             : c.next().then(function (e) {
@@ -330,7 +330,7 @@
               });
         }),
         _(k),
-        s(k, o, 'Generator'),
+        o(k, u, 'Generator'),
         (k[i] = function () {
           return this;
         }),
@@ -383,8 +383,8 @@
             var n = this;
             function a(r, a) {
               return (
-                (o.type = 'throw'),
-                (o.arg = e),
+                (u.type = 'throw'),
+                (u.arg = e),
                 (n.next = r),
                 a && ((n.method = 'next'), (n.arg = t)),
                 !!a
@@ -392,18 +392,18 @@
             }
             for (var i = this.tryEntries.length - 1; i >= 0; --i) {
               var c = this.tryEntries[i],
-                o = c.completion;
+                u = c.completion;
               if ('root' === c.tryLoc) return a('end');
               if (c.tryLoc <= this.prev) {
-                var s = r.call(c, 'catchLoc'),
-                  u = r.call(c, 'finallyLoc');
-                if (s && u) {
+                var o = r.call(c, 'catchLoc'),
+                  s = r.call(c, 'finallyLoc');
+                if (o && s) {
                   if (this.prev < c.catchLoc) return a(c.catchLoc, !0);
                   if (this.prev < c.finallyLoc) return a(c.finallyLoc);
-                } else if (s) {
+                } else if (o) {
                   if (this.prev < c.catchLoc) return a(c.catchLoc, !0);
                 } else {
-                  if (!u)
+                  if (!s)
                     throw new Error('try statement without catch or finally');
                   if (this.prev < c.finallyLoc) return a(c.finallyLoc);
                 }
@@ -494,12 +494,12 @@
       a = n.n(r);
     function i(e, t, n, r, a, i, c) {
       try {
-        var o = e[i](c),
-          s = o.value;
-      } catch (u) {
-        return void n(u);
+        var u = e[i](c),
+          o = u.value;
+      } catch (s) {
+        return void n(s);
       }
-      o.done ? t(s) : Promise.resolve(s).then(r, a);
+      u.done ? t(o) : Promise.resolve(o).then(r, a);
     }
     function c(e) {
       return function () {
@@ -507,24 +507,24 @@
           n = arguments;
         return new Promise(function (r, a) {
           var c = e.apply(t, n);
+          function u(e) {
+            i(c, r, a, u, o, 'next', e);
+          }
           function o(e) {
-            i(c, r, a, o, s, 'next', e);
+            i(c, r, a, u, o, 'throw', e);
           }
-          function s(e) {
-            i(c, r, a, o, s, 'throw', e);
-          }
-          o(void 0);
+          u(void 0);
         });
       };
     }
-    function o(e, t) {
+    function u(e, t) {
       (null == t || t > e.length) && (t = e.length);
       for (var n = 0, r = new Array(t); n < t; n++) r[n] = e[n];
       return r;
     }
-    function s(e, t) {
+    function o(e, t) {
       if (e) {
-        if ('string' === typeof e) return o(e, t);
+        if ('string' === typeof e) return u(e, t);
         var n = Object.prototype.toString.call(e).slice(8, -1);
         return (
           'Object' === n && e.constructor && (n = e.constructor.name),
@@ -532,21 +532,21 @@
             ? Array.from(e)
             : 'Arguments' === n ||
               /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)
-            ? o(e, t)
+            ? u(e, t)
             : void 0
         );
       }
     }
-    function u(e) {
+    function s(e) {
       return (
         (function (e) {
-          if (Array.isArray(e)) return o(e);
+          if (Array.isArray(e)) return u(e);
         })(e) ||
         (function (e) {
           if ('undefined' !== typeof Symbol && Symbol.iterator in Object(e))
             return Array.from(e);
         })(e) ||
-        s(e) ||
+        o(e) ||
         (function () {
           throw new TypeError(
             'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
@@ -560,7 +560,7 @@
       if ('undefined' === typeof Symbol || null == e[Symbol.iterator]) {
         if (
           Array.isArray(e) ||
-          (n = s(e)) ||
+          (n = o(e)) ||
           (t && e && 'number' === typeof e.length)
         ) {
           n && (e = n);
@@ -583,7 +583,7 @@
       }
       var i,
         c = !0,
-        o = !1;
+        u = !1;
       return {
         s: function () {
           n = e[Symbol.iterator]();
@@ -593,13 +593,13 @@
           return (c = e.done), e;
         },
         e: function (e) {
-          (o = !0), (i = e);
+          (u = !0), (i = e);
         },
         f: function () {
           try {
             c || null == n.return || n.return();
           } finally {
-            if (o) throw i;
+            if (u) throw i;
           }
         },
       };
@@ -835,7 +835,7 @@
       A = (function () {
         var e = c(
           a.a.mark(function e(t) {
-            var n, r, i, c, o, s, u, h;
+            var n, r, i, c, u, o, s, h;
             return a.a.wrap(
               function (e) {
                 for (;;)
@@ -845,22 +845,22 @@
                         (r = t.mode),
                         (i = t.plugins),
                         (c = j(void 0 === i ? [] : i, 'cacheKeyWillBeUsed')),
-                        (o = n),
-                        (s = f(c)),
+                        (u = n),
+                        (o = f(c)),
                         (e.prev = 4),
-                        s.s();
+                        o.s();
                     case 6:
-                      if ((u = s.n()).done) {
+                      if ((s = o.n()).done) {
                         e.next = 15;
                         break;
                       }
                       return (
-                        (h = u.value),
+                        (h = s.value),
                         (e.next = 10),
-                        h.cacheKeyWillBeUsed.call(h, { mode: r, request: o })
+                        h.cacheKeyWillBeUsed.call(h, { mode: r, request: u })
                       );
                     case 10:
-                      'string' === typeof (o = e.sent) && (o = new Request(o));
+                      'string' === typeof (u = e.sent) && (u = new Request(u));
                     case 13:
                       e.next = 6;
                       break;
@@ -868,11 +868,11 @@
                       e.next = 20;
                       break;
                     case 17:
-                      (e.prev = 17), (e.t0 = e.catch(4)), s.e(e.t0);
+                      (e.prev = 17), (e.t0 = e.catch(4)), o.e(e.t0);
                     case 20:
-                      return (e.prev = 20), s.f(), e.finish(20);
+                      return (e.prev = 20), o.f(), e.finish(20);
                     case 23:
-                      return e.abrupt('return', o);
+                      return e.abrupt('return', u);
                     case 24:
                     case 'end':
                       return e.stop();
@@ -891,7 +891,7 @@
       M = (function () {
         var e = c(
           a.a.mark(function e(t) {
-            var n, r, i, c, o, s, u, h, l, p;
+            var n, r, i, c, u, o, s, h, l, p;
             return a.a.wrap(
               function (e) {
                 for (;;)
@@ -901,13 +901,13 @@
                         (r = t.response),
                         (i = t.event),
                         (c = t.plugins),
-                        (o = r),
-                        (s = !1),
-                        (u = f(void 0 === c ? [] : c)),
+                        (u = r),
+                        (o = !1),
+                        (s = f(void 0 === c ? [] : c)),
                         (e.prev = 4),
-                        u.s();
+                        s.s();
                     case 6:
-                      if ((h = u.n()).done) {
+                      if ((h = s.n()).done) {
                         e.next = 19;
                         break;
                       }
@@ -916,13 +916,13 @@
                         break;
                       }
                       return (
-                        (s = !0),
+                        (o = !0),
                         (p = l.cacheWillUpdate),
                         (e.next = 13),
-                        p.call(l, { request: n, response: o, event: i })
+                        p.call(l, { request: n, response: u, event: i })
                       );
                     case 13:
-                      if ((o = e.sent)) {
+                      if ((u = e.sent)) {
                         e.next = 17;
                         break;
                       }
@@ -934,13 +934,13 @@
                       e.next = 24;
                       break;
                     case 21:
-                      (e.prev = 21), (e.t0 = e.catch(4)), u.e(e.t0);
+                      (e.prev = 21), (e.t0 = e.catch(4)), s.e(e.t0);
                     case 24:
-                      return (e.prev = 24), u.f(), e.finish(24);
+                      return (e.prev = 24), s.f(), e.finish(24);
                     case 27:
                       return (
-                        s || (o = o && 200 === o.status ? o : void 0),
-                        e.abrupt('return', o || null)
+                        o || (u = u && 200 === u.status ? u : void 0),
+                        e.abrupt('return', u || null)
                       );
                     case 29:
                     case 'end':
@@ -960,7 +960,7 @@
       C = (function () {
         var e = c(
           a.a.mark(function e(t) {
-            var n, r, i, c, o, s, u, h, l, p, v, d, y;
+            var n, r, i, c, u, o, s, h, l, p, v, d, y;
             return a.a.wrap(
               function (e) {
                 for (;;)
@@ -971,21 +971,21 @@
                         (r = t.request),
                         (i = t.event),
                         (c = t.matchOptions),
-                        (o = t.plugins),
-                        (s = void 0 === o ? [] : o),
+                        (u = t.plugins),
+                        (o = void 0 === u ? [] : u),
                         (e.next = 3),
                         self.caches.open(n)
                       );
                     case 3:
                       return (
-                        (u = e.sent),
+                        (s = e.sent),
                         (e.next = 6),
-                        A({ plugins: s, request: r, mode: 'read' })
+                        A({ plugins: o, request: r, mode: 'read' })
                       );
                     case 6:
-                      return (h = e.sent), (e.next = 9), u.match(h, c);
+                      return (h = e.sent), (e.next = 9), s.match(h, c);
                     case 9:
-                      (l = e.sent), (p = f(s)), (e.prev = 12), p.s();
+                      (l = e.sent), (p = f(o)), (e.prev = 12), p.s();
                     case 14:
                       if ((v = p.n()).done) {
                         e.next = 24;
@@ -1039,7 +1039,7 @@
         put: (function () {
           var e = c(
             a.a.mark(function e(t) {
-              var n, r, i, c, o, s, u, h, l, p, v, d, y, m, g;
+              var n, r, i, c, u, o, s, h, l, p, v, d, y, m, g;
               return a.a.wrap(
                 function (e) {
                   for (;;)
@@ -1049,15 +1049,15 @@
                           (r = t.request),
                           (i = t.response),
                           (c = t.event),
-                          (o = t.plugins),
-                          (s = void 0 === o ? [] : o),
-                          (u = t.matchOptions),
+                          (u = t.plugins),
+                          (o = void 0 === u ? [] : u),
+                          (s = t.matchOptions),
                           (e.next = 4);
                         break;
                       case 4:
                         return (
                           (e.next = 6),
-                          A({ plugins: s, request: r, mode: 'write' })
+                          A({ plugins: o, request: r, mode: 'write' })
                         );
                       case 6:
                         if (((h = e.sent), i)) {
@@ -1070,7 +1070,7 @@
                       case 10:
                         return (
                           (e.next = 12),
-                          M({ event: c, plugins: s, response: i, request: h })
+                          M({ event: c, plugins: o, response: i, request: h })
                         );
                       case 12:
                         if ((l = e.sent)) {
@@ -1083,14 +1083,14 @@
                       case 18:
                         if (
                           ((p = e.sent),
-                          !((v = j(s, 'cacheDidUpdate')).length > 0))
+                          !((v = j(o, 'cacheDidUpdate')).length > 0))
                         ) {
                           e.next = 26;
                           break;
                         }
                         return (
                           (e.next = 23),
-                          C({ cacheName: n, matchOptions: u, request: h })
+                          C({ cacheName: n, matchOptions: s, request: h })
                         );
                       case 23:
                         (e.t0 = e.sent), (e.next = 27);
@@ -1193,16 +1193,16 @@
               i = void 0;
             try {
               for (
-                var c, o = e[Symbol.iterator]();
-                !(r = (c = o.next()).done) &&
+                var c, u = e[Symbol.iterator]();
+                !(r = (c = u.next()).done) &&
                 (n.push(c.value), !t || n.length !== t);
                 r = !0
               );
-            } catch (s) {
-              (a = !0), (i = s);
+            } catch (o) {
+              (a = !0), (i = o);
             } finally {
               try {
-                r || null == o.return || o.return();
+                r || null == u.return || u.return();
               } finally {
                 if (a) throw i;
               }
@@ -1210,7 +1210,7 @@
             return n;
           }
         })(e, t) ||
-        s(e, t) ||
+        o(e, t) ||
         (function () {
           throw new TypeError(
             'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
@@ -1433,9 +1433,9 @@
                     r,
                     i,
                     c,
+                    u,
                     o,
                     s,
-                    u,
                     f,
                     h,
                     l = arguments;
@@ -1449,9 +1449,9 @@
                               (r = n.index),
                               (i = n.query),
                               (c = void 0 === i ? null : i),
-                              (o = n.direction),
-                              (s = void 0 === o ? 'next' : o),
-                              (u = n.count),
+                              (u = n.direction),
+                              (o = void 0 === u ? 'next' : u),
+                              (s = n.count),
                               (f = n.includeKeys),
                               (h = void 0 !== f && f),
                               (e.next = 3),
@@ -1461,16 +1461,16 @@
                                 function (e, n) {
                                   var a = e.objectStore(t),
                                     i = r ? a.index(r) : a,
-                                    o = [],
-                                    f = i.openCursor(c, s);
+                                    u = [],
+                                    f = i.openCursor(c, o);
                                   f.onsuccess = function () {
                                     var e = f.result;
                                     e
-                                      ? (o.push(h ? e : e.value),
-                                        u && o.length >= u
-                                          ? n(o)
+                                      ? (u.push(h ? e : e.value),
+                                        s && u.length >= s
+                                          ? n(u)
                                           : e.continue())
-                                      : n(o);
+                                      : n(u);
                                   };
                                 }
                               )
@@ -1544,24 +1544,24 @@
                 a.a.mark(function e(t, n, r) {
                   var i,
                     c,
+                    u,
                     o,
-                    s,
-                    u = arguments;
+                    s = arguments;
                   return a.a.wrap(
                     function (e) {
                       for (;;)
                         switch ((e.prev = e.next)) {
                           case 0:
                             for (
-                              i = u.length,
+                              i = s.length,
                                 c = new Array(i > 3 ? i - 3 : 0),
-                                o = 3;
-                              o < i;
-                              o++
+                                u = 3;
+                              u < i;
+                              u++
                             )
-                              c[o - 3] = u[o];
+                              c[u - 3] = s[u];
                             return (
-                              (s = function (e, r) {
+                              (o = function (e, r) {
                                 var a = e.objectStore(n),
                                   i = a[t].apply(a, c);
                                 i.onsuccess = function () {
@@ -1569,7 +1569,7 @@
                                 };
                               }),
                               (e.next = 4),
-                              this.transaction([n], r, s)
+                              this.transaction([n], r, o)
                             );
                           case 4:
                             return e.abrupt('return', e.sent);
@@ -1620,21 +1620,21 @@
                     a.a.mark(function e(r) {
                       var i,
                         c,
-                        o,
-                        s = arguments;
+                        u,
+                        o = arguments;
                       return a.a.wrap(
                         function (e) {
                           for (;;)
                             switch ((e.prev = e.next)) {
                               case 0:
                                 for (
-                                  i = s.length,
+                                  i = o.length,
                                     c = new Array(i > 1 ? i - 1 : 0),
-                                    o = 1;
-                                  o < i;
-                                  o++
+                                    u = 1;
+                                  u < i;
+                                  u++
                                 )
-                                  c[o - 1] = s[o];
+                                  c[u - 1] = o[u];
                                 return (
                                   (e.next = 3),
                                   this._call.apply(this, [t, r, n].concat(c))
@@ -1657,8 +1657,8 @@
                 })());
             };
             for (r.s(); !(e = r.n()).done; ) i();
-          } catch (o) {
-            r.e(o);
+          } catch (u) {
+            r.e(u);
           } finally {
             r.f();
           }
@@ -1672,7 +1672,7 @@
       G++
     )
       B();
-    var V = (function () {
+    var Y = (function () {
         var e = c(
           a.a.mark(function e(t) {
             return a.a.wrap(function (e) {
@@ -1705,11 +1705,11 @@
           return e.apply(this, arguments);
         };
       })(),
-      Y = {
+      $ = {
         fetch: (function () {
           var e = c(
             a.a.mark(function e(t) {
-              var n, r, i, c, o, s, u, h, l, p, v, d, y, m, g, x, w, b, _, R, E;
+              var n, r, i, c, u, o, s, h, l, p, v, d, y, m, g, x, w, b, _, R, E;
               return a.a.wrap(
                 function (e) {
                   for (;;)
@@ -1720,7 +1720,7 @@
                           (r = t.fetchOptions),
                           (i = t.event),
                           (c = t.plugins),
-                          (o = void 0 === c ? [] : c),
+                          (u = void 0 === c ? [] : c),
                           'string' === typeof n && (n = new Request(n)),
                           !(i instanceof FetchEvent && i.preloadResponse))
                         ) {
@@ -1729,17 +1729,17 @@
                         }
                         return (e.next = 5), i.preloadResponse;
                       case 5:
-                        if (!(s = e.sent)) {
+                        if (!(o = e.sent)) {
                           e.next = 9;
                           break;
                         }
-                        return e.abrupt('return', s);
+                        return e.abrupt('return', o);
                       case 9:
                         0,
-                          (u = j(o, 'fetchDidFail')),
-                          (h = u.length > 0 ? n.clone() : null),
+                          (s = j(u, 'fetchDidFail')),
+                          (h = s.length > 0 ? n.clone() : null),
                           (e.prev = 12),
-                          (l = f(o)),
+                          (l = f(u)),
                           (e.prev = 14),
                           l.s();
                       case 16:
@@ -1798,7 +1798,7 @@
                       case 50:
                         g = e.sent;
                       case 51:
-                        0, (x = f(o)), (e.prev = 53), x.s();
+                        0, (x = f(u)), (e.prev = 53), x.s();
                       case 55:
                         if ((w = x.n()).done) {
                           e.next = 64;
@@ -1833,7 +1833,7 @@
                       case 75:
                         (e.prev = 75),
                           (e.t3 = e.catch(41)),
-                          (_ = f(u)),
+                          (_ = f(s)),
                           (e.prev = 79),
                           _.s();
                       case 81:
@@ -1885,13 +1885,13 @@
           };
         })(),
       };
-    function $(e, t) {
-      return J.apply(this, arguments);
+    function J(e, t) {
+      return V.apply(this, arguments);
     }
-    function J() {
-      return (J = c(
+    function V() {
+      return (V = c(
         a.a.mark(function e(t, n) {
-          var r, i, c, o;
+          var r, i, c, u;
           return a.a.wrap(function (e) {
             for (;;)
               switch ((e.prev = e.next)) {
@@ -1916,7 +1916,7 @@
                 case 9:
                   e.t0 = e.sent;
                 case 10:
-                  return (o = e.t0), e.abrupt('return', new Response(o, c));
+                  return (u = e.t0), e.abrupt('return', new Response(u, c));
                 case 12:
                 case 'end':
                   return e.stop();
@@ -1950,7 +1950,7 @@
                 var t = e.target.result.createObjectStore(z, { keyPath: 'id' });
                 t.createIndex('cacheName', 'cacheName', { unique: !1 }),
                   t.createIndex('timestamp', 'timestamp', { unique: !1 }),
-                  V(this._cacheName);
+                  Y(this._cacheName);
               },
             },
             {
@@ -2031,9 +2031,9 @@
                     var r,
                       i,
                       c,
+                      u,
                       o,
-                      s,
-                      u = this;
+                      s = this;
                     return a.a.wrap(
                       function (e) {
                         for (;;)
@@ -2054,9 +2054,9 @@
                                     a.onsuccess = function () {
                                       var e = a.result;
                                       if (e) {
-                                        var o = e.value;
-                                        o.cacheName === u._cacheName &&
-                                          ((t && o.timestamp < t) ||
+                                        var u = e.value;
+                                        u.cacheName === s._cacheName &&
+                                          ((t && u.timestamp < t) ||
                                           (n && c >= n)
                                             ? i.push(e.value)
                                             : c++),
@@ -2073,17 +2073,17 @@
                                 (e.prev = 5),
                                 c.s();
                             case 7:
-                              if ((o = c.n()).done) {
+                              if ((u = c.n()).done) {
                                 e.next = 14;
                                 break;
                               }
                               return (
-                                (s = o.value),
+                                (o = u.value),
                                 (e.next = 11),
-                                this._db.delete(z, s.id)
+                                this._db.delete(z, o.id)
                               );
                             case 11:
-                              i.push(s.url);
+                              i.push(o.url);
                             case 12:
                               e.next = 7;
                               break;
@@ -2141,7 +2141,7 @@
               value: (function () {
                 var e = c(
                   a.a.mark(function e() {
-                    var t, n, r, i, c, o;
+                    var t, n, r, i, c, u;
                     return a.a.wrap(
                       function (e) {
                         for (;;)
@@ -2179,7 +2179,7 @@
                                 e.next = 20;
                                 break;
                               }
-                              return (o = c.value), (e.next = 18), r.delete(o);
+                              return (u = c.value), (e.next = 18), r.delete(u);
                             case 18:
                               e.next = 14;
                               break;
@@ -2331,7 +2331,7 @@
             (this.cachedResponseWillBeUsed = (function () {
               var e = c(
                 a.a.mark(function e(n) {
-                  var r, i, c, o, s, u, f;
+                  var r, i, c, u, o, s, f;
                   return a.a.wrap(function (e) {
                     for (;;)
                       switch ((e.prev = e.next)) {
@@ -2340,7 +2340,7 @@
                             ((r = n.event),
                             (i = n.request),
                             (c = n.cacheName),
-                            (o = n.cachedResponse))
+                            (u = n.cachedResponse))
                           ) {
                             e.next = 3;
                             break;
@@ -2348,9 +2348,9 @@
                           return e.abrupt('return', null);
                         case 3:
                           if (
-                            ((s = t._isResponseDateFresh(o)),
-                            I((u = t._getCacheExpiration(c)).expireEntries()),
-                            (f = u.updateTimestamp(i.url)),
+                            ((o = t._isResponseDateFresh(u)),
+                            I((s = t._getCacheExpiration(c)).expireEntries()),
+                            (f = s.updateTimestamp(i.url)),
                             r)
                           )
                             try {
@@ -2358,7 +2358,7 @@
                             } catch (a) {
                               0;
                             }
-                          return e.abrupt('return', s ? o : null);
+                          return e.abrupt('return', o ? u : null);
                         case 9:
                         case 'end':
                           return e.stop();
@@ -2549,17 +2549,17 @@
                       : a && void 0 === a.revision && n.push(a.url);
                     var i = ae(a),
                       c = i.cacheKey,
-                      o = i.url,
-                      s =
+                      u = i.url,
+                      o =
                         'string' !== typeof a && a.revision
                           ? 'reload'
                           : 'default';
                     if (
-                      this._urlsToCacheKeys.has(o) &&
-                      this._urlsToCacheKeys.get(o) !== c
+                      this._urlsToCacheKeys.has(u) &&
+                      this._urlsToCacheKeys.get(u) !== c
                     )
                       throw new k('add-to-cache-list-conflicting-entries', {
-                        firstEntry: this._urlsToCacheKeys.get(o),
+                        firstEntry: this._urlsToCacheKeys.get(u),
                         secondEntry: c,
                       });
                     if ('string' !== typeof a && a.integrity) {
@@ -2569,23 +2569,23 @@
                       )
                         throw new k(
                           'add-to-cache-list-conflicting-integrities',
-                          { url: o }
+                          { url: u }
                         );
                       this._cacheKeysToIntegrities.set(c, a.integrity);
                     }
                     if (
-                      (this._urlsToCacheKeys.set(o, c),
-                      this._urlsToCacheModes.set(o, s),
+                      (this._urlsToCacheKeys.set(u, c),
+                      this._urlsToCacheModes.set(u, o),
                       n.length > 0)
                     ) {
-                      var u =
+                      var s =
                         'Workbox is precaching URLs without revision ' +
                         'info: '.concat(
                           n.join(', '),
                           '\nThis is generally NOT safe. '
                         ) +
                         'Learn more at https://bit.ly/wb-precache';
-                      console.warn(u);
+                      console.warn(s);
                     }
                   }
                 } catch (h) {
@@ -2605,9 +2605,9 @@
                       r,
                       i,
                       c,
+                      u,
                       o,
                       s,
-                      u,
                       h,
                       l,
                       p,
@@ -2633,11 +2633,11 @@
                                 self.caches.open(this._cacheName)
                               );
                             case 6:
-                              return (o = e.sent), (e.next = 9), o.keys();
+                              return (u = e.sent), (e.next = 9), u.keys();
                             case 9:
-                              (s = e.sent),
-                                (u = new Set(
-                                  s.map(function (e) {
+                              (o = e.sent),
+                                (s = new Set(
+                                  o.map(function (e) {
                                     return e.url;
                                   })
                                 )),
@@ -2647,7 +2647,7 @@
                                   (p = D(l.value, 2)),
                                     (v = p[0]),
                                     (d = p[1]),
-                                    u.has(d)
+                                    s.has(d)
                                       ? c.push(v)
                                       : i.push({ cacheKey: d, url: v });
                               } catch (a) {
@@ -2703,7 +2703,7 @@
               value: (function () {
                 var e = c(
                   a.a.mark(function e() {
-                    var t, n, r, i, c, o, s;
+                    var t, n, r, i, c, u, o;
                     return a.a.wrap(
                       function (e) {
                         for (;;)
@@ -2722,17 +2722,17 @@
                                 (e.prev = 9),
                                 c.s();
                             case 11:
-                              if ((o = c.n()).done) {
+                              if ((u = c.n()).done) {
                                 e.next = 19;
                                 break;
                               }
-                              if (((s = o.value), r.has(s.url))) {
+                              if (((o = u.value), r.has(o.url))) {
                                 e.next = 17;
                                 break;
                               }
-                              return (e.next = 16), t.delete(s);
+                              return (e.next = 16), t.delete(o);
                             case 16:
-                              i.push(s.url);
+                              i.push(o.url);
                             case 17:
                               e.next = 11;
                               break;
@@ -2766,7 +2766,7 @@
               value: (function () {
                 var e = c(
                   a.a.mark(function e(t) {
-                    var n, r, i, c, o, s, u, h, l, p, v, d;
+                    var n, r, i, c, u, o, s, h, l, p, v, d;
                     return a.a.wrap(
                       function (e) {
                         for (;;)
@@ -2777,18 +2777,18 @@
                                 (r = t.url),
                                 (i = t.cacheMode),
                                 (c = t.event),
-                                (o = t.plugins),
-                                (s = t.integrity),
-                                (u = new Request(r, {
-                                  integrity: s,
+                                (u = t.plugins),
+                                (o = t.integrity),
+                                (s = new Request(r, {
+                                  integrity: o,
                                   cache: i,
                                   credentials: 'same-origin',
                                 })),
                                 (e.next = 4),
-                                Y.fetch({ event: c, plugins: o, request: u })
+                                $.fetch({ event: c, plugins: u, request: s })
                               );
                             case 4:
-                              (h = e.sent), (p = f(o || []));
+                              (h = e.sent), (p = f(u || []));
                               try {
                                 for (p.s(); !(v = p.n()).done; )
                                   'cacheWillUpdate' in (d = v.value) && (l = d);
@@ -2805,7 +2805,7 @@
                                 (e.next = 10),
                                 l.cacheWillUpdate({
                                   event: c,
-                                  request: u,
+                                  request: s,
                                   response: h,
                                 })
                               );
@@ -2828,7 +2828,7 @@
                                 e.next = 21;
                                 break;
                               }
-                              return (e.next = 20), $(h);
+                              return (e.next = 20), J(h);
                             case 20:
                               h = e.sent;
                             case 21:
@@ -2836,9 +2836,9 @@
                                 (e.next = 23),
                                 K.put({
                                   event: c,
-                                  plugins: o,
+                                  plugins: u,
                                   response: h,
-                                  request: n === r ? u : new Request(n),
+                                  request: n === r ? s : new Request(n),
                                   cacheName: this._cacheName,
                                   matchOptions: { ignoreSearch: !0 },
                                 })
@@ -2867,7 +2867,7 @@
             {
               key: 'getCachedURLs',
               value: function () {
-                return u(this._urlsToCacheKeys.keys());
+                return s(this._urlsToCacheKeys.keys());
               },
             },
             {
@@ -2996,10 +2996,10 @@
           e
         );
       })(),
-      oe = function () {
+      ue = function () {
         return ie || (ie = new ce()), ie;
       };
-    function se(e) {
+    function oe(e) {
       for (
         var t =
             arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : [],
@@ -3010,23 +3010,23 @@
             }) && e.searchParams.delete(n);
           },
           r = 0,
-          a = u(e.searchParams.keys());
+          a = s(e.searchParams.keys());
         r < a.length;
         r++
       )
         n();
       return e;
     }
-    var ue = a.a.mark(fe);
+    var se = a.a.mark(fe);
     function fe(e) {
       var t,
         n,
         r,
         i,
         c,
+        u,
         o,
         s,
-        u,
         h,
         l,
         p,
@@ -3044,19 +3044,19 @@
                   (r = t.directoryIndex),
                   (i = t.cleanURLs),
                   (c = t.urlManipulation),
-                  ((o = new URL(e, location.href)).hash = ''),
+                  ((u = new URL(e, location.href)).hash = ''),
                   (a.next = 5),
-                  o.href
+                  u.href
                 );
               case 5:
-                return (s = se(o, n)), (a.next = 8), s.href;
+                return (o = oe(u, n)), (a.next = 8), o.href;
               case 8:
-                if (!r || !s.pathname.endsWith('/')) {
+                if (!r || !o.pathname.endsWith('/')) {
                   a.next = 13;
                   break;
                 }
                 return (
-                  ((u = new URL(s.href)).pathname += r), (a.next = 13), u.href
+                  ((s = new URL(o.href)).pathname += r), (a.next = 13), s.href
                 );
               case 13:
                 if (!i) {
@@ -3064,7 +3064,7 @@
                   break;
                 }
                 return (
-                  ((h = new URL(s.href)).pathname += '.html'),
+                  ((h = new URL(o.href)).pathname += '.html'),
                   (a.next = 18),
                   h.href
                 );
@@ -3073,7 +3073,7 @@
                   a.next = 37;
                   break;
                 }
-                (l = c({ url: o })), (p = f(l)), (a.prev = 21), p.s();
+                (l = c({ url: u })), (p = f(l)), (a.prev = 21), p.s();
               case 23:
                 if ((v = p.n()).done) {
                   a.next = 29;
@@ -3095,14 +3095,14 @@
                 return a.stop();
             }
         },
-        ue,
+        se,
         null,
         [[21, 31, 34, 37]]
       );
     }
     var he = function (e, t) {
         var n,
-          r = oe().getURLsToCacheKeys(),
+          r = ue().getURLsToCacheKeys(),
           a = f(fe(e, t));
         try {
           for (a.s(); !(n = a.n()).done; ) {
@@ -3110,8 +3110,8 @@
               c = r.get(i);
             if (c) return c;
           }
-        } catch (o) {
-          a.e(o);
+        } catch (u) {
+          a.e(u);
         } finally {
           a.f();
         }
@@ -3130,18 +3130,18 @@
             a = void 0 === r ? 'index.html' : r,
             i = e.cleanURLs,
             c = void 0 === i || i,
-            o = e.urlManipulation,
-            s = q();
+            u = e.urlManipulation,
+            o = q();
           self.addEventListener('fetch', function (e) {
             var t = he(e.request.url, {
               cleanURLs: c,
               directoryIndex: a,
               ignoreURLParametersMatching: n,
-              urlManipulation: o,
+              urlManipulation: u,
             });
             if (t) {
               var r = self.caches
-                .open(s)
+                .open(o)
                 .then(function (e) {
                   return e.match(t);
                 })
@@ -3155,7 +3155,7 @@
         (le = !0));
     }
     var ve = function (e) {
-        var t = oe(),
+        var t = ue(),
           n = re();
         e.waitUntil(
           t.install({ event: e, plugins: n }).catch(function (e) {
@@ -3164,7 +3164,7 @@
         );
       },
       de = function (e) {
-        var t = oe();
+        var t = ue();
         e.waitUntil(t.activate());
       };
     n(3);
@@ -3226,7 +3226,7 @@
                     var r = Promise.all(
                       n.urlsToCache.map(function (t) {
                         'string' === typeof t && (t = [t]);
-                        var n = x(Request, u(t));
+                        var n = x(Request, s(t));
                         return e.handleRequest({ request: n });
                       })
                     );
@@ -3254,30 +3254,30 @@
                       event: r,
                     }),
                     c = i.params,
-                    o = i.route,
-                    s = o && o.handler;
+                    u = i.route,
+                    o = u && u.handler;
                   if (
-                    (!s && this._defaultHandler && (s = this._defaultHandler),
-                    s)
+                    (!o && this._defaultHandler && (o = this._defaultHandler),
+                    o)
                   ) {
-                    var u;
+                    var s;
                     0;
                     try {
-                      u = s.handle({ url: a, request: n, event: r, params: c });
+                      s = o.handle({ url: a, request: n, event: r, params: c });
                     } catch (f) {
-                      u = Promise.reject(f);
+                      s = Promise.reject(f);
                     }
                     return (
-                      u instanceof Promise &&
+                      s instanceof Promise &&
                         this._catchHandler &&
-                        (u = u.catch(function (e) {
+                        (s = s.catch(function (e) {
                           return t._catchHandler.handle({
                             url: a,
                             request: n,
                             event: r,
                           });
                         })),
-                      u
+                      s
                     );
                   }
                 }
@@ -3294,21 +3294,21 @@
                 try {
                   for (i.s(); !(a = i.n()).done; ) {
                     var c = a.value,
-                      o = void 0,
-                      s = c.match({ url: t, request: n, event: r });
-                    if (s)
+                      u = void 0,
+                      o = c.match({ url: t, request: n, event: r });
+                    if (o)
                       return (
-                        (o = s),
-                        ((Array.isArray(s) && 0 === s.length) ||
-                          (s.constructor === Object &&
-                            0 === Object.keys(s).length) ||
-                          'boolean' === typeof s) &&
-                          (o = void 0),
-                        { route: c, params: o }
+                        (u = o),
+                        ((Array.isArray(o) && 0 === o.length) ||
+                          (o.constructor === Object &&
+                            0 === Object.keys(o).length) ||
+                          'boolean' === typeof o) &&
+                          (u = void 0),
+                        { route: c, params: u }
                       );
                   }
-                } catch (u) {
-                  i.e(u);
+                } catch (s) {
+                  i.e(s);
                 } finally {
                   i.f();
                 }
@@ -3429,7 +3429,7 @@
             var n = t.plugins.some(function (e) {
               return !!e.cacheWillUpdate;
             });
-            this._plugins = n ? t.plugins : [Re].concat(u(t.plugins));
+            this._plugins = n ? t.plugins : [Re].concat(s(t.plugins));
           } else this._plugins = [Re];
           (this._fetchOptions = t.fetchOptions),
             (this._matchOptions = t.matchOptions);
@@ -3441,7 +3441,7 @@
               value: (function () {
                 var e = c(
                   a.a.mark(function e(t) {
-                    var n, r, i, c, o;
+                    var n, r, i, c, u;
                     return a.a.wrap(
                       function (e) {
                         for (;;)
@@ -3473,7 +3473,7 @@
                               if (n)
                                 try {
                                   n.waitUntil(i);
-                                } catch (o) {
+                                } catch (u) {
                                   0;
                                 }
                               e.next = 23;
@@ -3484,7 +3484,7 @@
                               (c = e.sent), (e.next = 23);
                               break;
                             case 20:
-                              (e.prev = 20), (e.t0 = e.catch(14)), (o = e.t0);
+                              (e.prev = 20), (e.t0 = e.catch(14)), (u = e.t0);
                             case 23:
                               if (c) {
                                 e.next = 26;
@@ -3492,7 +3492,7 @@
                               }
                               throw new k('no-response', {
                                 url: r.url,
-                                error: o,
+                                error: u,
                               });
                             case 26:
                               return e.abrupt('return', c);
@@ -3527,7 +3527,7 @@
                                 (n = t.request),
                                 (r = t.event),
                                 (e.next = 3),
-                                Y.fetch({
+                                $.fetch({
                                   request: n,
                                   event: r,
                                   fetchOptions: this._fetchOptions,
@@ -3575,17 +3575,17 @@
       return self.clients.claim();
     }),
       (function (e) {
-        oe().addToCacheList(e),
+        ue().addToCacheList(e),
           e.length > 0 &&
             (self.addEventListener('install', ve),
             self.addEventListener('activate', de));
       })([
-        { revision: '5f4a9a72235ef1b060481173b9acad70', url: '/index.html' },
+        { revision: '753f29bd3cffbacf0c3dcfc33543c51c', url: '/index.html' },
         { revision: null, url: '/build/static/css/2.c984a218.chunk.css' },
         { revision: null, url: '/build/static/css/main.f7385783.chunk.css' },
         { revision: null, url: '/build/static/js/2.86f61e96.chunk.js' },
         { revision: null, url: '/build/static/js/3.1db8b70a.chunk.js' },
-        { revision: null, url: '/build/static/js/main.1e45508b.chunk.js' },
+        { revision: null, url: '/build/static/js/main.3d7fe044.chunk.js' },
         { revision: null, url: '/build/static/js/runtime-main.7812b42e.js' },
         { revision: null, url: '/build/static/media/blueNetwork.5a06aeb6.png' },
         {
@@ -3672,7 +3672,7 @@
         !n.pathname.startsWith('/_') &&
         !n.pathname.match(qe)
       );
-    }, ((Le = '/index.html'), oe().createHandlerBoundToURL(Le))),
+    }, ((Le = '/index.html'), ue().createHandlerBoundToURL(Le))),
       ke(function (e) {
         var t = e.url;
         return t.origin === self.location.origin && t.pathname.endsWith('.png');
@@ -3691,8 +3691,6 @@
               for (;;)
                 switch ((e.prev = e.next)) {
                   case 0:
-                    console.log('SERVICE_WORKER_INSTALLED!! :DDD ');
-                  case 1:
                   case 'end':
                     return e.stop();
                 }

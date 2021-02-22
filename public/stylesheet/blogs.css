@@ -535,6 +535,11 @@ body {
     .cta--1:link,
     .cta--1:visited {
       width: 22rem; } }
+  @media only screen and (max-width: 40em) {
+    .cta--1,
+    .cta--1:link,
+    .cta--1:visited {
+      margin: 10px; } }
   @media only screen and (max-width: 30em) {
     .cta--1,
     .cta--1:link,
@@ -571,6 +576,10 @@ body {
     .cta--2,
     .cta--2:focus {
       width: 22rem; } }
+  @media only screen and (max-width: 40em) {
+    .cta--2,
+    .cta--2:focus {
+      margin: 0 0 10px 0; } }
   @media only screen and (max-width: 30em) {
     .cta--2,
     .cta--2:focus {

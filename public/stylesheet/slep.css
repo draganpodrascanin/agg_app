@@ -508,11 +508,11 @@ body {
     gap: 2rem; }
     @media only screen and (max-width: 30em) {
       .header__cards {
-        grid-template-columns: 1fr; } }
+        grid-template-columns: 1fr 1fr; } }
     .header__cards__link:link, .header__cards__link:visited {
       text-decoration: none;
       display: block;
-      transition: all .1s; }
+      transition: all 0.1s; }
     .header__cards__link:hover, .header__cards__link:active {
       transform: scale(1.05); }
       @media only screen and (max-width: 40em) {
@@ -554,6 +554,9 @@ body {
   width: 30%;
   height: 1px;
   background-color: #fff; }
+  @media only screen and (max-width: 40em) {
+    .heading__4--mod::before {
+      content: none; } }
 
 .heading__4--mod::after {
   display: block;
@@ -564,6 +567,9 @@ body {
   width: 30%;
   height: 1px;
   background-color: #fff; }
+  @media only screen and (max-width: 40em) {
+    .heading__4--mod::after {
+      content: none; } }
 
 .slep-header-flex {
   display: flex;
@@ -785,6 +791,11 @@ body {
     .cta--1:link,
     .cta--1:visited {
       width: 22rem; } }
+  @media only screen and (max-width: 40em) {
+    .cta--1,
+    .cta--1:link,
+    .cta--1:visited {
+      margin: 10px; } }
   @media only screen and (max-width: 30em) {
     .cta--1,
     .cta--1:link,
@@ -821,6 +832,10 @@ body {
     .cta--2,
     .cta--2:focus {
       width: 22rem; } }
+  @media only screen and (max-width: 40em) {
+    .cta--2,
+    .cta--2:focus {
+      margin: 0 0 10px 0; } }
   @media only screen and (max-width: 30em) {
     .cta--2,
     .cta--2:focus {
@@ -905,6 +920,9 @@ body {
     margin: 2rem;
     fill: #4a5155; }
 
+#nav {
+  width: 100vw; }
+
 .about__wrapper {
   text-align: center;
   display: flex;
@@ -931,7 +949,8 @@ body {
     border: 1px solid #d8d8d8;
     letter-spacing: 1px;
     border-radius: 40px;
-    min-width: 45rem;
+    width: 45rem;
+    max-width: 90%;
     transition: all 0.2s;
     margin: 2rem 0; }
   .about .about__btn:hover,

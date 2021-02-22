@@ -37,6 +37,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media only screen and (max-width: $bp-l-phone) {
+      flex-direction: column;
+      margin-bottom: 38px;
+    }
   }
   .header__link:link,
   .header__link:visited {
@@ -79,6 +84,10 @@
     border: 1px solid $color-white;
     line-height: 1;
     transition: all 0.2s;
+
+    @media only screen and (max-width: $bp-l-phone) {
+      margin-bottom: 1rem;
+    }
   }
   .header__btn--1:hover,
   .header_btn--1:active {

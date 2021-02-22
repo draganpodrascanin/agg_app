@@ -514,6 +514,10 @@ body {
     display: flex;
     justify-content: center;
     align-items: center; }
+    @media only screen and (max-width: 40em) {
+      .header .header__nav {
+        flex-direction: column;
+        margin-bottom: 38px; } }
   .header .header__link:link,
   .header .header__link:visited {
     display: inline-block;
@@ -551,6 +555,10 @@ body {
     border: 1px solid #fff;
     line-height: 1;
     transition: all 0.2s; }
+    @media only screen and (max-width: 40em) {
+      .header .header__btn--1:link,
+      .header .header__btn--1:visited {
+        margin-bottom: 1rem; } }
   .header .header__btn--1:hover,
   .header .header_btn--1:active {
     background-color: #fff;
@@ -899,6 +907,11 @@ body {
     .cta--1:link,
     .cta--1:visited {
       width: 22rem; } }
+  @media only screen and (max-width: 40em) {
+    .cta--1,
+    .cta--1:link,
+    .cta--1:visited {
+      margin: 10px; } }
   @media only screen and (max-width: 30em) {
     .cta--1,
     .cta--1:link,
@@ -935,6 +948,10 @@ body {
     .cta--2,
     .cta--2:focus {
       width: 22rem; } }
+  @media only screen and (max-width: 40em) {
+    .cta--2,
+    .cta--2:focus {
+      margin: 0 0 10px 0; } }
   @media only screen and (max-width: 30em) {
     .cta--2,
     .cta--2:focus {
