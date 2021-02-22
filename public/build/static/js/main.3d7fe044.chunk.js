@@ -1371,30 +1371,28 @@
             A = function (e) {
               e.preventDefault();
             },
-            y = ye
-              .b()
-              .shape({
-                firstName: ye.d().required('Polje Obavezno!'),
-                lastName: ye.d().required('Polje Obavezno!'),
-                phoneNumber: ye.d().required('Polje Obavezno!'),
-                email: ye.d().required('Polje Obavezno!'),
-                username: ye.d().required('Polje Obavezno!'),
-                role: ye.d().required('Polje Obavezno!'),
-                password:
-                  l.create &&
-                  ye
-                    .d()
-                    .min(8, 'Najmanje 8 karaktera.')
-                    .required('Polje obavezno'),
-                passwordConfirm:
-                  l.create &&
-                  ye
-                    .d()
-                    .oneOf([
-                      ye.c('password'),
-                      'Mora biti isto kao polje \u0161ifra.',
-                    ]),
-              }),
+            y = ye.b().shape({
+              firstName: ye.d().required('Polje Obavezno!'),
+              lastName: ye.d().required('Polje Obavezno!'),
+              phoneNumber: ye.d().required('Polje Obavezno!'),
+              email: ye.d().required('Polje Obavezno!'),
+              username: ye.d().required('Polje Obavezno!'),
+              role: ye.d().required('Polje Obavezno!'),
+              password:
+                l.create &&
+                ye
+                  .d()
+                  .min(8, 'Najmanje 8 karaktera.')
+                  .required('Polje obavezno'),
+              passwordConfirm:
+                l.create &&
+                ye
+                  .d()
+                  .oneOf([
+                    ye.c('password'),
+                    'Mora biti isto kao polje \u0161ifra.',
+                  ]),
+            }),
             _ = Object(m.a)({
               initialValues: {
                 firstName: t || '',
@@ -1598,20 +1596,18 @@
             p = function (e) {
               e.preventDefault();
             },
-            j = ye
-              .b()
-              .shape({
-                password: ye
-                  .d()
-                  .min(8, 'Najmanje 8 karaktera.')
-                  .required('Polje obavezno'),
-                passwordConfirm: ye
-                  .d()
-                  .oneOf([
-                    ye.c('password'),
-                    'Mora biti isto kao polje \u0161ifra.',
-                  ]),
-              }),
+            j = ye.b().shape({
+              password: ye
+                .d()
+                .min(8, 'Najmanje 8 karaktera.')
+                .required('Polje obavezno'),
+              passwordConfirm: ye
+                .d()
+                .oneOf([
+                  ye.c('password'),
+                  'Mora biti isto kao polje \u0161ifra.',
+                ]),
+            }),
             b = Object(m.a)({
               initialValues: { password: '', passwordConfirm: '' },
               onSubmit: e.onSubmit,
@@ -2337,14 +2333,12 @@
             ]),
             l = St(),
             u = Object(d.b)(),
-            p = ye
-              .b()
-              .shape({
-                name: ye.d().required('Polje Obavezno!'),
-                car: ye.d().required('Polje Obavezno!'),
-                note: ye.d().required('Polje Obavezno!'),
-                phoneNumber: ye.d().required('Polje Obavezno!'),
-              }),
+            p = ye.b().shape({
+              name: ye.d().required('Polje Obavezno!'),
+              car: ye.d().required('Polje Obavezno!'),
+              note: ye.d().required('Polje Obavezno!'),
+              phoneNumber: ye.d().required('Polje Obavezno!'),
+            }),
             j = Object(m.a)({
               initialValues: {
                 name: a || '',
@@ -2910,11 +2904,9 @@
             r = Object(Ae.a)(e, ['partsUnderWarranty', 'validUntil']),
             c = Vt(),
             i = Object(d.b)(),
-            o = ye
-              .b()
-              .shape({
-                partsUnderWarranty: ye.d().required('Polje Obavezno!'),
-              }),
+            o = ye.b().shape({
+              partsUnderWarranty: ye.d().required('Polje Obavezno!'),
+            }),
             s = Object(m.a)({
               initialValues: {
                 partsUnderWarranty: t || '',
@@ -4099,16 +4091,14 @@
                 return e.apply(this, arguments);
               };
             })(),
-            A = ye
-              .b()
-              .shape({
-                title: ye.d().required('Polje Obavezno!'),
-                blog: ye.d().required('Sadr\u017eaj bloga je obavezan..'),
-                imageId: ye.d().required('Glavna slika je obavezna.'),
-                imageAlt: ye.d().required('Alt naziv je obavezan.'),
-                thumbnailId: ye.d().required('Thumbnail slika je obavezna.'),
-                thumbnailAlt: ye.d().required('Alt naziv je obavezan.'),
-              }),
+            A = ye.b().shape({
+              title: ye.d().required('Polje Obavezno!'),
+              blog: ye.d().required('Sadr\u017eaj bloga je obavezan..'),
+              imageId: ye.d().required('Glavna slika je obavezna.'),
+              imageAlt: ye.d().required('Alt naziv je obavezan.'),
+              thumbnailId: ye.d().required('Thumbnail slika je obavezna.'),
+              thumbnailAlt: ye.d().required('Alt naziv je obavezan.'),
+            }),
             _ = Object(m.a)({
               initialValues: {
                 title: e.title || '',
@@ -8206,12 +8196,10 @@
             r = Object(d.c)(function (e) {
               return e.workOrder;
             }),
-            c = ye
-              .b()
-              .shape({
-                workDone: ye.d().required('Polje Obavezno!'),
-                charged: ye.a().required('Polje Obavezno!'),
-              }),
+            c = ye.b().shape({
+              workDone: ye.d().required('Polje Obavezno!'),
+              charged: ye.a().required('Polje Obavezno!'),
+            }),
             i = Object(m.a)({
               initialValues: {
                 workDone: e.workDone || '',
@@ -8535,12 +8523,10 @@
             r = Object(d.c)(function (e) {
               return e.workOrder;
             }),
-            c = ye
-              .b()
-              .shape({
-                ticket: ye.d().required('Polje Obavezno!'),
-                status: ye.d().required('Obavezno ozna\u010diti status!'),
-              }),
+            c = ye.b().shape({
+              ticket: ye.d().required('Polje Obavezno!'),
+              status: ye.d().required('Obavezno ozna\u010diti status!'),
+            }),
             i = Object(m.a)({
               initialValues: { ticket: e.ticket || '', status: e.status || '' },
               onSubmit:
@@ -8899,12 +8885,10 @@
             r = Object(d.c)(function (e) {
               return e.workOrder;
             }),
-            c = ye
-              .b()
-              .shape({
-                ownerRemarks: ye.d().required('Polje Obavezno!'),
-                milage: ye.a().required('Polje Obavezno!'),
-              }),
+            c = ye.b().shape({
+              ownerRemarks: ye.d().required('Polje Obavezno!'),
+              milage: ye.a().required('Polje Obavezno!'),
+            }),
             i = Object(m.a)({
               initialValues: {
                 ownerRemarks: e.ownerRemarks || '',
@@ -9953,7 +9937,7 @@
         },
         xc =
           (a(682), Object(s.a)({ palette: { primary: { main: '#1e7be2' } } })),
-        fc = Object(b.io)('https://gagetest.xyz'),
+        fc = Object(b.io)('https://gagatest.xyz'),
         Ec = new u.Howl({ src: be }),
         gc = function () {
           var e = Object(d.c)(function (e) {
