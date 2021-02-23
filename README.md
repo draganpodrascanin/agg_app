@@ -4,6 +4,10 @@
 
 Business websajt i aplikacija za poslovne potrebe Auto Gas Gaga doo.
 
+[Demo Video](https://www.youtube.com/watch?v=NmPDpOctZTI&ab_channel=Dragan 'AGG WebApp Demo video')
+
+[Test Website](https://gagatest.xyz/ 'AGG WebApp Test Sajt')
+
 - Business Website
 - API
 - Blog
