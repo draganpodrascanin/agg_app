@@ -41,7 +41,6 @@ class ImageController {
   public upload = async (req: Request, res: Response) => {
     //@ts-ignore
     const file = req.file;
-
     if (!file) throw new CustomError('no image uploaded', 400);
 
     const imageRepo = getEnvConnection().getRepository(Image);
